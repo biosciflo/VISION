@@ -110,4 +110,98 @@ The standalone version simplifies the installation process by bundling the appli
 Welcome to GP Analyzer! As you start the application for the first time, here's what you can expect and how to navigate the initial setup process.
 
 **What to Expect:**
-- **Console Window**: Upon launching GP Analyzer, a console window will appear
+- **Console Window**: Upon launching GP Analyzer, a console window will appear. This window is an essential part of the application, providing real-time feedback, status updates, and information about the tasks being performed. It's normal for this console to remain open throughout your use of GP Analyzer, as it will display valuable information during the application's run.
+- **Splash Screen (Windows Only)**: Shortly after the console window opens, you'll be greeted by a splash screen. This splash screen serves as a visual indicator that GP Analyzer is in the process of starting up. It's designed to provide a friendly welcome while the application loads the necessary components in the background.
+- **Initial Loading Time**: The first startup of GP Analyzer may take some time, which is completely normal and depends on your system's specifications. This initial loading allows GP Analyzer to properly initialize and prepare for optimal performance. We appreciate your patience during this process.
+- **GUI Appearance**: Once initialization is complete, the main graphical user interface (GUI) of GP Analyzer will appear. This is where you will interact with the software to load images, perform analyses, and view results. The GUI is designed to be user-friendly and intuitive, providing easy access to all of GP Analyzer's powerful features.
+- **Console Window During Use**: As mentioned, the console window will remain open while you use GP Analyzer. It will continue to provide important messages and updates. Keeping an eye on the console can offer insights into the application's processes and alert you to any actions required on your part.
+
+**Getting Started**: With the GUI open, you are now ready to begin exploring GP Analyzer. Whether you're analyzing your first image or configuring settings for your analysis, GP Analyzer is equipped to support your work.
+
+**A Note on Performance**: The performance and responsiveness of GP Analyzer after the initial launch will vary based on the complexity of the tasks you're performing and your computer's hardware. For demanding tasks or large datasets, enhanced system specifications can contribute to smoother operation.
+
+## Navigating the Interface
+
+Welcome to GP Analyzer! This section will help you become familiar with the main window's interface, ensuring you can navigate the software efficiently and make the most out of its powerful features.
+
+### Main Window (1) Overview
+The main window of GP Analyzer is designed with intuitiveness and efficiency in mind, structured to facilitate easy access to all necessary tools and functionalities for comprehensive image analysis. Here's what you'll find:
+
+- **Settings Panel (2)**: Positioned to maximize ease of access, the Settings Panel is where you'll begin your journey with GP Analyzer. From top to bottom, it comprises:
+  - **Load and Table Interaction Section**: At the very top, this area allows you to load images into GP Analyzer. Following image loading, the section provides functionalities for interacting with the list (table) of loaded images, making it easier to manage and select specific datasets for analysis.
+  - **Table for Loaded Images**: Directly below the interaction tools, this table displays all your loaded images. It serves as a central hub for selecting and organizing your analysis queue, providing an overview of your working datasets.
+  - **Test Run and Analysis Settings**: Moving down, this segment of the Settings Panel is dedicated to preparing and initiating your image analyses. Here, you can conduct preliminary tests, run analyses, and adjust general settings that apply to the upcoming analysis tasks.
+  - **Specific Analysis Settings**: This section is tailored for fine-tuning the analysis parameters, including:
+    - **Membrane Settings**: Adjustments specific to analyzing membrane-related features.
+    - **Cytosol Settings**: Settings for analyzing cytosolic components.
+    - **Advanced Settings**: Additional parameters for users requiring more control and customization of the analysis process.
+    - **Savings Settings**: Options for determining how and where your analysis results are saved.
+  - **Mini Console**: Located at the bottom of the Settings Panel, the mini console serves as an interactive feedback area. It displays important user messages, warnings, and recommendations, especially useful if a setting is not correctly configured.
+
+- **Results Panel (3)**: This panel is your destination for viewing the outcomes of your analyses. It is organized into three main tabs, each offering a different perspective on your results:
+  - **Mask Results**: Displays the results related to image segmentation or masking, providing insights into the specific areas of interest within your images.
+  - **Full Image Results**: Offers a holistic view of the analyzed images, highlighting the overall findings and annotations made by the software.
+  - **Object Results**: Focuses on the results at the object level, detailing measurements, classifications, and other quantitative data extracted from individual objects identified in your images.
+
+## Project Setup
+
+- **How to start a new project or open an existing one.**
+- **Configuration Settings**: Guide on configuring the software settings for optimal use (e.g., setting preferences, default save locations).
+
+## Basic Operations
+
+- **Loading Images**: Instructions on how to load images into the software.
+- **Performing Analysis**: Step-by-step guide on running standard analyses, including selecting analysis parameters and starting the process.
+- **Viewing Results**: How to interpret the analysis results displayed by the software, including understanding output files and visualizations.
+- **Exporting Data**: Guide on exporting analysis results for further use or publication.
+
+## Advanced Features
+
+- **Custom Analyses**: Instructions for performing more advanced or customized analyses, including using any plugin features.
+- **Scripting and Automation**: If applicable, how users can automate tasks or extend functionality through scripting.
+
+## Troubleshooting and Support
+
+- **Common Issues and Solutions**: List of frequently encountered problems and how to resolve them.
+- **Software Updates**: How to check for and install software updates.
+- **Getting Help**: Information on where to find more documentation, how to access user forums or communities, and how to contact technical support.
+
+## Appendix
+
+### Glossary
+Definitions of terms and concepts used within the guide and software.
+
+### FAQs
+Answers to frequently asked questions about the software.
+
+## Index
+
+### Keyword Index
+An index to help users quickly find information within the guide.
+
+## License
+
+```
+MIT License
+
+Copyright (c) 2024 Luca Andronico & Florian Weber
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "VISION"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+```
+
