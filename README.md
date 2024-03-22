@@ -123,6 +123,7 @@ Welcome to GP Analyzer! As you start the application for the first time, here's 
 ## Navigating the Interface
 
 Welcome to GP Analyzer! This section will help you become familiar with the main window's interface, ensuring you can navigate the software efficiently and make the most out of its powerful features.
+![image](https://github.com/biosciflo/VISON/assets/106735259/6072d1b8-ca1c-4484-9741-74ebf34fb299)
 
 ### Main Window (1) Overview
 The main window of GP Analyzer is designed with intuitiveness and efficiency in mind, structured to facilitate easy access to all necessary tools and functionalities for comprehensive image analysis. Here's what you'll find:
