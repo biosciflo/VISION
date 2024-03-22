@@ -1,4 +1,4 @@
-name: GP-Analyzer
+name: VISION_1_0_0
 channels:
   - anaconda
   - conda-forge
