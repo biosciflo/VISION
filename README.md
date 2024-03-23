@@ -1,4 +1,4 @@
-# User Guide for VISON
+# User Guide for VISION
 **Version**: V1.0.0
 
 ## Contents
