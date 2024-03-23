@@ -1,9 +1,3 @@
-"""
-Created on Wed Oct 19 12:39:12 2022
-
-@author: P41650
-"""
-
 #performance
 import copy
 #import pyi_splash
