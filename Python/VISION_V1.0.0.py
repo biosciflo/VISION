@@ -1,3 +1,9 @@
+"""
+Created on Wed Oct 19 12:39:12 2022
+
+@author: P41650
+"""
+
 #performance
 import copy
 #import pyi_splash
@@ -767,6 +773,8 @@ class MainWindow(QtWidgets.QMainWindow):
         
         
         self.pushButton.clicked.connect(self.test)
+        self.pushButton.setVisible(False)
+        
         self.B_selectsavingpath.clicked.connect(self.Select_Saving_Path)
         
         
@@ -864,6 +872,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
         
     def test(self):
+        res=1/0
         global Results_g
         Results_g = self.Results
         global Membrane_Maskdata_g
@@ -3478,7 +3487,6 @@ class MainWindow(QtWidgets.QMainWindow):
         ax.set_facecolor('#2D2D2D')
         self.matplotlibwidget_24.axis = ax 
         ax=self.matplotlibwidget_24.axis
-
         
         if SegmentImage:
             if key !=[] and ((isinstance(SegmentImage[0], np.ndarray) and SegmentImage[0].size > 0) or (isinstance(SegmentImage[0], list) and len(SegmentImage[0]) > 0)):
@@ -5142,10 +5150,38 @@ class MainWindow(QtWidgets.QMainWindow):
                         self.Cyto_GPPhasor_polar_obj[filename].append([])
 
 
+def exception_hook(exctype, value, traceback_obj):
+    # Define the format of your log message
+    log_message = f"{'='*80}\n"  # Separator line
+    log_message += f"Timestamp: {time.asctime(time.localtime())}\n"  # Timestamp
+    log_message += f"Exception type: {exctype.__name__}\n"  # Exception type
+    log_message += f"Exception message: {value}\n"  # Exception message
+    log_message += "".join(traceback.format_tb(traceback_obj))  # Stack trace
+    
+    # Define the path to your log file
+    if getattr(sys, 'frozen', False):
+        # For standalone executables
+        current_directory =dirname(sys.executable)
+    else:
+        # For running as a script
+#                 current_directory = dirname(abspath(__file__))
+        # or 
+        current_directory = getcwd()
+    log_file_path = join(current_directory, 'global_error_log.txt')
+    
+    # Write the log message to the file
+    with open(log_file_path, "a") as log_file:
+        log_file.write(log_message)
+    
+    """Custom exception hook."""
+    QMessageBox.critical(None, "An exception was raised", f"Exception type: {exctype.__name__}\n{value}")
+    sys.exit(1)
+
+sys.excepthook = exception_hook
+
 if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)
     apply_dark_palette(app)
-    app.setAttribute(Qt.AA_EnableHighDpiScaling, True)
     window = MainWindow()
     #pyi_splash.close()
     app.processEvents() 
