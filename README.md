@@ -259,6 +259,8 @@ Each panel has a Membrane and Cytosolic part and is split into Mask, Full Image,
 **Note**: Once you have run the image, all Results are automatically Saved.
 ## Youtube Tutorials:
 - [TUTORIAL1](https://)
+- [TUTORIAL2](https://)
+- [TUTORIAL3](https://)
 
 # Advanced Features
 
