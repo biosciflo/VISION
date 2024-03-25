@@ -91,19 +91,19 @@ VISION is designed to be easily accessible, offering both a standalone version f
 
 macOS prevents certain applications from running due to security restrictions, particularly those downloaded from the internet and not signed by a verified developer.
 
-** Step 1: Grant Execution Permission**
+**Step 1: Grant Execution Permission**
 
 - **Command**: `chmod +x /path/to/yourApp`
 - **Purpose**: Grants execute permission to your application, making it runnable on your system.
 - **Usage**: Replace `/path/to/yourApp` with the actual path to the application you wish to run.
 
-** Step 2: Remove Quarantine Attribute**
+**Step 2: Remove Quarantine Attribute**
 
 - **Command**: `xattr -cr /path/to/yourApplication`
 - **Purpose**: Removes the quarantine attribute macOS applies to files downloaded from the internet, which causes the security block.
 - **Usage**: Replace `/path/to/yourApplication` with the path to the affected application or folder containing multiple blocked files.
 
-** Notes**
+**Notes**
 
 - These steps are particularly useful for applications blocked by macOS due to lack of a verified developer signature or for files marked as unsafe because they were downloaded from the internet.
 - Always ensure you trust the source of the software you're attempting to run, as bypassing these protections can expose your system to risks.
