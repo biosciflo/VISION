@@ -270,6 +270,17 @@ Each panel has a Membrane and Cytosolic part and is split into Mask, Full Image,
   Or…
   - Press “Clear Selection” and Press Run - All Images in list will be Processed.
 
+# Useing '*.ome.tiff' as imageformat: Currently image file types of '*.lsm' and '*.czi' can be openend but with '*.ome.tiff' (imagej/fiji) all images can be anlaysed with VISION. 
+## Step by Step guid to get the right '*.ome.tiff'.
+- (1)
+- (2)
+- (3)
+- (4)
+- 
+
+- **Glossary**: Definitions of terms and concepts used within the guide and software.
+
+
 # Troubleshooting and Support
 
 - **Common Issues and Solutions**: As of now, no common issues have been identified. However, we acknowledge that problems we have not yet tested may arise. We appreciate your understanding and patience in these matters. We also encourage you to assist us by reporting any problems you encounter. Your feedback is invaluable in helping us continuously improve the software.
