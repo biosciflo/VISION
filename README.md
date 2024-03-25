@@ -257,8 +257,8 @@ Each panel has a Membrane and Cytosolic part and is split into Mask, Full Image,
    b. Check Full Image Results and Object-Related Results.
    
 **Note**: Once you have run the image, all Results are automatically Saved.
-##Youtube Tutorials##:
-[TUTORIAL1](https://)
+## Youtube Tutorials:
+- [TUTORIAL1](https://)
 
 # Advanced Features
 
