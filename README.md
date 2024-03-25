@@ -85,7 +85,30 @@ VISION is designed to be easily accessible, offering both a standalone version f
 - Navigate to the extracted folder and double-click on `VISION.exe` to start the application.
 
 **macOS:**
-- Open the extracted folder, find the `VISION.app` file, and double-click to launch it. If you encounter any security prompts preventing the app from opening (due to macOS Gatekeeper), right-click (or Control-click) the app and select Open, then confirm in the dialog that you want to open it.
+- Open the extracted folder, find the `VISION.app` file, and double-click to launch it. If you encounter any security prompts preventing the app from opening (due to macOS Gatekeeper), right-click (or Control-click) the app and select Open, then confirm in the dialog #
+
+- Quick Guide for Running Blocked Applications on macOS
+
+macOS prevents certain applications from running due to security restrictions, particularly those downloaded from the internet and not signed by a verified developer.
+
+## Step 1: Grant Execution Permission
+
+- **Command**: `chmod +x /path/to/yourApp`
+- **Purpose**: Grants execute permission to your application, making it runnable on your system.
+- **Usage**: Replace `/path/to/yourApp` with the actual path to the application you wish to run.
+
+## Step 2: Remove Quarantine Attribute
+
+- **Command**: `xattr -cr /path/to/yourApplication`
+- **Purpose**: Removes the quarantine attribute macOS applies to files downloaded from the internet, which causes the security block.
+- **Usage**: Replace `/path/to/yourApplication` with the path to the affected application or folder containing multiple blocked files.
+
+## Notes
+
+- These steps are particularly useful for applications blocked by macOS due to lack of a verified developer signature or for files marked as unsafe because they were downloaded from the internet.
+- Always ensure you trust the source of the software you're attempting to run, as bypassing these protections can expose your system to risks.
+- This guide is intended to help users quickly resolve issues with running applications that macOS has blocked due to its security settings.
+
 
 **Linux:**
 - Open a terminal and change to the directory containing the extracted files.
@@ -144,41 +167,120 @@ The main window of GP Analyzer is designed with intuitiveness and efficiency in 
   - **Full Image Results**: Offers a holistic view of the analyzed images, highlighting the overall findings and annotations made by the software.
   - **Object Results**: Focuses on the results at the object level, detailing measurements, classifications, and other quantitative data extracted from individual objects identified in your images.
 
-## Project Setup
+# Setting Panel
 
-- **How to start a new project or open an existing one.**
-- **Configuration Settings**: Guide on configuring the software settings for optimal use (e.g., setting preferences, default save locations).
+## Load and Table Interaction Section
 
-## Basic Operations
+- **Load Files**: Load one or multiple images (*.lsm, *.czi, *.ome.tiff).
+- **Load Folder**: Loads all images in folder with compatible file formats (*.lsm, *.czi, *.ome.tiff).
+- **Clear Selection**: Clears (unselects a selected item) in image table. 
+- **Delete Entry**: Deletes selected item in image table.
+- **Clear Table**: Clears (deletes) full image table.
 
-- **Loading Images**: Instructions on how to load images into the software.
-- **Performing Analysis**: Step-by-step guide on running standard analyses, including selecting analysis parameters and starting the process.
-- **Viewing Results**: How to interpret the analysis results displayed by the software, including understanding output files and visualizations.
-- **Exporting Data**: Guide on exporting analysis results for further use or publication.
+## Test, Run, and Analysis Settings
 
-## Advanced Features
+- **Test Mask**: Runs the thresholding and masking part of the algorithm and returns the results.
+- **Run Analysis**: Runs the full Analysis with the selected sub-options.
+- **Object Detection**: Enables/disables Object Detection for the full analysis. 
+- **Linearization**: Enables/disables object Linearization for the full analysis. (Enabling Object Detection is mandatory)
 
-- **Custom Analyses**: Instructions for performing more advanced or customized analyses, including using any plugin features.
-- **Scripting and Automation**: If applicable, how users can automate tasks or extend functionality through scripting.
+## Specific Analysis Settings
 
-## Troubleshooting and Support
+### Membrane Settings – P Value and Analysis
 
-- **Common Issues and Solutions**: List of frequently encountered problems and how to resolve them.
-- **Software Updates**: How to check for and install software updates.
-- **Getting Help**: Information on where to find more documentation, how to access user forums or communities, and how to contact technical support.
+- **Channel Settings**: Upon loading image files, fields A, B, C, & D automatically populate with existing channel information, such as '488' or numbers '1-9', derived directly from the original file's metadata. When loading spectral LSM or CZI files, the results in the comboboxes will include all available channel wavelengths.
+- **Membrane Profiler**: Enables/disables Membrane Profiler. 
+- **Colocalization**: Enables/disables an additional, independent colocalization channel. The population of the combobox below follows the same procedure as described in Channel Settings above.
+- **Equation**: The "Equation" text field leverages the channel settings A, B, C, and D to calculate the P-Value, for example, the GP-Value using the formula “(A-B)/(A+B)”. Please note, only the variables A, B, C, and D are permitted in this field.
 
-## Appendix
+### Membrane Settings – Global Membrane Masking Options
 
-### Glossary
-Definitions of terms and concepts used within the guide and software.
+- **Thresholding Options – Specific Channel**: Enable/disable the specific channel Thresholding. Uses combobox next to select the channel dedicated to Thresholding (if disabled: default thresholding is used – Channel with lowest intensity used in equation).
+- **Thresholding Options – Thresholding Mode**: Choose between Automatic Otsu Algorithm or Manual. (if Manual, Manual Cutoff Level is enabled).
+- **Thresholding Options – Manual Cutoff Level**: Enter an Intensity Value as the Cutoff Level for Thresholding.
+- **Thresholding Options – Signal to Noise Ratio**: Enter Signal to Noise Ratio for Thresholding algorithm.
+- **Thresholding Options – Background Compensation**: Enable/disable Background Compensation mode for the Thresholding algorithm. When enabled, it allows for the adjustment of Background Mean and Standard Deviation through manual modifications. (as well as through “Probe Raw Image”- Probe Raw Image is in the MASK Results Tab, click on button Probe Raw Image and raise a square area of interest (e.g. Background). Mean, median Standard deviation, min & max will be calculated of this area and shown below, additionally, the mean and standard deviation values will be automatically updated as the "Background Mean" and "Background Std" in the Thresholding options.)
+- **Masking Options – Compression**: Enable/disable Compression and Compression Value (float).
+- **Masking Options – Remove Object**: Enable/disable Remove Objects and Remove Objects Value (int).
+- **Masking Options – Fill Holes**: Enable/disable Fill Holes and Fill Holes Value (float).
+- **Masking Options – Gaussian Filter**: Enable/disable Gaussian Filter and Gaussian Filter Value (float).
+- **Masking Options – Dilation**: Enable/disable Dilation, Dilation Shape, and X/Y Dimensions of Dilation Shape (int).
+- **Binning**: Min/Max/Width of Binning. 
 
-### FAQs
-Answers to frequently asked questions about the software.
+### Cytosol Settings
 
-## Index
+- All Settings as described for the membrane part, but it is performed on the cytosolic regions. 
+- **Cytosolic Measurement**: Enable/disable the analysis of cytosolic regions.
 
-### Keyword Index
-An index to help users quickly find information within the guide.
+### Advanced Settings
+
+- **Object Segmentation – Skeleton Debranching** 
+- **Object Segmentation – tol0**
+- **Object Segmentation – tol1**
+- **Membrane Profiling – Recentering**: Enable/disable Recentering of Integration Element
+- **Membrane Profiling – dim_line**
+- **Membrane Profiling – Integrations Element**: Integration Element Shape
+- **Membrane Profiling – Integrations Element X/Y-Dimension**: Integration Element XY Dimension
+- **Membrane Profiling – P-Value Threshold Auto Cut off** 
+
+### Data Saving
+
+- **Select Saving Path**: Choose a different path to save Results (default: path of image) 
+- **Save cropped Membrane**: Save membrane images of individual detected objects.
+- **Save cropped Cytosol**: Save cytosolic imagesof individual detected objects.
+- **Save Linearized Cytosol**: Save linearized images of individual detected objects.
+- **Save Phasors**: Save Phasor plots in excel.
+- **Save Settings in JSON**: Save used settings in a dedicated JSON File.
+- **Save Results in JSON**: Save used settings and all results in a dedicated JSON File.
+
+# Results Panel
+
+Each panel has a Membrane and Cytosolic part and is split into Mask, Full Image, & Object Results Panel.
+
+# Basic Project Walk Through
+
+1. **Start VISON**
+2. **Load File(s) / Load Folder**
+3. **(Membrane Settings)** (Optional) Enter Equation for P-Value calculation.
+4. **(Membrane Settings)** Select Channels for each used variable in Equation.
+5. **(Membrane Settings)** (Optional) Enable and Choose Specific Thresholding Channel.
+6. **Test Mask** (if Mask is not optimal follow with Steps a-c, otherwise go to 7)
+   a. Move displayed Raw Image (Right Panel of Mask Results) to the channel of Choose Specific Thresholding Channel or used Channel of Equation with the lowest intensity. Click on “Probe Raw Image” and select a background area.
+   b. Activate Background Compensation.
+   c. Test Mask (if Mask is not optimal follow with Steps d-, otherwise go to 7)
+   d. Enable options such as the Gauss Filter, Dilation, Compression, and Fill Holes, then fine-tune their respective parameters until the mask is satisfactory. Proceed to Step 7 upon completion.
+7. **Run Analysis – (Full Image)**
+   a. Check Full Image Results.
+8. **Activate Object Detection**
+9. **Run Analysis – (Full Image & Object Detection)**
+   a. If an error appears in the mini console, try to adapt the Masking options; it could be that the subroutines can't detect single objects.
+   b. Check Full Image Results and Object-Related Results.
+   
+**Note**: Once you have run the image, all Results are automatically Saved.
+
+# Advanced Features
+
+- **Custom Analyses**: Equations???? Different Equations?
+- **Patch Processing**: If multiple images are in the Image – List, either:
+  - Select Multiple Images and press Run – Selected Images will be Processed.
+  Or…
+  - Press “Clear Selection” and Press Run - All Images in list will be Processed.
+
+# Troubleshooting and Support
+
+- **Common Issues and Solutions**: As of now, no common issues have been identified. However, we acknowledge that problems we have not yet tested may arise. We appreciate your understanding and patience in these matters. We also encourage you to assist us by reporting any problems you encounter. Your feedback is invaluable in helping us continuously improve the software.
+- **Software Updates**: We will release eventually, updates where we cover all the bugs which we and you encounter. New releases you will find here at the GitHub repository.
+- **Getting Help**: At the GitHub repository.
+
+# Appendix
+
+- **Glossary**: Definitions of terms and concepts used within the guide and software.
+- **FAQs**: Answers to frequently asked questions about the software.
+
+# Index
+
+- **Keyword Index**: An index to help users quickly find information within the guide.
+
 
 ## License
 
