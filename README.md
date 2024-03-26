@@ -276,8 +276,9 @@ Each panel has a Membrane and Cytosolic part and is split into Mask, Full Image,
 To apply specific masking options across multiple images in batch processing, it is essential to first initialize the detailed masking settings for each image file listed in the image table. This involves clicking on each file to activate the detailed options. Failing to perform this step may result in a key value error displayed in the mini console. We are aware of this issue and plan to streamline the process in future updates of VISION.
 
 
-# Useing '*.ome.tiff' as imageformat:
+# Using '*.ome.tiff' as imageformat:
 Currently image file types of '*.lsm' and '*.czi' can be openend but with '*.ome.tiff' (imagej/fiji) all images can be anlaysed with VISION. 
+- Other image types: If you have special image types such as .lif or .obf. Please get in touch with us. We will be happy to implement the image type if you can provide us with some test images. 
 
 ## Step by Step guid to get the right '*.ome.tiff' via FIJI/ImageJ.
 - (1) First open FIJI/ImageJ
