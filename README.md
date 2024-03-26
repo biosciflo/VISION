@@ -130,29 +130,29 @@ For those who prefer the flexibility of a Python environment or wish to integrat
 The standalone version simplifies the installation process by bundling the application with all its dependencies. It's ideal for users who prefer a quick setup without the need to manually install Python or additional packages. For detailed guides on using Python and managing packages, refer to the provided additional resources.
 
 ### First Launch
-Welcome to GP Analyzer! As you start the application for the first time, here's what you can expect and how to navigate the initial setup process.
+Welcome to VISION! As you start the application for the first time, here's what you can expect and how to navigate the initial setup process.
 
 **What to Expect:**
-- **Console Window**: Upon launching GP Analyzer, a console window will appear. This window is an essential part of the application, providing real-time feedback, status updates, and information about the tasks being performed. It's normal for this console to remain open throughout your use of GP Analyzer, as it will display valuable information during the application's run.
-- **Splash Screen (Windows Only)**: Shortly after the console window opens, you'll be greeted by a splash screen. This splash screen serves as a visual indicator that GP Analyzer is in the process of starting up. It's designed to provide a friendly welcome while the application loads the necessary components in the background.
-- **Initial Loading Time**: The first startup of GP Analyzer may take some time, which is completely normal and depends on your system's specifications. This initial loading allows GP Analyzer to properly initialize and prepare for optimal performance. We appreciate your patience during this process.
-- **GUI Appearance**: Once initialization is complete, the main graphical user interface (GUI) of GP Analyzer will appear. This is where you will interact with the software to load images, perform analyses, and view results. The GUI is designed to be user-friendly and intuitive, providing easy access to all of GP Analyzer's powerful features.
-- **Console Window During Use**: As mentioned, the console window will remain open while you use GP Analyzer. It will continue to provide important messages and updates. Keeping an eye on the console can offer insights into the application's processes and alert you to any actions required on your part.
+- **Console Window**: Upon launching VISION, a console window will appear. This window is an essential part of the application, providing real-time feedback, status updates, and information about the tasks being performed. It's normal for this console to remain open throughout your use of VISION, as it will display valuable information during the application's run.
+- **Splash Screen (Windows Only)**: Shortly after the console window opens, you'll be greeted by a splash screen. This splash screen serves as a visual indicator that VISION is in the process of starting up. It's designed to provide a friendly welcome while the application loads the necessary components in the background.
+- **Initial Loading Time**: The first startup of VISION may take some time, which is completely normal and depends on your system's specifications. This initial loading allows VISION to properly initialize and prepare for optimal performance. We appreciate your patience during this process.
+- **GUI Appearance**: Once initialization is complete, the main graphical user interface (GUI) of VISION will appear. This is where you will interact with the software to load images, perform analyses, and view results. The GUI is designed to be user-friendly and intuitive, providing easy access to all of VISION's powerful features.
+- **Console Window During Use**: As mentioned, the console window will remain open while you use VISION. It will continue to provide important messages and updates. Keeping an eye on the console can offer insights into the application's processes and alert you to any actions required on your part.
 
-**Getting Started**: With the GUI open, you are now ready to begin exploring GP Analyzer. Whether you're analyzing your first image or configuring settings for your analysis, GP Analyzer is equipped to support your work.
+**Getting Started**: With the GUI open, you are now ready to begin exploring VISION. Whether you're analyzing your first image or configuring settings for your analysis, VISION is equipped to support your work.
 
-**A Note on Performance**: The performance and responsiveness of GP Analyzer after the initial launch will vary based on the complexity of the tasks you're performing and your computer's hardware. For demanding tasks or large datasets, enhanced system specifications can contribute to smoother operation.
+**A Note on Performance**: The performance and responsiveness of VISION after the initial launch will vary based on the complexity of the tasks you're performing and your computer's hardware. For demanding tasks or large datasets, enhanced system specifications can contribute to smoother operation.
 
 ## Navigating the Interface
 
-Welcome to GP Analyzer! This section will help you become familiar with the main window's interface, ensuring you can navigate the software efficiently and make the most out of its powerful features.
+Welcome to VISION! This section will help you become familiar with the main window's interface, ensuring you can navigate the software efficiently and make the most out of its powerful features.
 ![image](https://github.com/biosciflo/VISON/assets/106735259/6072d1b8-ca1c-4484-9741-74ebf34fb299)
 
 ### Main Window (1) Overview
-The main window of GP Analyzer is designed with intuitiveness and efficiency in mind, structured to facilitate easy access to all necessary tools and functionalities for comprehensive image analysis. Here's what you'll find:
+The main window of VISION is designed with intuitiveness and efficiency in mind, structured to facilitate easy access to all necessary tools and functionalities for comprehensive image analysis. Here's what you'll find:
 
-- **Settings Panel (2)**: Positioned to maximize ease of access, the Settings Panel is where you'll begin your journey with GP Analyzer. From top to bottom, it comprises:
-  - **Load and Table Interaction Section**: At the very top, this area allows you to load images into GP Analyzer. Following image loading, the section provides functionalities for interacting with the list (table) of loaded images, making it easier to manage and select specific datasets for analysis.
+- **Settings Panel (2)**: Positioned to maximize ease of access, the Settings Panel is where you'll begin your journey with VISION. From top to bottom, it comprises:
+  - **Load and Table Interaction Section**: At the very top, this area allows you to load images into VISION. Following image loading, the section provides functionalities for interacting with the list (table) of loaded images, making it easier to manage and select specific datasets for analysis.
   - **Table for Loaded Images**: Directly below the interaction tools, this table displays all your loaded images. It serves as a central hub for selecting and organizing your analysis queue, providing an overview of your working datasets.
   - **Test Run and Analysis Settings**: Moving down, this segment of the Settings Panel is dedicated to preparing and initiating your image analyses. Here, you can conduct preliminary tests, run analyses, and adjust general settings that apply to the upcoming analysis tasks.
   - **Specific Analysis Settings**: This section is tailored for fine-tuning the analysis parameters, including:
@@ -273,7 +273,7 @@ Each panel has a Membrane and Cytosolic part and is split into Mask, Full Image,
   - Time-Lapse Sequences: For datasets organized by time, the "Detailed Masking Options" table expands dynamically, adding a column for each time point. This feature allows for the adjustment of masking settings uniquely for each time point.
   - 3D Stacks: For spatial (z) slices within a 3D stack, use the dedicated combobox to select the specific time point (T Position) you wish to customize. This selection enables targeted modification of the masking options for individual z-layers.
   - Important Note for Batch Processing:
-To apply specific masking options across multiple images in batch processing, it is essential to first initialize the detailed masking settings for each image file listed in the image table. This involves clicking on each file to activate the detailed options. Failing to perform this step may result in a key value error displayed in the mini console. We are aware of this issue and plan to streamline the process in future updates of GP Analyzer.
+To apply specific masking options across multiple images in batch processing, it is essential to first initialize the detailed masking settings for each image file listed in the image table. This involves clicking on each file to activate the detailed options. Failing to perform this step may result in a key value error displayed in the mini console. We are aware of this issue and plan to streamline the process in future updates of VISION.
 
 
 # Useing '*.ome.tiff' as imageformat:
