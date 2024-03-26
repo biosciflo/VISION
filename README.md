@@ -36,6 +36,7 @@
 - [Appendix](#appendix)
   - [Glossary](#glossary)
 - [Index](#index)
+- [License](#license)
 
 ## Introduction
 
