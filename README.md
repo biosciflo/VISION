@@ -18,8 +18,9 @@
     - [Python-Based Version Setup](#python-based-version-setup)
   - [First Launch](#first-launch)
 - [Navigating the Interface](#navigating-the-interface)
-- [Project Setup](#project-setup)
-- [Basic Operations](#basic-operations)
+- [Setting Panel](#setting-Panel)
+  - [Load and Table Interaction Section](#Load-and-table-Interaction-Section)
+  - [Load and Table Interaction Section](#Load-and-table-Interaction-Section)
 - [Advanced Features](#advanced-features)
 - [Troubleshooting and Support](#troubleshooting-and-support)
 - [Appendix](#appendix)
@@ -294,7 +295,6 @@ Currently image file types of '*.lsm' and '*.czi' can be openend but with '*.ome
 - ADD: This can be done with all kind of images supported by VISION or not. e.g LIF files are currently not supported with an export as '*.ome.tif' you export Sinle Sceens form a LIF project.
 
 - **Glossary**: Definitions of terms and concepts used within the guide and software.
-
 
 # Troubleshooting and Support
 
