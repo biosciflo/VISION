@@ -270,8 +270,8 @@ Each panel has a Membrane and Cytosolic part and is split into Mask, Full Image,
   Or…
   - Press “Clear Selection” and Press Run - All Images in list will be Processed.
 - **Detailed Masking Options**: VISION provides flexible thresholding and masking capabilities. Each masking option available in the global settings is also accessible for individual customization within the "Detailed Masking Options" table (available for membrane and cytosolic part). This level of detail ensures that each slice can be analyzed with precision, accommodating both 3D stacks and time-lapse sequences. Here's how you can customize these settings:
-  -Time-Lapse Sequences: For datasets organized by time, the "Detailed Masking Options" table expands dynamically, adding a column for each time point. This feature allows for the adjustment of masking settings uniquely for each time point.
-  -3D Stacks: For spatial (z) slices within a 3D stack, use the dedicated combobox to select the specific time point (T Position) you wish to customize. This selection enables targeted modification of the masking options for individual z-layers.
+  - Time-Lapse Sequences: For datasets organized by time, the "Detailed Masking Options" table expands dynamically, adding a column for each time point. This feature allows for the adjustment of masking settings uniquely for each time point.
+  - 3D Stacks: For spatial (z) slices within a 3D stack, use the dedicated combobox to select the specific time point (T Position) you wish to customize. This selection enables targeted modification of the masking options for individual z-layers.
   -Important Note for Batch Processing:
 To apply specific masking options across multiple images in batch processing, it is essential to first initialize the detailed masking settings for each image file listed in the image table. This involves clicking on each file to activate the detailed options. Failing to perform this step may result in a key value error displayed in the mini console. We are aware of this issue and plan to streamline the process in future updates of GP Analyzer.
 
@@ -326,7 +326,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,    
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 ```
