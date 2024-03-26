@@ -279,12 +279,16 @@ To apply specific masking options across multiple images in batch processing, it
 # Useing '*.ome.tiff' as imageformat:
 Currently image file types of '*.lsm' and '*.czi' can be openend but with '*.ome.tiff' (imagej/fiji) all images can be anlaysed with VISION. 
 
-## Step by Step guid to get the right '*.ome.tiff'.
-- (1)
-- (2)
-- (3)
-- (4)
-- 
+## Step by Step guid to get the right '*.ome.tiff' via FIJI/ImageJ.
+- (1) First open FIJI/ImageJ
+- (2) Load image file as Hyperstack
+- (3) Select "Save" as "OME-TIFF..." 
+- (4) Enter Filename with the ending '*.ome.tif' (e.g. test.ome.tif)
+- (5) Choose Filetype OME-TIFF
+- (6) Press save
+- (7) if Window with multiple options for T,Z and Channesl appear do not select anything, just press OK.
+- (8) Deselect ROIs, Use "Uncompressed" and press OK
+- ADD: This can be done with all kind of images supported by VISION or not. e.g LIF files are currently not supported with an export as '*.ome.tif' you export Sinle Sceens form a LIF project.
 
 - **Glossary**: Definitions of terms and concepts used within the guide and software.
 
