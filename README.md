@@ -14,7 +14,7 @@
   - [Installation Instructions](#installation-instructions)
     - [Standalone Version Installation](#standalone-version-installation)
       - [Windows](#windows)
-      - [MAC](#mac)
+      - [macOS](#macOS)
     - [Python-Based Version Setup](#python-based-version-setup)
   - [First Launch](#first-launch)
 - [Navigating the Interface](#navigating-the-interface)
