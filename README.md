@@ -82,10 +82,10 @@ VISION is designed to be easily accessible, offering both a standalone version f
 1. Download the ZIP file for your respective operating system (Windows, macOS, or Linux) from the VISION official website.
 2. Extract the ZIP file to your desired location. This will create a folder containing the VISION executable and all necessary dependencies.
 
-**Windows:**
+##### **Windows:**
 - Navigate to the extracted folder and double-click on `VISION.exe` to start the application.
 
-**macOS:**
+##### **macOS:**
 - Open the extracted folder, find the `VISION.app` file, and double-click to launch it. If you encounter any security prompts preventing the app from opening (due to macOS Gatekeeper), right-click (or Control-click) the app and select Open, then confirm in the dialog #
 
 **Quick Guide for Running Blocked Applications on macOS**
