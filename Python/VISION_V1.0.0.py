@@ -828,6 +828,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.Cyto_Intensities_per_object={}
         self.Cyto_GPPhasor_polar_obj={}
         self.savingpath=str([])
+        self.DifferentSavingPath=str([])
 
 
 #### for testing purposes
@@ -1159,7 +1160,7 @@ class MainWindow(QtWidgets.QMainWindow):
                                 'Dilation Shape': {'key': 'shape', 'type': (str,)},
                                 'Dilation Shape Dimension 1': {'key': 'dim1', 'type': (int,)},
                                 'Dilation Shape Dimension 2': {'key': 'dim2', 'type': (int,)},
-                                'Gaussian Filter': {'key': 'GaussianS', 'type': (int, str)},  # can be str or int
+                                'Gaussian Filter': {'key': 'GaussianS', 'type': (float, str)},  # can be str or int
                                 'Signal to Noise Ratio': {'key': 'S_N', 'type': (float,)},
                                 'Background StdDev': {'key': 'stddev', 'type': (float,)},  # can be 1 or float
                                 'Background Mean': {'key': 'bgmean', 'type': (float, str)},  # can be str or float
@@ -1224,7 +1225,7 @@ class MainWindow(QtWidgets.QMainWindow):
             elif key == "GaussianS":
                 if not newValue.isdigit() and newValue!="NaN":
                     self.plainTextEdit_1.appendPlainText(time.asctime(time.localtime()))
-                    self.plainTextEdit_1.appendPlainText(f"The value '{newValue}' is not valid for 'Gaussian Filter'. (NaN or a int)")
+                    self.plainTextEdit_1.appendPlainText(f"The value '{newValue}' is not valid for 'Gaussian Filter'. (NaN or a float)")
                     Error=False
             elif key == "S_N":
                 if not newValue.replace(".", "", 1).isdigit():
@@ -1359,7 +1360,7 @@ class MainWindow(QtWidgets.QMainWindow):
            "dim1":int(self.spinBox_4.value()), #shpae dim1
            "dim2":int(self.spinBox_5.value()), #shpae dim2
            "PixelDepth":metadata['BitDepth'],
-           "GaussianS":"NaN" if not self.checkBox_26.isChecked() else (self.spinBox_13.value()),
+           "GaussianS":"NaN" if not self.checkBox_26.isChecked() else (self.doubleSpinBox_12.value()),
            "S_N":self.doubleSpinBox_8.value(),
            "stddev": 1 if not self.checkBox_15.isChecked() else (self.doubleSpinBox_7.value()),
            "bgmean": "NaN" if not self.checkBox_15.isChecked() else (self.doubleSpinBox_9.value()),
@@ -1523,7 +1524,7 @@ class MainWindow(QtWidgets.QMainWindow):
                            "dim1":int(self.spinBox_4.value()), #shpae dim1
                            "dim2":int(self.spinBox_5.value()), #shpae dim2
                            "PixelDepth":metadata['BitDepth'],
-                           "GaussianS":"NaN" if not self.checkBox_26.isChecked() else (self.spinBox_13.value()),
+                           "GaussianS":"NaN" if not self.checkBox_26.isChecked() else (self.doubleSpinBox_12.value()),
                            "S_N":self.doubleSpinBox_8.value(),
                            "stddev": 1 if not self.checkBox_15.isChecked() else (self.doubleSpinBox_7.value()),
                            "bgmean": "NaN" if not self.checkBox_15.isChecked() else (self.doubleSpinBox_9.value()),
@@ -1591,7 +1592,7 @@ class MainWindow(QtWidgets.QMainWindow):
                        "dim1":int(self.spinBox_4.value()), #shpae dim1
                        "dim2":int(self.spinBox_5.value()), #shpae dim2
                        "PixelDepth":metadata['BitDepth'],
-                       "GaussianS":"NaN" if not self.checkBox_26.isChecked() else (self.spinBox_13.value()),
+                       "GaussianS":"NaN" if not self.checkBox_26.isChecked() else (self.doubleSpinBox_12.value()),
                        "S_N":self.doubleSpinBox_8.value(),
                           "stddev": 1 if not self.checkBox_15.isChecked() else (self.doubleSpinBox_7.value()),
                        "bgmean": "NaN" if not self.checkBox_15.isChecked() else (self.doubleSpinBox_9.value()),
@@ -1612,7 +1613,7 @@ class MainWindow(QtWidgets.QMainWindow):
                                "dim1":int(self.spinBox_4.value()), #shpae dim1
                                "dim2":int(self.spinBox_5.value()), #shpae dim2
                                "PixelDepth":metadata['BitDepth'],
-                               "GaussianS":"NaN" if not self.checkBox_26.isChecked() else (self.spinBox_13.value()),
+                               "GaussianS":"NaN" if not self.checkBox_26.isChecked() else (self.doubleSpinBox_12.value()),
                                "S_N":self.doubleSpinBox_8.value(),
                                   "stddev": 1 if not self.checkBox_15.isChecked() else (self.doubleSpinBox_7.value()),
                                "bgmean": "NaN" if not self.checkBox_15.isChecked() else (self.doubleSpinBox_9.value()),
@@ -1635,7 +1636,7 @@ class MainWindow(QtWidgets.QMainWindow):
                            "dim1":int(self.spinBox_4.value()), #shpae dim1
                            "dim2":int(self.spinBox_5.value()), #shpae dim2
                            "PixelDepth":metadata['BitDepth'],
-                           "GaussianS":"NaN" if not self.checkBox_26.isChecked() else (self.spinBox_13.value()),
+                           "GaussianS":"NaN" if not self.checkBox_26.isChecked() else (self.doubleSpinBox_12.value()),
                            "S_N":self.doubleSpinBox_8.value(),
                               "stddev": 1 if not self.checkBox_15.isChecked() else (self.doubleSpinBox_7.value()),
                            "bgmean": "NaN" if not self.checkBox_15.isChecked() else (self.doubleSpinBox_9.value()),
@@ -1654,7 +1655,7 @@ class MainWindow(QtWidgets.QMainWindow):
                        "dim1":int(self.spinBox_4.value()), #shpae dim1
                        "dim2":int(self.spinBox_5.value()), #shpae dim2
                        "PixelDepth":metadata['BitDepth'],
-                       "GaussianS":"NaN" if not self.checkBox_26.isChecked() else (self.spinBox_13.value()),
+                       "GaussianS":"NaN" if not self.checkBox_26.isChecked() else (self.doubleSpinBox_12.value()),
                        "S_N":self.doubleSpinBox_8.value(),
                           "stddev": 1 if not self.checkBox_15.isChecked() else (self.doubleSpinBox_7.value()),
                        "bgmean": "NaN" if not self.checkBox_15.isChecked() else (self.doubleSpinBox_9.value()),
@@ -1680,7 +1681,7 @@ class MainWindow(QtWidgets.QMainWindow):
                                 'Dilation Shape': {'key': 'shape', 'type': (str,)},
                                 'Dilation Shape Dimension 1': {'key': 'dim1', 'type': (int,)},
                                 'Dilation Shape Dimension 2': {'key': 'dim2', 'type': (int,)},
-                                'Gaussian Filter': {'key': 'GaussianS', 'type': (int, str)},  # can be str or int
+                                'Gaussian Filter': {'key': 'GaussianS', 'type': (float, str)},  # can be str or int
                                 'Signal to Noise Ratio': {'key': 'S_N', 'type': (float,)},
                                 'Background StdDev': {'key': 'stddev', 'type': (float,)},  # can be 1 or float
                                 'Background Mean': {'key': 'bgmean', 'type': (float, str)},  # can be str or float
@@ -1745,7 +1746,7 @@ class MainWindow(QtWidgets.QMainWindow):
             elif key == "GaussianS":
                 if not newValue.isdigit() and newValue!="NaN":
                     self.plainTextEdit_1.appendPlainText(time.asctime(time.localtime()))
-                    self.plainTextEdit_1.appendPlainText(f"The value '{newValue}' is not valid for 'Gaussian Filter'. (NaN or a int)")
+                    self.plainTextEdit_1.appendPlainText(f"The value '{newValue}' is not valid for 'Gaussian Filter'. (NaN or a float)")
                     Error=False
             elif key == "S_N":
                 if not newValue.replace(".", "", 1).isdigit():
@@ -3825,7 +3826,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.comboBox_23.setEnabled(self.checkBox_36.checkState())
         
     def gaussEnable(self):
-        self.spinBox_13.setEnabled(self.checkBox_26.checkState())
+        self.doubleSpinBox_12.setEnabled(self.checkBox_26.checkState())
         
     def gaussEnable_cyto(self):
         self.spinBox_19.setEnabled(self.checkBox_33.checkState())
@@ -3892,7 +3893,7 @@ class MainWindow(QtWidgets.QMainWindow):
                 "Dilation Dimmension 1":(self.spinBox_4.value()), #shpae dim1
                 "Dilation Dimmension 2":(self.spinBox_5.value()), #shpae dim2
                 "Gauss Filter":self.checkBox_26.isChecked(),
-                "Gauss Filter Value":"NaN" if not self.checkBox_26.isChecked() else (self.spinBox_13.value()),
+                "Gauss Filter Value":"NaN" if not self.checkBox_26.isChecked() else (self.doubleSpinBox_12.value()),
                 "Binning Values [min,max,step]": [self.doubleSpinBox_5.value(),self.doubleSpinBox_6.value(),self.doubleSpinBox_4.value()],
                 "Global Slice Masking": self.checkBox_24.isChecked(),
                 "Individual Slice MaskingSettings":self.Membrane_Maskdata[filename],
@@ -4099,8 +4100,9 @@ class MainWindow(QtWidgets.QMainWindow):
 
 
     def Select_Saving_Path(self):
-        self.savingpath= QFileDialog.getExistingDirectory(None, "Open Image Directory")
-        self.textBrowser.setText(self.savingpath)
+        #self.savingpath= QFileDialog.getExistingDirectory(None, "Open Image Directory")
+        self.DifferentSavingPath=QFileDialog.getExistingDirectory(None, "Open Image Directory")
+        self.textBrowser.setText(self.DifferentSavingPath)
         
     def LoadFolder(self):
         self.ClearALL_andDissable() 
@@ -4696,11 +4698,13 @@ class MainWindow(QtWidgets.QMainWindow):
                                 Data_py=image
                                 ## Run Analysis selected images
                                 mode=1
-                                if self.savingpath:
-                                    savepath=self.tableWidget.item(i,1).text()
+                                if len(self.DifferentSavingPath)>2:
+                                    print("YES")
+                                    savepath=self.DifferentSavingPath
                                 else:
-                                    savepath=self.savingpath
-                                
+                                    print("NO")
+                                    savepath=self.tableWidget.item(i,1).text()
+                                print(savepath)
                                 if self.checkBox_24.isChecked():
                                     self.update_toglobal_values_membrane(filename=filename, path=path)
                                 if self.checkBox_31.isChecked():
@@ -4771,11 +4775,13 @@ class MainWindow(QtWidgets.QMainWindow):
                         self.Metadata[filename]=metadata
                         Data_py=image
                         mode=1
-                        if self.savingpath:
-                            savepath=self.tableWidget.item(i,1).text()
+                        if len(self.DifferentSavingPath)>2:
+                            print("YES")
+                            savepath=self.DifferentSavingPath
                         else:
-                            savepath=self.savingpath
-                        
+                            print("NO")
+                            savepath=self.tableWidget.item(i,1).text()
+                        print(savepath)
                         if self.checkBox_24.isChecked():
                             self.update_toglobal_values_membrane(filename=filename, path=path)
                         if self.checkBox_31.isChecked():
@@ -4847,7 +4853,7 @@ class MainWindow(QtWidgets.QMainWindow):
             else:
                 self.key[filename]="Tstack"
             self.GPImage[filename]=[]
-            
+            self.FullImage_Parameters[filename]=[]
             self.GPPhasor[filename]=[]
             self.GPPhasor_polar_all[filename]=[]
             
