@@ -33,6 +33,7 @@
 - [Advanced Features](#advanced-features)
 - [Using '*.ome.tiff' as image format](#using-ome-tiff-as-image-format)
 - [Troubleshooting and Support](#troubleshooting-and-support)
+  - [Reporting Bugs](#reporting-bugs)
 - [Appendix](#appendix)
   - [Glossary](#glossary)
 - [Index](#index)
@@ -308,7 +309,7 @@ Currently image file types of '*.lsm' and '*.czi' can be openend but with '*.ome
 
 - **Common Issues and Solutions**: As of now, no common issues have been identified. However, we acknowledge that problems we have not yet tested may arise. We appreciate your understanding and patience in these matters. We also encourage you to assist us by reporting any problems you encounter. Your feedback is invaluable in helping us continuously improve the software.
 - **Software Updates**: We will release eventually, updates where we cover all the bugs which we and you encounter. New releases you will find here at the GitHub repository.
-# Reporting Bugs
+## Reporting Bugs
 If you encounter any issues while using our software, we highly encourage you to report them so we can work on fixing them promptly. Here's how to report a bug on GitHub:
 
 Visit the GitHub Repository: Navigate to our software's GitHub repository. If you're not already signed in, GitHub will prompt you to log in or create a new account.
@@ -324,8 +325,8 @@ Fill Out the Issue Template: Provide a clear and concise title for your issue. F
 - Expected behavior and what actually happens.
 - Any relevant error messages or screenshots. For that please add the "global_error_log.txt" and/or "error_log.txt". They are in the folder were your executable file is located. 
 - Your operating system and version, as well as the software version you're using.
-- Submit the Issue: Once you've filled out the template, submit your issue by clicking the 'Submit new issue' button.
 - Any files that you used. 
+- Submit the Issue: Once you've filled out the template, submit your issue by clicking the 'Submit new issue' button.
 
 Monitor Your Issue: After submitting, keep an eye on your issue for any comments or questions from the development team. They may need more information or provide a workaround or solution.
 
