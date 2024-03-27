@@ -308,7 +308,8 @@ Currently image file types of '*.lsm' and '*.czi' can be openend but with '*.ome
 
 - **Common Issues and Solutions**: As of now, no common issues have been identified. However, we acknowledge that problems we have not yet tested may arise. We appreciate your understanding and patience in these matters. We also encourage you to assist us by reporting any problems you encounter. Your feedback is invaluable in helping us continuously improve the software.
 - **Software Updates**: We will release eventually, updates where we cover all the bugs which we and you encounter. New releases you will find here at the GitHub repository.
-- **Reporting Bugs**:If you encounter any issues while using our software, we highly encourage you to report them so we can work on fixing them promptly. Here's how to report a bug on GitHub:
+# Reporting Bugs
+If you encounter any issues while using our software, we highly encourage you to report them so we can work on fixing them promptly. Here's how to report a bug on GitHub:
 
 Visit the GitHub Repository: Navigate to our software's GitHub repository. If you're not already signed in, GitHub will prompt you to log in or create a new account.
 
