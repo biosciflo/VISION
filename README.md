@@ -308,7 +308,27 @@ Currently image file types of '*.lsm' and '*.czi' can be openend but with '*.ome
 
 - **Common Issues and Solutions**: As of now, no common issues have been identified. However, we acknowledge that problems we have not yet tested may arise. We appreciate your understanding and patience in these matters. We also encourage you to assist us by reporting any problems you encounter. Your feedback is invaluable in helping us continuously improve the software.
 - **Software Updates**: We will release eventually, updates where we cover all the bugs which we and you encounter. New releases you will find here at the GitHub repository.
-- **Getting Help**: At the GitHub repository.
+- **Reporting Bugs**:If you encounter any issues while using our software, we highly encourage you to report them so we can work on fixing them promptly. Here's how to report a bug on GitHub:
+
+Visit the GitHub Repository: Navigate to our software's GitHub repository. If you're not already signed in, GitHub will prompt you to log in or create a new account.
+
+Check Existing Issues: Before submitting a new bug report, please take a moment to check if the issue has already been reported. You can use the repository's search tool to find issues by keywords. If you find an existing issue that matches yours, you can add any new information you have to that issue rather than creating a new one.
+
+Create a New Issue: If your issue is new, click the 'Issues' tab in the repository, and then click the 'New issue' button. If the repository uses issue templates, select the one that matches your situation or choose 'Open a blank issue' if none of the templates fit.
+
+Fill Out the Issue Template: Provide a clear and concise title for your issue. Fill in the template with as much detail as possible. Be sure to include:
+
+- A brief description of the issue.
+- Steps to reproduce the issue.
+- Expected behavior and what actually happens.
+- Any relevant error messages or screenshots. For that please add the "global_error_log.txt" and/or "error_log.txt". They are in the folder were your executable file is located. 
+- Your operating system and version, as well as the software version you're using.
+- Submit the Issue: Once you've filled out the template, submit your issue by clicking the 'Submit new issue' button.
+- Any files that you used. 
+
+Monitor Your Issue: After submitting, keep an eye on your issue for any comments or questions from the development team. They may need more information or provide a workaround or solution.
+
+Your reports play a crucial role in improving the quality of the software, and we appreciate your contributions to making our project better for everyone.
 
 # Appendix
 
