@@ -8,9 +8,9 @@ Created on Wed Oct 19 12:39:12 2022
 import copy
 #import pyi_splash
 
-# import warnings
-# warnings.filterwarnings("ignore", category=DeprecationWarning)
-# warnings.filterwarnings("ignore", category=FutureWarning)
+import warnings
+warnings.filterwarnings("ignore", category=DeprecationWarning)
+warnings.filterwarnings("ignore", category=FutureWarning)
 
 
 #ForGUI
@@ -1880,7 +1880,7 @@ class MainWindow(QtWidgets.QMainWindow):
           "dim1":int(self.spinBox_17.value()), #shpae dim1
           "dim2":int(self.spinBox_16.value()), #shpae dim2
           "PixelDepth":metadata['BitDepth'],
-          "GaussianS":"NaN" if not self.checkBox_33.isChecked() else (self.spinBox_19.value()),
+          "GaussianS":"NaN" if not self.checkBox_33.isChecked() else (self.doubleSpinBox_11.value()),
           "S_N":self.doubleSpinBox_21.value(),
           "stddev": 1 if not self.checkBox_16.isChecked() else (self.doubleSpinBox_20.value()),
           "bgmean": "NaN" if not self.checkBox_16.isChecked() else (self.doubleSpinBox_10.value()),
@@ -2044,7 +2044,7 @@ class MainWindow(QtWidgets.QMainWindow):
                            "dim1":int(self.spinBox_17.value()), #shpae dim1
                            "dim2":int(self.spinBox_16.value()), #shpae dim2
                            "PixelDepth":metadata['BitDepth'],
-                           "GaussianS":"NaN" if not self.checkBox_33.isChecked() else (self.spinBox_19.value()),
+                           "GaussianS":"NaN" if not self.checkBox_33.isChecked() else (self.doubleSpinBox_11.value()),
                            "S_N":self.doubleSpinBox_21.value(),
                            "stddev": 1 if not self.checkBox_16.isChecked() else (self.doubleSpinBox_20.value()),
                            "bgmean": "NaN" if not self.checkBox_16.isChecked() else (self.doubleSpinBox_10.value()),
@@ -2112,7 +2112,7 @@ class MainWindow(QtWidgets.QMainWindow):
                        "dim1":int(self.spinBox_17.value()), #shpae dim1
                        "dim2":int(self.spinBox_16.value()), #shpae dim2
                        "PixelDepth":metadata['BitDepth'],
-                       "GaussianS":"NaN" if not self.checkBox_33.isChecked() else (self.spinBox_19.value()),
+                       "GaussianS":"NaN" if not self.checkBox_33.isChecked() else (self.doubleSpinBox_11.value()),
                        "S_N":self.doubleSpinBox_21.value(),
                        "stddev": 1 if not self.checkBox_16.isChecked() else (self.doubleSpinBox_20.value()),
                        "bgmean": "NaN" if not self.checkBox_16.isChecked() else (self.doubleSpinBox_10.value()),
@@ -2133,7 +2133,7 @@ class MainWindow(QtWidgets.QMainWindow):
                                "dim1":int(self.spinBox_17.value()), #shpae dim1
                                "dim2":int(self.spinBox_16.value()), #shpae dim2
                                "PixelDepth":metadata['BitDepth'],
-                               "GaussianS":"NaN" if not self.checkBox_33.isChecked() else (self.spinBox_19.value()),
+                               "GaussianS":"NaN" if not self.checkBox_33.isChecked() else (self.doubleSpinBox_11.value()),
                                "S_N":self.doubleSpinBox_21.value(),
                                "stddev": 1 if not self.checkBox_16.isChecked() else (self.doubleSpinBox_20.value()),
                                "bgmean": "NaN" if not self.checkBox_16.isChecked() else (self.doubleSpinBox_10.value()),
@@ -2156,7 +2156,7 @@ class MainWindow(QtWidgets.QMainWindow):
                            "dim1":int(self.spinBox_17.value()), #shpae dim1
                            "dim2":int(self.spinBox_16.value()), #shpae dim2
                            "PixelDepth":metadata['BitDepth'],
-                           "GaussianS":"NaN" if not self.checkBox_33.isChecked() else (self.spinBox_19.value()),
+                           "GaussianS":"NaN" if not self.checkBox_33.isChecked() else (self.doubleSpinBox_11.value()),
                            "S_N":self.doubleSpinBox_21.value(),
                            "stddev": 1 if not self.checkBox_16.isChecked() else (self.doubleSpinBox_20.value()),
                            "bgmean": "NaN" if not self.checkBox_16.isChecked() else (self.doubleSpinBox_10.value()),
@@ -2175,7 +2175,7 @@ class MainWindow(QtWidgets.QMainWindow):
                        "dim1":int(self.spinBox_17.value()), #shpae dim1
                        "dim2":int(self.spinBox_16.value()), #shpae dim2
                        "PixelDepth":metadata['BitDepth'],
-                       "GaussianS":"NaN" if not self.checkBox_33.isChecked() else (self.spinBox_19.value()),
+                       "GaussianS":"NaN" if not self.checkBox_33.isChecked() else (self.doubleSpinBox_11.value()),
                        "S_N":self.doubleSpinBox_21.value(),
                        "stddev": 1 if not self.checkBox_16.isChecked() else (self.doubleSpinBox_20.value()),
                        "bgmean": "NaN" if not self.checkBox_16.isChecked() else (self.doubleSpinBox_10.value()),
@@ -2888,22 +2888,22 @@ class MainWindow(QtWidgets.QMainWindow):
             if key == "Zstack":
                 n=self.verticalScrollBar.value()
                 img1=copy.deepcopy(img[n])
-                isns.imgplot(img1,ax=ax,cmap="viridis",cbar=True,vmax =self.doubleSpinBox_6.value(), vmin=self.doubleSpinBox_5.value(),cbar_ticks =np.arange(self.doubleSpinBox_5.value(),self.doubleSpinBox_6.value()+abs(abs(self.doubleSpinBox_5.value())+abs(self.doubleSpinBox_6.value()))/8,abs(abs(self.doubleSpinBox_5.value())+abs(self.doubleSpinBox_6.value()))/8),origin='upper')
+                isns.imgplot(img1,ax=ax,cmap="viridis",cbar=True,vmax =self.doubleSpinBox_18.value(), vmin=self.doubleSpinBox_17.value(),cbar_ticks =np.arange(self.doubleSpinBox_17.value(),self.doubleSpinBox_18.value()+abs(abs(self.doubleSpinBox_17.value())+abs(self.doubleSpinBox_18.value()))/8,abs(abs(self.doubleSpinBox_17.value())+abs(self.doubleSpinBox_18.value()))/8),origin='upper')
     
             if key == "Tstack":
                 n=self.horizontalScrollBar.value()
                 img1=copy.deepcopy(img[n])
-                isns.imgplot(img1,ax=ax,cmap="viridis",cbar=True,vmax =self.doubleSpinBox_6.value(), vmin=self.doubleSpinBox_5.value(),cbar_ticks =np.arange(self.doubleSpinBox_5.value(),self.doubleSpinBox_6.value()+abs(abs(self.doubleSpinBox_5.value())+abs(self.doubleSpinBox_6.value()))/8,abs(abs(self.doubleSpinBox_5.value())+abs(self.doubleSpinBox_6.value()))/8),origin='upper')
+                isns.imgplot(img1,ax=ax,cmap="viridis",cbar=True,vmax =self.doubleSpinBox_18.value(), vmin=self.doubleSpinBox_17.value(),cbar_ticks =np.arange(self.doubleSpinBox_17.value(),self.doubleSpinBox_18.value()+abs(abs(self.doubleSpinBox_17.value())+abs(self.doubleSpinBox_18.value()))/8,abs(abs(self.doubleSpinBox_17.value())+abs(self.doubleSpinBox_18.value()))/8),origin='upper')
             
             if key == "TZstack":
                 n=self.horizontalScrollBar.value()
                 m=self.verticalScrollBar.value()
                 img1=copy.deepcopy(img[n][m])
-                isns.imgplot(img1,ax=ax,cmap="viridis",cbar=True,vmax =self.doubleSpinBox_6.value(), vmin=self.doubleSpinBox_5.value(),cbar_ticks =np.arange(self.doubleSpinBox_5.value(),self.doubleSpinBox_6.value()+abs(abs(self.doubleSpinBox_5.value())+abs(self.doubleSpinBox_6.value()))/8,abs(abs(self.doubleSpinBox_5.value())+abs(self.doubleSpinBox_6.value()))/8),origin='upper')
+                isns.imgplot(img1,ax=ax,cmap="viridis",cbar=True,vmax =self.doubleSpinBox_18.value(), vmin=self.doubleSpinBox_17.value(),cbar_ticks =np.arange(self.doubleSpinBox_17.value(),self.doubleSpinBox_18.value()+abs(abs(self.doubleSpinBox_17.value())+abs(self.doubleSpinBox_18.value()))/8,abs(abs(self.doubleSpinBox_17.value())+abs(self.doubleSpinBox_18.value()))/8),origin='upper')
             
             if key == "3dim":
                 img1=copy.deepcopy(img)
-                isns.imgplot(img1,ax=ax,cmap="viridis",cbar=True,vmax =self.doubleSpinBox_6.value(), vmin=self.doubleSpinBox_5.value(),cbar_ticks =np.arange(self.doubleSpinBox_5.value(),self.doubleSpinBox_6.value()+abs(abs(self.doubleSpinBox_5.value())+abs(self.doubleSpinBox_6.value()))/8,abs(abs(self.doubleSpinBox_5.value())+abs(self.doubleSpinBox_6.value()))/8),origin='upper')
+                isns.imgplot(img1,ax=ax,cmap="viridis",cbar=True,vmax =self.doubleSpinBox_18.value(), vmin=self.doubleSpinBox_17.value(),cbar_ticks =np.arange(self.doubleSpinBox_17.value(),self.doubleSpinBox_18.value()+abs(abs(self.doubleSpinBox_17.value())+abs(self.doubleSpinBox_18.value()))/8,abs(abs(self.doubleSpinBox_17.value())+abs(self.doubleSpinBox_18.value()))/8),origin='upper')
             
             fig=self.matplotlibwidget_19.figure
             fig.tight_layout()
@@ -2958,7 +2958,7 @@ class MainWindow(QtWidgets.QMainWindow):
             
             
             sns.histplot(data=df, x="GP-Value",ax=ax,bins=np.arange(self.doubleSpinBox_5.value(),self.doubleSpinBox_6.value()+self.doubleSpinBox_4.value(),self.doubleSpinBox_4.value()))
-            ax.set_xlabel('P-Value')
+            ax.set_xlabel(r'$\beta$-Value')
             ax.set_ylabel('Counts')
             fig=self.matplotlibwidget_4.figure
             fig.subplots_adjust(left=0.1, right=0.9, top=0.9, bottom=0.1, wspace=0.2, hspace=0.2)
@@ -3010,8 +3010,8 @@ class MainWindow(QtWidgets.QMainWindow):
                 df = pd.DataFrame({"GP-Value": flattenedImage})
             
             
-            sns.histplot(data=df, x="GP-Value",ax=ax,bins=np.arange(self.doubleSpinBox_5.value(),self.doubleSpinBox_6.value()+self.doubleSpinBox_4.value(),self.doubleSpinBox_4.value()))
-            ax.set_xlabel('P-Value')
+            sns.histplot(data=df, x="GP-Value",ax=ax,bins=np.arange(self.doubleSpinBox_17.value(),self.doubleSpinBox_18.value()+self.doubleSpinBox_19.value(),self.doubleSpinBox_19.value()))
+            ax.set_xlabel(r'$\beta$-Value')
             ax.set_ylabel('Counts')
             
             fig=self.matplotlibwidget_20.figure
@@ -3319,22 +3319,22 @@ class MainWindow(QtWidgets.QMainWindow):
                 n=self.verticalScrollBar_2.value()
                 img1=img[n]
                 img1[img[n]==2]=np.nan
-                isns.imgplot(img1,ax=ax,cmap="viridis",cbar=True,vmax =self.doubleSpinBox_18.value(), vmin=self.doubleSpinBox_17.value(),cbar_ticks =np.arange(self.doubleSpinBox_5.value(),self.doubleSpinBox_6.value()+abs(abs(self.doubleSpinBox_5.value())+abs(self.doubleSpinBox_6.value()))/8,abs(abs(self.doubleSpinBox_5.value())+abs(self.doubleSpinBox_6.value()))/8),origin='upper')
+                isns.imgplot(img1,ax=ax,cmap="viridis",cbar=True,vmax =self.doubleSpinBox_18.value(), vmin=self.doubleSpinBox_17.value(),cbar_ticks =np.arange(self.doubleSpinBox_17.value(),self.doubleSpinBox_18.value()+abs(abs(self.doubleSpinBox_17.value())+abs(self.doubleSpinBox_18.value()))/8,abs(abs(self.doubleSpinBox_17.value())+abs(self.doubleSpinBox_18.value()))/8),origin='upper')
             if key == "Tstack":
                 n=self.horizontalScrollBar_2.value()
                 img1=img[n]
                 img1[img[n]==2]=np.nan
-                isns.imgplot(img1,ax=ax,cmap="viridis",cbar=True,vmax =self.doubleSpinBox_18.value(), vmin=self.doubleSpinBox_17.value(),cbar_ticks =np.arange(self.doubleSpinBox_5.value(),self.doubleSpinBox_6.value()+abs(abs(self.doubleSpinBox_5.value())+abs(self.doubleSpinBox_6.value()))/8,abs(abs(self.doubleSpinBox_5.value())+abs(self.doubleSpinBox_6.value()))/8),origin='upper')
+                isns.imgplot(img1,ax=ax,cmap="viridis",cbar=True,vmax =self.doubleSpinBox_18.value(), vmin=self.doubleSpinBox_17.value(),cbar_ticks =np.arange(self.doubleSpinBox_17.value(),self.doubleSpinBox_18.value()+abs(abs(self.doubleSpinBox_17.value())+abs(self.doubleSpinBox_18.value()))/8,abs(abs(self.doubleSpinBox_17.value())+abs(self.doubleSpinBox_18.value()))/8),origin='upper')
             if key == "TZstack":
                 n=self.horizontalScrollBar_2.value()
                 m=self.verticalScrollBar_2.value()
                 img1=img[n][m]
                 img1[img[n][m]==2]=np.nan
-                isns.imgplot(img1,ax=ax,cmap="viridis",cbar=True,vmax =self.doubleSpinBox_18.value(), vmin=self.doubleSpinBox_17.value(),cbar_ticks =np.arange(self.doubleSpinBox_5.value(),self.doubleSpinBox_6.value()+abs(abs(self.doubleSpinBox_5.value())+abs(self.doubleSpinBox_6.value()))/8,abs(abs(self.doubleSpinBox_5.value())+abs(self.doubleSpinBox_6.value()))/8),origin='upper')
+                isns.imgplot(img1,ax=ax,cmap="viridis",cbar=True,vmax =self.doubleSpinBox_18.value(), vmin=self.doubleSpinBox_17.value(),cbar_ticks =np.arange(self.doubleSpinBox_17.value(),self.doubleSpinBox_18.value()+abs(abs(self.doubleSpinBox_17.value())+abs(self.doubleSpinBox_18.value()))/8,abs(abs(self.doubleSpinBox_17.value())+abs(self.doubleSpinBox_18.value()))/8),origin='upper')
             
             if key == "3dim":
                 img[img==2]=np.nan
-                isns.imgplot(img,ax=ax,cmap="viridis",cbar=True,vmax =self.doubleSpinBox_18.value(), vmin=self.doubleSpinBox_17.value(),cbar_ticks =np.arange(self.doubleSpinBox_5.value(),self.doubleSpinBox_6.value()+abs(abs(self.doubleSpinBox_5.value())+abs(self.doubleSpinBox_6.value()))/8,abs(abs(self.doubleSpinBox_5.value())+abs(self.doubleSpinBox_6.value()))/8),origin='upper')
+                isns.imgplot(img,ax=ax,cmap="viridis",cbar=True,vmax =self.doubleSpinBox_18.value(), vmin=self.doubleSpinBox_17.value(),cbar_ticks =np.arange(self.doubleSpinBox_17.value(),self.doubleSpinBox_18.value()+abs(abs(self.doubleSpinBox_17.value())+abs(self.doubleSpinBox_18.value()))/8,abs(abs(self.doubleSpinBox_17.value())+abs(self.doubleSpinBox_18.value()))/8),origin='upper')
             
             i=1
             for n in Object_Coordinates:
@@ -3417,21 +3417,21 @@ class MainWindow(QtWidgets.QMainWindow):
                 n=self.verticalScrollBar_2.value()
                 img1=img[n]
                 img1[img[n]==2]=np.nan
-                isns.imgplot(img1,ax=ax,cmap="viridis",cbar=True,vmax =self.doubleSpinBox_18.value(), vmin=self.doubleSpinBox_17.value(),cbar_ticks =np.arange(self.doubleSpinBox_5.value(),self.doubleSpinBox_6.value()+abs(abs(self.doubleSpinBox_5.value())+abs(self.doubleSpinBox_6.value()))/8,abs(abs(self.doubleSpinBox_5.value())+abs(self.doubleSpinBox_6.value()))/8),origin='upper')
+                isns.imgplot(img1,ax=ax,cmap="viridis",cbar=True,vmax =self.doubleSpinBox_18.value(), vmin=self.doubleSpinBox_17.value(),cbar_ticks =np.arange(self.doubleSpinBox_17.value(),self.doubleSpinBox_18.value()+abs(abs(self.doubleSpinBox_17.value())+abs(self.doubleSpinBox_18.value()))/8,abs(abs(self.doubleSpinBox_17.value())+abs(self.doubleSpinBox_18.value()))/8),origin='upper')
             if key == "Tstack":
                 n=self.horizontalScrollBar_2.value()
                 img1=img[n]
                 img1[img[n]==2]=np.nan
-                isns.imgplot(img1,ax=ax,cmap="viridis",cbar=True,vmax =self.doubleSpinBox_18.value(), vmin=self.doubleSpinBox_17.value(),cbar_ticks =np.arange(self.doubleSpinBox_5.value(),self.doubleSpinBox_6.value()+abs(abs(self.doubleSpinBox_5.value())+abs(self.doubleSpinBox_6.value()))/8,abs(abs(self.doubleSpinBox_5.value())+abs(self.doubleSpinBox_6.value()))/8),origin='upper')
+                isns.imgplot(img1,ax=ax,cmap="viridis",cbar=True,vmax =self.doubleSpinBox_18.value(), vmin=self.doubleSpinBox_17.value(),cbar_ticks =np.arange(self.doubleSpinBox_17.value(),self.doubleSpinBox_18.value()+abs(abs(self.doubleSpinBox_17.value())+abs(self.doubleSpinBox_18.value()))/8,abs(abs(self.doubleSpinBox_17.value())+abs(self.doubleSpinBox_18.value()))/8),origin='upper')
             if key == "TZstack":
                 n=self.horizontalScrollBar_2.value()
                 m=self.verticalScrollBar_2.value()
                 img1=img[n][m]
                 img1[img[n][m]==2]=np.nan
-                isns.imgplot(img1,ax=ax,cmap="viridis",cbar=True,vmax =self.doubleSpinBox_18.value(), vmin=self.doubleSpinBox_17.value(),cbar_ticks =np.arange(self.doubleSpinBox_5.value(),self.doubleSpinBox_6.value()+abs(abs(self.doubleSpinBox_5.value())+abs(self.doubleSpinBox_6.value()))/8,abs(abs(self.doubleSpinBox_5.value())+abs(self.doubleSpinBox_6.value()))/8),origin='upper')
+                isns.imgplot(img1,ax=ax,cmap="viridis",cbar=True,vmax =self.doubleSpinBox_18.value(), vmin=self.doubleSpinBox_17.value(),cbar_ticks =np.arange(self.doubleSpinBox_17.value(),self.doubleSpinBox_18.value()+abs(abs(self.doubleSpinBox_17.value())+abs(self.doubleSpinBox_18.value()))/8,abs(abs(self.doubleSpinBox_17.value())+abs(self.doubleSpinBox_18.value()))/8),origin='upper')
             if key == "3dim":
                 img[img==2]=np.nan
-                isns.imgplot(img,ax=ax,cmap="viridis",cbar=True,vmax =self.doubleSpinBox_18.value(), vmin=self.doubleSpinBox_17.value(),cbar_ticks =np.arange(self.doubleSpinBox_5.value(),self.doubleSpinBox_6.value()+abs(abs(self.doubleSpinBox_5.value())+abs(self.doubleSpinBox_6.value()))/8,abs(abs(self.doubleSpinBox_5.value())+abs(self.doubleSpinBox_6.value()))/8),origin='upper')
+                isns.imgplot(img,ax=ax,cmap="viridis",cbar=True,vmax =self.doubleSpinBox_18.value(), vmin=self.doubleSpinBox_17.value(),cbar_ticks =np.arange(self.doubleSpinBox_17.value(),self.doubleSpinBox_18.value()+abs(abs(self.doubleSpinBox_17.value())+abs(self.doubleSpinBox_18.value()))/8,abs(abs(self.doubleSpinBox_17.value())+abs(self.doubleSpinBox_18.value()))/8),origin='upper')
             
             i=1
             for n in Object_Coordinates:
@@ -3528,7 +3528,7 @@ class MainWindow(QtWidgets.QMainWindow):
             flattenedImage = flattenedImage[flattenedImage != 2]
             df = pd.DataFrame({"GP-Value": flattenedImage})
             sns.histplot(data=df, x="GP-Value",ax=ax,bins=np.arange(self.doubleSpinBox_5.value(),self.doubleSpinBox_6.value()+self.doubleSpinBox_4.value(),self.doubleSpinBox_4.value()))
-            ax.set_xlabel('P-Value')
+            ax.set_xlabel(r'$\beta$-Value')
             ax.set_ylabel('Counts')
             fig=self.matplotlibwidget_9.figure
             fig.tight_layout()
@@ -3590,7 +3590,7 @@ class MainWindow(QtWidgets.QMainWindow):
                 
                 df = pd.DataFrame({"x": profile[0][:,0],"P-Value":profile[0][:,3], "Segment": profile[0][:,4].astype(int)})
                 sns.lineplot(data=df, x="x", y="P-Value",ax=ax,color=sns.color_palette("deep")[0])
-                ax.set_ylabel('P-Value', color=sns.color_palette("deep")[0])
+                ax.set_ylabel(r'$\beta$-Value', color=sns.color_palette("deep")[0])
                 
                 for segment in np.unique(df['Segment']):
                     # Adjust segment by +1 for color mapping, loop back to 1 if it exceeds the length of the color_map
@@ -3638,8 +3638,12 @@ class MainWindow(QtWidgets.QMainWindow):
             self.matplotlibwidget_12.canvas.draw_idle()
         
     def plot_CytoObject(self,img,key): # GP Histogramm object
+        self.matplotlibwidget_14.figure.clf()
+        self.matplotlibwidget_14.figure.patch.set_facecolor('#434343')
+        ax = self.matplotlibwidget_14.figure.add_subplot(111)
+        ax.set_facecolor('#2D2D2D')
+        self.matplotlibwidget_14.axis = ax 
         ax=self.matplotlibwidget_14.axis
-        self.matplotlibwidget_14.axis.clear()
         if key != [] and ((isinstance(img, np.ndarray) and img.size > 0) or (isinstance(img, list) and len(img) > 0)):
             img=img
             ax.set_facecolor("#2D2D2D")
@@ -3683,7 +3687,7 @@ class MainWindow(QtWidgets.QMainWindow):
             flattenedImage = flattenedImage[flattenedImage != 2]
             df = pd.DataFrame({"GP-Value": flattenedImage})
             sns.histplot(data=df, x="GP-Value",ax=ax,bins=np.arange(self.doubleSpinBox_17.value(),self.doubleSpinBox_18.value()+self.doubleSpinBox_19.value(),self.doubleSpinBox_19.value()))
-            ax.set_xlabel('P-Value')
+            ax.set_xlabel(r'$\beta$-Value')
             ax.set_ylabel('Counts')
             fig=self.matplotlibwidget_17.figure
             fig.tight_layout()
@@ -3829,7 +3833,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.doubleSpinBox_12.setEnabled(self.checkBox_26.checkState())
         
     def gaussEnable_cyto(self):
-        self.spinBox_19.setEnabled(self.checkBox_33.checkState())
+        self.doubleSpinBox_11.setEnabled(self.checkBox_33.checkState())
 
 
         
@@ -3924,7 +3928,7 @@ class MainWindow(QtWidgets.QMainWindow):
                 "Dilation Dimmension 1":(self.spinBox_17.value()), #shpae dim1
                 "Dilation Dimmension 2":(self.spinBox_16.value()), #shpae dim2
                 "Gauss Filter":self.checkBox_33.isChecked(),
-                "Gauss Filter Value":"NaN" if not self.checkBox_33.isChecked() else (self.spinBox_19.value()),
+                "Gauss Filter Value":"NaN" if not self.checkBox_33.isChecked() else (self.doubleSpinBox_11.value()),
                 "Binning Values [min,max,step]": [self.doubleSpinBox_17.value(),self.doubleSpinBox_18.value(),self.doubleSpinBox_19.value()],
                 "Global Slice Masking": self.checkBox_31.isChecked(),
                 "Individual Slice MaskingSettings": self.Cyto_Maskdata[filename]
@@ -4707,8 +4711,12 @@ class MainWindow(QtWidgets.QMainWindow):
                                 print(savepath)
                                 if self.checkBox_24.isChecked():
                                     self.update_toglobal_values_membrane(filename=filename, path=path)
+                                else:
+                                    pass # here we need the fix for the detailed masking not prior selecte image issue
                                 if self.checkBox_31.isChecked():
                                     self.update_toglobal_values_cytosol(filename=filename, path=path)
+                                else:
+                                    pass # here we need the fix for the detailed masking not prior selecte image issue
                                 
                                 Result=RunAnalyser(mode=mode,
                                                     filename=filename,
@@ -4728,7 +4736,7 @@ class MainWindow(QtWidgets.QMainWindow):
                                                     proDim2=self.spinBox_8.value(),
                                                     text=self.plainTextEdit.toPlainText(),
                                                     histpars=[self.doubleSpinBox_5.value(),self.doubleSpinBox_6.value(),self.doubleSpinBox_4.value()], 
-                                                    histpars_cyto=[self.doubleSpinBox_17.value(),self.doubleSpinBox_18.value(),self.doubleSpinBox_19.value()],
+                                                    histpars_cyto=[self.doubleSpinBox_17.value(),self.doubleSpinBox_18.value(),self.doubleSpinBox_17.value()],
                                                     text_cyto=self.plainTextEdit_2.toPlainText(),
                                                     profile_cyto=self.checkBox.isChecked(),
                                                     varlist_cyto=[int(self.comboBox_13.currentText()) if self.comboBox_13.currentText().lower() != 'nan' else None,
