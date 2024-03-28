@@ -1,4 +1,4 @@
-# User Guide for VISION
+P# User Guide for VISION
 **Version**: V1.0.0
 
 ## Contents
@@ -22,7 +22,7 @@
   - [Load and Table Interaction Section](#load-and-table-interaction-section)
   - [Test, Run, and Analysis Settings](#test-run-and-analysis-settings)
   - [Specific Analysis Settings](#specific-analysis-settings)
-    - [Membrane Settings – P Value and Analysis](#membrane-settings--p-value-and-analysis)
+    - [Membrane Settings – P Value and Analysis](#membrane-settings--β-value-and-analysis)
     - [Membrane Settings – Global Membrane Masking Options](#membrane-settings--global-membrane-masking-options)
     - [Cytosol Settings](#cytosol-settings)
     - [Advanced Settings](#advanced-settings)
@@ -203,7 +203,7 @@ The main window of VISION is designed with intuitiveness and efficiency in mind,
 - **Channel Settings**: Upon loading image files, fields A, B, C, & D automatically populate with existing channel information, such as '488' or numbers '1-9', derived directly from the original file's metadata. When loading spectral LSM or CZI files, the results in the comboboxes will include all available channel wavelengths.
 - **Membrane Profiler**: Enables/disables Membrane Profiler. 
 - **Colocalization**: Enables/disables an additional, independent colocalization channel. The population of the combobox below follows the same procedure as described in Channel Settings above.
-- **Equation**: The "Equation" text field leverages the channel settings A, B, C, and D to calculate the P-Value, for example, the GP-Value using the formula “(A-B)/(A+B)”. Please note, only the variables A, B, C, and D are permitted in this field.
+- **Equation**: The "Equation" text field leverages the channel settings A, B, C, and D to calculate the β-Value, for example, the GP-Value using the formula “(A-B)/(A+B)”. Please note, only the variables A, B, C, and D are permitted in this field.
 
 ### Membrane Settings – Global Membrane Masking Options
 
@@ -233,7 +233,7 @@ The main window of VISION is designed with intuitiveness and efficiency in mind,
 - **Membrane Profiling – dim_line**
 - **Membrane Profiling – Integrations Element**: Integration Element Shape
 - **Membrane Profiling – Integrations Element X/Y-Dimension**: Integration Element XY Dimension
-- **Membrane Profiling – P-Value Threshold Auto Cut off** 
+- **Membrane Profiling – β-Value Threshold Auto Cut off** 
 
 ### Data Saving
 
@@ -253,7 +253,7 @@ Each panel has a Membrane and Cytosolic part and is split into Mask, Full Image,
 
 1. **Start VISON**
 2. **Load File(s) / Load Folder**
-3. **(Membrane Settings)** (Optional) Enter Equation for P-Value calculation.
+3. **(Membrane Settings)** (Optional) Enter Equation for β-Value calculation.
 4. **(Membrane Settings)** Select Channels for each used variable in Equation.
 5. **(Membrane Settings)** (Optional) Enable and Choose Specific Thresholding Channel.
 6. **Test Mask** (if Mask is not optimal follow with Steps a-c, otherwise go to 7)
