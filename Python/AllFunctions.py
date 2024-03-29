@@ -1,5 +1,7 @@
 from Packages import np, skmM, skmF, ndi, slC, skM, imgIO, pd, os, sys, skcanny, tfl, plt, ndi, ssig
 
+
+
 def abovenoise(image, varidxs, S_N, stddev, bgmean, idx_col):
 
     if len(varidxs) == 1:
@@ -258,6 +260,7 @@ def basicmeasure(img, reccoor, meta, varidxs, text, histpars):
         if i.isalpha():
             letters.append(i)
     letters.sort()
+    letters=list(set(letters))
 
     if len(varidxs) == 1:
         varA = np.reshape(img[reccoor[:, 0], reccoor[:, 1], varidxs[0]], (-1, 1)).astype('int')
