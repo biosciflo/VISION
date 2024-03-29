@@ -1,7 +1,9 @@
 from Packages import np, skmM, skmF, ndi, slC, skM, imgIO, pd, os, sys, skcanny, tfl, plt, ndi, ssig
+import formula_main as Form
 
 
 def abovenoise(image, varidxs, S_N, stddev, bgmean, idx_col):
+
     if len(varidxs) == 1:
         if bgmean == 'NaN':
             N_medianA = np.median(image[:, :, varidxs[0]])
@@ -237,6 +239,7 @@ def normhist(par, data):
         histnorm = hist / np.sum(hist) * 100
 
         return binhist[:-1], histnorm  # slice until the second last
+
     except:
         raise Exception("Check bin range for histogram")
 
@@ -252,23 +255,29 @@ def cart2pol(coor):
 
 
 def basicmeasure(img, reccoor, meta, varidxs, text, histpars):
+    letters = []
+    for i in text:
+        if i.isalpha():
+            letters.append(i)
+    letters.sort()
+
     if len(varidxs) == 1:
         varA = np.reshape(img[reccoor[:, 0], reccoor[:, 1], varidxs[0]], (-1, 1)).astype('int')
 
-        GPlist = varA
+        GPlist = eval(text, {'np': np, letters[0]: varA})
 
     if len(varidxs) == 2:
         varA = np.reshape(img[reccoor[:, 0], reccoor[:, 1], varidxs[0]], (-1, 1)).astype('int')
         varB = np.reshape(img[reccoor[:, 0], reccoor[:, 1], varidxs[1]], (-1, 1)).astype('int')
 
-        GPlist = eval(text, {'np': np, 'A': varA, 'B': varB})
+        GPlist = eval(text, {'np': np, letters[0]: varA, letters[1]: varB})
 
     if len(varidxs) == 3:
         varA = np.reshape(img[reccoor[:, 0], reccoor[:, 1], varidxs[0]], (-1, 1)).astype('int')
         varB = np.reshape(img[reccoor[:, 0], reccoor[:, 1], varidxs[1]], (-1, 1)).astype('int')
         varC = np.reshape(img[reccoor[:, 0], reccoor[:, 1], varidxs[2]], (-1, 1)).astype('int')
 
-        GPlist = eval(text, {'np': np, 'A': varA, 'B': varB, 'C': varC})
+        GPlist = eval(text, {'np': np, letters[0]: varA, letters[1]: varB, letters[2]: varC})
 
     elif len(varidxs) == 4:
         varA = np.reshape(img[reccoor[:, 0], reccoor[:, 1], varidxs[0]], (-1, 1)).astype('int')
@@ -276,7 +285,7 @@ def basicmeasure(img, reccoor, meta, varidxs, text, histpars):
         varC = np.reshape(img[reccoor[:, 0], reccoor[:, 1], varidxs[2]], (-1, 1)).astype('int')
         varD = np.reshape(img[reccoor[:, 0], reccoor[:, 1], varidxs[3]], (-1, 1)).astype('int')
 
-        GPlist = eval(text, {'np': np, 'A': varA, 'B': varB, 'C': varC, 'D': varD})
+        GPlist = eval(text, {'np': np, letters[0]: varA, letters[1]: varB, letters[2]: varC, letters[3]: varD})
 
     if len(GPlist) == 0:  # this is to avoid crashing
         print('No points above threshold for P value measurement')
@@ -911,11 +920,12 @@ def findvaridx(Lambdachannel, varlist):
     numeric_values = [x for x in varlist if isinstance(x, (int, float))]
 
     if len(numeric_values) != 0:
-        if len(numeric_values) == 1:
+        if len(Lambdachannel) == 1:
             varidxs = [0]
         else:
-            idxs = [num in numeric_values for num in Lambdachannel.tolist()]
-            varidxs = [index for index, value in enumerate(idxs) if value]
+            varidxs = []
+            for i in numeric_values:
+                varidxs.append(np.where(Lambdachannel == i)[0][0])
 
         return varidxs
 
@@ -1162,7 +1172,6 @@ def objprofiler(newcropped_skel, ordcoor, varidxs, pars, rawcroppedmask, autoff,
 
         filtered_array_int_col = np.zeros((array_integration.shape[2], array_integration.shape[1]), dtype=int)
 
-
     if len(varidxs) == 1:
         filtered_array_int_varA[logic_allVar] = array_int_varA[logic_allVar]
         profiled_varA = np.sum(filtered_array_int_varA, axis=0) / np.sum(logic_allVar, axis=0)
@@ -1310,6 +1319,7 @@ def objlinearization(rawcroppedboth, newcropped_skel, newcoors_mask, newcoors_cy
 
             try:
                 totInt.append(rawcroppedboth[Ycors, Xcors, k])
+
             except:
                 raise Exception("Integration line out of image boundaries")
 
@@ -1446,6 +1456,7 @@ def measuremask(imageR, Reccoors, Reccoors_cyto, Meta, varidxs, varidxs_cyto, te
 
                     results_obj[i].update({'profile': [INTs_GP, Pmedian_below, Pmedian_above, cutoff, percentage_up, seg_lengths_pxl,
                                                        seglabelled_mask]})
+
                 except:
                     results_obj[i].update({'profile': []})
                     print('Membrane not profiled')
