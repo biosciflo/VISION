@@ -6,7 +6,8 @@ Created on Wed Oct 19 12:39:12 2022
 
 #performance
 import copy
-#import pyi_splash
+
+# import pyi_splash
 
 import warnings
 warnings.filterwarnings("ignore", category=DeprecationWarning)
@@ -73,6 +74,7 @@ import obf_support
 #for Erroe handling
 import traceback
 
+QtCore.QCoreApplication.setAttribute(QtCore.Qt.AA_EnableHighDpiScaling)
 
 ##segment color map:
 from matplotlib.colors import ListedColormap
@@ -156,7 +158,7 @@ class WorkerThread(QThread):
             self.window.plainTextEdit_1.appendPlainText(f"Error: An exception occurred in RunAnalysis: \n In Run Traceback:\n{error_trace}")
             self.terminate_thread.emit()
         
-    def testthresholding(self): #SavingThread
+    def testthresholding(self):
         try:
             self.window.testThresholding()
             self.finished.emit()
@@ -180,7 +182,7 @@ class WorkerThread(QThread):
             self.window.plainTextEdit_1.appendPlainText(f"Error: An exception occurred in TestThreshold: \nIn Run Traceback:\n{error_trace}")
             self.terminate_thread.emit()
             
-    def SavingThread(self): #SavingThread
+    def SavingThread(self):
         try:
             self.window.Data_Saving()
             self.finished.emit()
@@ -722,7 +724,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.checkBox_19.stateChanged.connect(self.JSONResultsWarning)
         
         self.tableWidget.itemSelectionChanged.connect(self.updatePlots)
-
+        self.tableWidget.itemSelectionChanged.connect(self.PlotRaw_initial)
         
         
         self.verticalScrollBar.valueChanged.connect(self.updatePlots)
@@ -952,6 +954,51 @@ class MainWindow(QtWidgets.QMainWindow):
         Cyto_GPPhasor_polar_obj_g = self.Cyto_GPPhasor_polar_obj
         global savingpath_g
         savingpath_g = self.savingpath
+        
+    def PlotRaw_initial(self):
+        if self.tableWidget.currentRow() !=-1:
+            filename=self.tableWidget.item(self.tableWidget.currentRow(),0).text()
+            path=self.tableWidget.item(self.tableWidget.currentRow(),1).text()
+            if self.tableWidget.item(self.tableWidget.currentRow(),0) != [] and filename not in self.RawImages:
+                self.RawImages[filename],metadata=openfile(join(path, filename))
+                dims=metadata['Dimensions']
+                if ((dims[0]!=1) != (dims[1]!=1)): #if Z or T 4D
+                    if dims[1]!=1: #Zstack 4D
+                        self.key[filename]="Zstack"
+                        self.verticalScrollBar_3.setEnabled(True)
+                        self.verticalScrollBar_3.setRange(0,len(self.RawImages[filename])-1)
+                        self.horizontalScrollBar_3.setEnabled(False)
+                        self.horizontalScrollBar_4.setEnabled(True)
+                        self.horizontalScrollBar_4.setRange(0,len(self.RawImages[filename][0][0][0])-1)
+                    else:
+                        self.key[filename]="Tstack"
+                        self.horizontalScrollBar_3.setEnabled(True)
+                        self.horizontalScrollBar_3.setRange(0,len(self.RawImages[filename])-1)
+                        self.verticalScrollBar_3.setEnabled(False)
+                        self.horizontalScrollBar_4.setEnabled(True)
+                        self.horizontalScrollBar_4.setRange(0,len(self.RawImages[filename][0][0][0])-1)
+                elif (dims[0]!=1 and dims[1]!=1): #if Z and T 5D
+                    self.key[filename]="TZstack"
+                    self.horizontalScrollBar_3.setEnabled(True)
+                    self.horizontalScrollBar_3.setRange(0,len(self.RawImages[filename])-1)
+                    self.verticalScrollBar_3.setEnabled(True)
+                    self.verticalScrollBar_3.setRange(0,len(self.RawImages[filename])-1)
+                    self.horizontalScrollBar_4.setEnabled(True)
+                    self.horizontalScrollBar_4.setRange(0,len(self.RawImages[filename][0][0][0][0])-1)
+                else:
+                    self.key[filename]="3dim"
+                    self.verticalScrollBar_3.setEnabled(False)
+                    self.horizontalScrollBar_3.setEnabled(False)
+                    self.horizontalScrollBar_4.setEnabled(True)
+                    self.horizontalScrollBar_4.setRange(0,len(self.RawImages[filename][0][0])-1)
+                    
+                if self.tabWidget_2.currentIndex() == 0 and filename in self.RawImages:
+                    self.plot_RawImage(self.RawImages[filename],self.key[filename])
+                else:
+                    self.plot_RawImage([],[])
+        else:
+            self.plot_RawImage([],[])
+                
     
     def toggle_Colocalization(self):
         self.comboBox_8.setEnabled(self.checkBox_14.checkState())
@@ -2484,6 +2531,14 @@ class MainWindow(QtWidgets.QMainWindow):
                             self.plot_GPHistogramm_Object(self.GPImage_per_object[filename][int(ObjectNr)-1],self.key[filename])
                             self.plot_IntesitieDist_Object(self.Intensities_per_object[filename][int(ObjectNr)-1],self.key[filename])
                             self.plot_GPPhasor_Object(self.GPPhasor_polar_obj[filename],ObjectNr,self.key[filename])
+                            if len(self.Cytoprof[filename]) !=0:
+                                self.horizontalScrollBar_5.setEnabled(True)
+                                self.horizontalScrollBar_5.setRange(0,self.dims[filename][len(self.dims[filename])-1]-1)
+                                self.plot_CytoLineProfile(self.Cytoprof[filename][int(ObjectNr)-1],self.key[filename])
+                            else:
+                                self.horizontalScrollBar_5.setEnabled(False)
+                                self.horizontalScrollBar_5.setRange(0,self.dims[filename][len(self.dims[filename])-1]-1)
+                                self.plot_CytoLineProfile([],[])
                             if len(self.Profile) !=0:
                                 if filename in self.Profile and self.Profile:
                                     self.plot_GProfile_Object(self.Profile[filename][int(ObjectNr)-1],self.key[filename])
@@ -2492,11 +2547,8 @@ class MainWindow(QtWidgets.QMainWindow):
                             if len(self.Cyto_Image) != 0:
                                 if filename in self.Cyto_Image:
                                     self.plot_update_Cyto_GPImage_Object(self.Cyto_GPImage[filename],self.Object_Coordinates[filename],ObjectNr,self.key[filename])
-                                    self.horizontalScrollBar_5.setEnabled(True)
-                                    self.horizontalScrollBar_5.setRange(0,self.dims[filename][len(self.dims[filename])-1]-1)
                                     self.plot_CytoObject(self.Cyto_Image[filename][int(ObjectNr)-1],self.key[filename])
                                     self.Update_Stats_oject_cyto(self.Object_Parameters_cyto[filename][int(ObjectNr)-1],self.key[filename])
-                                    self.plot_CytoLineProfile(self.Cytoprof[filename][int(ObjectNr)-1],self.key[filename])
                                     self.plot_Cyto_GPHistogramm_Object(self.Cyto_Image[filename][int(ObjectNr)-1],self.key[filename])
                                     self.plot_Cyto_IntesitieDist_Object(self.Cyto_Intensities_per_object[filename][int(ObjectNr)-1],self.key[filename])
                                     self.plot_Cyto_GPPhasor_Object(self.Cyto_GPPhasor_polar_obj[filename],ObjectNr,self.key[filename])
@@ -2506,7 +2558,6 @@ class MainWindow(QtWidgets.QMainWindow):
                                     self.plot_Cyto_GPHistogramm_Object([],[])
                                     self.plot_Cyto_IntesitieDist_Object([],[])
                                     self.plot_Cyto_GPPhasor_Object([],[],[])
-                                    self.plot_CytoLineProfile([],[])
             
                                 
                     elif self.key[filename] == "Zstack":
@@ -2518,6 +2569,14 @@ class MainWindow(QtWidgets.QMainWindow):
                             self.plot_Membrane_Segment_Object(self.MembraneSegments[filename][self.verticalScrollBar_2.value()][int(ObjectNr)-1],self.key[filename])
                             self.plot_IntesitieDist_Object(self.Intensities_per_object[filename][self.verticalScrollBar_2.value()][int(ObjectNr)-1],self.key[filename])
                             self.plot_GPPhasor_Object(self.GPPhasor_polar_obj[filename][self.verticalScrollBar_2.value()],ObjectNr,self.key[filename])
+                            if len(self.Cytoprof[filename]) !=0:
+                                self.horizontalScrollBar_5.setEnabled(True)
+                                self.horizontalScrollBar_5.setRange(0,self.dims[filename][len(self.dims[filename])-1]-1)
+                                self.plot_CytoLineProfile(self.Cytoprof[filename][self.verticalScrollBar_2.value()][int(ObjectNr)-1],self.key[filename])
+                            else:
+                                self.horizontalScrollBar_5.setEnabled(False)
+                                self.horizontalScrollBar_5.setRange(0,self.dims[filename][len(self.dims[filename])-1]-1)
+                                self.plot_CytoLineProfile([],[])
                             if len(self.Profile[filename]) !=0:
                                 if filename in self.Profile:
                                     self.plot_GProfile_Object(self.Profile[filename][self.verticalScrollBar_2.value()][int(ObjectNr)-1],self.key[filename])
@@ -2526,21 +2585,17 @@ class MainWindow(QtWidgets.QMainWindow):
                                 if len(self.Cyto_Image[filename]) != 0:
                                     if filename in self.Cyto_Image:
                                         self.plot_update_Cyto_GPImage_Object(self.Cyto_GPImage[filename],self.Object_Coordinates[filename][self.verticalScrollBar_2.value()],ObjectNr,self.key[filename])
-                                        self.horizontalScrollBar_5.setEnabled(True)
-                                        self.horizontalScrollBar_5.setRange(0,self.dims[filename][len(self.dims[filename])-1]-1)
                                         self.plot_CytoObject(self.Cyto_Image[filename][self.verticalScrollBar_2.value()][int(ObjectNr)-1],self.key[filename])
                                         self.Update_Stats_oject_cyto(self.Object_Parameters_cyto[filename][self.verticalScrollBar_2.value()][int(ObjectNr)-1],self.key[filename])
                                         self.plot_Cyto_GPHistogramm_Object(self.Cyto_Image[filename][self.verticalScrollBar_2.value()][int(ObjectNr)-1],self.key[filename])
                                         self.plot_Cyto_IntesitieDist_Object(self.Cyto_Intensities_per_object[filename][self.verticalScrollBar_2.value()][int(ObjectNr)-1],self.key[filename])
                                         self.plot_Cyto_GPPhasor_Object(self.Cyto_GPPhasor_polar_obj[filename][self.verticalScrollBar_2.value()],ObjectNr,self.key[filename])
-                                        self.plot_CytoLineProfile(self.Cytoprof[filename][self.verticalScrollBar_2.value()][int(ObjectNr)-1],self.key[filename])
                                     else:
                                         self.plot_CytoObject([],[])
                                         self.Update_Stats_oject_cyto([],[])
                                         self.plot_Cyto_GPHistogramm_Object([],[])
                                         self.plot_Cyto_IntesitieDist_Object([],[])
                                         self.plot_Cyto_GPPhasor_Object([],[],[])
-                                        self.plot_CytoLineProfile([],[])
             
                     elif self.key[filename] == "Tstack":
                         if len(self.nobjects[filename]) != 0:
@@ -2551,6 +2606,14 @@ class MainWindow(QtWidgets.QMainWindow):
                             self.plot_Membrane_Segment_Object(self.MembraneSegments[filename][self.horizontalScrollBar_2.value()][int(ObjectNr)-1],self.key[filename])
                             self.plot_IntesitieDist_Object(self.Intensities_per_object[filename][self.horizontalScrollBar_2.value()][int(ObjectNr)-1],self.key[filename])
                             self.plot_GPPhasor_Object(self.GPPhasor_polar_obj[filename][self.horizontalScrollBar_2.value()],ObjectNr,self.key[filename])
+                            if len(self.Cytoprof[filename]) !=0:
+                                self.horizontalScrollBar_5.setEnabled(True)
+                                self.horizontalScrollBar_5.setRange(0,self.dims[filename][len(self.dims[filename])-1]-1)
+                                self.plot_CytoLineProfile(self.Cytoprof[filename][self.horizontalScrollBar_2.value()][int(ObjectNr)-1],self.key[filename])
+                            else:
+                                self.horizontalScrollBar_5.setEnabled(False)
+                                self.horizontalScrollBar_5.setRange(0,self.dims[filename][len(self.dims[filename])-1]-1)
+                                self.plot_CytoLineProfile([],[])
                             if len(self.Profile[filename]) !=0:
                                 if filename in self.Profile:
                                     self.plot_GProfile_Object(self.Profile[filename][self.horizontalScrollBar_2.value()][int(ObjectNr)-1],self.key[filename])
@@ -2559,21 +2622,18 @@ class MainWindow(QtWidgets.QMainWindow):
                                 if len(self.Cyto_Image[filename]) != 0:
                                     if filename in self.Cyto_Image:
                                         self.plot_update_Cyto_GPImage_Object(self.Cyto_GPImage[filename],self.Object_Coordinates[filename][self.horizontalScrollBar_2.value()],ObjectNr,self.key[filename])
-                                        self.horizontalScrollBar_5.setEnabled(True)
-                                        self.horizontalScrollBar_5.setRange(0,self.dims[filename][len(self.dims[filename])-1]-1)
                                         self.plot_CytoObject(self.Cyto_Image[filename][self.horizontalScrollBar_2.value()][int(ObjectNr)-1],self.key[filename])
                                         self.Update_Stats_oject_cyto(self.Object_Parameters_cyto[filename][self.horizontalScrollBar_2.value()][int(ObjectNr)-1],self.key[filename])
                                         self.plot_Cyto_GPHistogramm_Object(self.Cyto_Image[filename][self.horizontalScrollBar_2.value()][int(ObjectNr)-1],self.key[filename])
                                         self.plot_Cyto_IntesitieDist_Object(self.Cyto_Intensities_per_object[filename][self.horizontalScrollBar_2.value()][int(ObjectNr)-1],self.key[filename])
                                         self.plot_Cyto_GPPhasor_Object(self.Cyto_GPPhasor_polar_obj[filename][self.horizontalScrollBar_2.value()],ObjectNr,self.key[filename])
-                                        self.plot_CytoLineProfile(self.Cytoprof[filename][self.horizontalScrollBar_2.value()][int(ObjectNr)-1],self.key[filename])
+
                                     else:
                                         self.plot_CytoObject([],[])
                                         self.Update_Stats_oject_cyto([],[])
                                         self.plot_Cyto_GPHistogramm_Object([],[])
                                         self.plot_Cyto_IntesitieDist_Object([],[])
                                         self.plot_Cyto_GPPhasor_Object([],[],[])
-                                        self.plot_CytoLineProfile([],[])
             
                     elif self.key[filename] == "TZstack":
                         if len(self.nobjects[filename]) != 0:
@@ -2584,7 +2644,15 @@ class MainWindow(QtWidgets.QMainWindow):
                             self.plot_Membrane_Segment_Object(self.MembraneSegments[filename][self.horizontalScrollBar_2.value()][self.verticalScrollBar_2.value()][int(ObjectNr)-1],self.key[filename])
                             self.plot_IntesitieDist_Object(self.Intensities_per_object[filename][self.horizontalScrollBar_2.value()][self.verticalScrollBar_2.value()][int(ObjectNr)-1],self.key[filename])
                             self.plot_GPPhasor_Object(self.GPPhasor_polar_obj[filename][self.horizontalScrollBar_2.value()][self.verticalScrollBar_2.value()],ObjectNr,self.key[filename])
-    
+                            if len(self.Cytoprof[filename]) !=0:
+                                self.horizontalScrollBar_5.setEnabled(True)
+                                self.horizontalScrollBar_5.setRange(0,self.dims[filename][len(self.dims[filename])-1]-1)
+                                self.plot_CytoLineProfile(self.Cytoprof[filename][self.horizontalScrollBar_2.value()][self.verticalScrollBar_2.value()][int(ObjectNr)-1],self.key[filename])
+                            else:
+                                self.horizontalScrollBar_5.setEnabled(False)
+                                self.horizontalScrollBar_5.setRange(0,self.dims[filename][len(self.dims[filename])-1]-1)
+                                self.plot_CytoLineProfile([],[])
+                                
                             if len(self.Profile[filename]) !=0:
                                 if filename in self.Profile:
                                     self.plot_GProfile_Object(self.Profile[filename][self.horizontalScrollBar_2.value()][self.verticalScrollBar_2.value()][int(ObjectNr)-1],self.key[filename])
@@ -2593,21 +2661,19 @@ class MainWindow(QtWidgets.QMainWindow):
                                 if len(self.Cyto_Image[filename][0]) != 0:
                                     if filename in self.Cyto_Image:
                                         self.plot_update_Cyto_GPImage_Object(self.Cyto_GPImage[filename],self.Object_Coordinates[filename][self.horizontalScrollBar_2.value()][self.verticalScrollBar_2.value()],ObjectNr,self.key[filename])
-                                        self.horizontalScrollBar_5.setEnabled(True)
-                                        self.horizontalScrollBar_5.setRange(0,self.dims[filename][len(self.dims[filename])-1]-1)
                                         self.plot_CytoObject(self.Cyto_Image[filename][self.horizontalScrollBar_2.value()][self.verticalScrollBar_2.value()][int(ObjectNr)-1],self.key[filename])
                                         self.Update_Stats_oject_cyto(self.Object_Parameters_cyto[filename][self.horizontalScrollBar_2.value()][self.verticalScrollBar_2.value()][int(ObjectNr)-1],self.key[filename])
                                         self.plot_Cyto_GPHistogramm_Object(self.Cyto_Image[filename][self.horizontalScrollBar_2.value()][self.verticalScrollBar_2.value()][int(ObjectNr)-1],self.key[filename])
                                         self.plot_Cyto_IntesitieDist_Object(self.Cyto_Intensities_per_object[filename][self.horizontalScrollBar_2.value()][self.verticalScrollBar_2.value()][int(ObjectNr)-1],self.key[filename])
                                         self.plot_Cyto_GPPhasor_Object(self.Cyto_GPPhasor_polar_obj[filename][self.horizontalScrollBar_2.value()][self.verticalScrollBar_2.value()],ObjectNr,self.key[filename])
-                                        self.plot_CytoLineProfile(self.Cytoprof[filename][self.horizontalScrollBar_2.value()][self.verticalScrollBar_2.value()][int(ObjectNr)-1],self.key[filename])
+                                       
                                     else:
                                         self.plot_CytoObject([],[])
                                         self.Update_Stats_oject_cyto([],[])
                                         self.plot_Cyto_GPHistogramm_Object([],[])
                                         self.plot_Cyto_IntesitieDist_Object([],[])
                                         self.plot_Cyto_GPPhasor_Object([],[],[])
-                                        self.plot_CytoLineProfile([],[])
+
         app.processEvents()
         
     def activate_rectangle_selector(self):
@@ -4352,7 +4418,20 @@ class MainWindow(QtWidgets.QMainWindow):
             invalid_combos.append("'Colocalization Channel'")
 
         if invalid_combos:
-            return False,f"Error Membrane Settings: Letter(s) {', '.join(invalid_combos)} is/are in use (Equation), but corresponding ComboBox value(s) is/are NaN."
+            return False,f"Error Membrane Settings: Letter(s) {', '.join(invalid_combos)} are in use in the Equation, but corresponding ComboBox value(s) are NaN."
+
+        invalid_combos = []
+        if combo_A != 'NaN' and 'A' not in unique_letters :
+            invalid_combos.append("'A'")
+        if combo_B != 'NaN' and 'B' not in unique_letters :
+            invalid_combos.append("'B'")
+        if combo_C != 'NaN' and 'C' not in unique_letters :
+            invalid_combos.append("'C'")
+        if combo_D != 'NaN' and 'D' not in unique_letters :
+            invalid_combos.append("'D'")
+
+        if invalid_combos:
+            return False,f"Error Membrane Settings: Letter(s) {', '.join(invalid_combos)} are not 'NaN' but corresponding letter(s) are used in the equation."
 
         return True,"All good"
             
@@ -4394,7 +4473,21 @@ class MainWindow(QtWidgets.QMainWindow):
             invalid_combos.append("'Specific Cytosol Thresholding Channel'")
 
         if invalid_combos:
-            return False,f"Error Cytosol Settings: Letter(s) {', '.join(invalid_combos)} is/are in use (Equation), but corresponding ComboBox value(s) is/are NaN."
+            return False,f"Error Cytosol Settings: Letter(s) {', '.join(invalid_combos)} are in use in the Equation, but corresponding ComboBox value(s) are NaN."
+
+        invalid_combos = []
+        if combo_A != 'NaN' and 'A' not in unique_letters :
+            invalid_combos.append("'A'")
+        if combo_B != 'NaN' and 'B' not in unique_letters :
+            invalid_combos.append("'B'")
+        if combo_C != 'NaN' and 'C' not in unique_letters :
+            invalid_combos.append("'C'")
+        if combo_D != 'NaN' and 'D' not in unique_letters :
+            invalid_combos.append("'D'")
+
+        if invalid_combos:
+            return False,f"Error Cytosol Settings: Letter(s) {', '.join(invalid_combos)} are not 'NaN' but corresponding letter(s) are used in the equation."
+
 
         return True,"All good"
 
@@ -4877,6 +4970,7 @@ class MainWindow(QtWidgets.QMainWindow):
             self.Channellamda[filename]=[]
             self.Profile[filename]=[]
             self.MembraneSegments[filename]=[]
+            self.Cytoprof[filename]=[]
             if Result[0]["analysis"]["results_whole_cyto"]:
                 self.Cyto_GPPhasor_polar_all[filename]=[]
                 self.Cyto_Intensities[filename]=[]
@@ -4884,7 +4978,6 @@ class MainWindow(QtWidgets.QMainWindow):
                 self.FullImage_Parameters_cyto[filename]=[]
                 self.Cyto_Intensities_per_object[filename]=[]
                 self.Cyto_GPPhasor_polar_obj[filename]=[]
-                self.Cytoprof[filename]=[]
                 self.Cyto_Image[filename]=[]
                 self.Object_Parameters_cyto[filename]=[]
         
@@ -4918,8 +5011,8 @@ class MainWindow(QtWidgets.QMainWindow):
                     self.Object_Coordinates[filename].append([])
                     self.Profile[filename].append([])
                     self.MembraneSegments[filename].append([])
+                    self.Cytoprof[filename].append([])
                     if Result[0]["analysis"]["results_whole_cyto"]:
-                        self.Cytoprof[filename].append([])
                         self.Cyto_Image[filename].append([])
                         self.Object_Parameters_cyto[filename].append([])
                         self.Cyto_Intensities_per_object[filename].append([])
@@ -4942,9 +5035,12 @@ class MainWindow(QtWidgets.QMainWindow):
                         else:
                             self.Profile[filename][Stack].append([])
                             self.MembraneSegments[filename][Stack].append([])
-                        if len(Resultstest[Stack]["analysis"]["results_obj"][objn]["basiccyto"]) !=0:
+                        if len(Resultstest[Stack]["analysis"]["results_obj"][objn]["objlinearization"]) !=0: 
                             self.Cytoprof[filename][Stack].append([])
                             self.Cytoprof[filename][Stack][int(objn)-1].append(Resultstest[Stack]["analysis"]["results_obj"][objn]["objlinearization"])
+                        else:
+                            self.Cytoprof[filename][Stack].append([])
+                        if len(Resultstest[Stack]["analysis"]["results_obj"][objn]["basiccyto"]) !=0:
                             self.Cyto_Image[filename][Stack].append(Resultstest[Stack]["analysis"]["results_obj"][objn]["basiccyto"][2])
                             self.Object_Parameters_cyto[filename][Stack].append(Resultstest[Stack]["analysis"]["results_obj"][objn]["basiccyto"][0]["Parameters"])
                             self.Cyto_Intensities_per_object[filename][Stack].append([])
@@ -4952,7 +5048,6 @@ class MainWindow(QtWidgets.QMainWindow):
                             self.Cyto_Intensities_per_object[filename][Stack][int(objn)-1].append(Resultstest[Stack]["analysis"]["results_obj"][objn]["basiccyto"][0]["Norm. Intensity"])
                             self.Cyto_GPPhasor_polar_obj[filename][Stack].append(Resultstest[Stack]["analysis"]["results_obj"][objn]["basicmembrane"][3])
                         elif Result[0]["analysis"]["results_whole_cyto"]:
-                            self.Cytoprof[filename][Stack].append([])
                             self.Cyto_Image[filename][Stack].append([])
                             self.Object_Parameters_cyto[filename][Stack].append([])
                             self.Cyto_Intensities_per_object[filename][Stack].append([])
@@ -4975,6 +5070,7 @@ class MainWindow(QtWidgets.QMainWindow):
             self.Channellamda[filename]=[]
             self.Profile[filename]=[]
             self.MembraneSegments[filename]=[]
+            self.Cytoprof[filename]=[]
             if Result[0][0]["analysis"]["results_whole_cyto"]: 
                 self.Cyto_GPImage[filename]=[]
                 self.FullImage_Parameters_cyto[filename]=[]
@@ -4982,7 +5078,6 @@ class MainWindow(QtWidgets.QMainWindow):
                 self.Cyto_Intensities[filename]=[]
                 self.Cyto_Intensities_per_object[filename]=[]
                 self.Cyto_GPPhasor_polar_obj[filename]=[]
-                self.Cytoprof[filename]=[]
                 self.Cyto_Image[filename]=[]
                 self.Object_Parameters_cyto[filename]=[]
         
@@ -5002,6 +5097,7 @@ class MainWindow(QtWidgets.QMainWindow):
                 self.Channellamda[filename].append([])
                 self.Profile[filename].append([])
                 self.MembraneSegments[filename].append([])
+                self.Cytoprof[filename].append([])
                 if Result[0][0]["analysis"]["results_whole_cyto"]: 
                     self.Cyto_GPImage[filename].append([])
                     self.FullImage_Parameters_cyto[filename][T_Stack].append([])
@@ -5009,7 +5105,6 @@ class MainWindow(QtWidgets.QMainWindow):
                     self.Cyto_Intensities[filename].append([])
                     self.Cyto_Intensities_per_object[filename].append([])
                     self.Cyto_GPPhasor_polar_obj[filename].append([])
-                    self.Cytoprof[filename].append([])
                     self.Cyto_Image[filename].append([])
                     self.Object_Parameters_cyto[filename].append([])
                 for Z_Stack in Result[T_Stack]:
@@ -5038,8 +5133,8 @@ class MainWindow(QtWidgets.QMainWindow):
                     self.Object_Coordinates[filename][T_Stack].append([])
                     self.Profile[filename][T_Stack].append([])
                     self.MembraneSegments[filename][T_Stack].append([])
+                    self.Cytoprof[filename][T_Stack].append([])
                     if Result[0][0]["analysis"]["results_whole_cyto"]: 
-                        self.Cytoprof[filename][T_Stack].append([])
                         self.Cyto_Image[filename][T_Stack].append([])
                         self.Object_Parameters_cyto[filename][T_Stack].append([])
                         self.Cyto_Intensities_per_object[filename][T_Stack].append([])
@@ -5056,8 +5151,8 @@ class MainWindow(QtWidgets.QMainWindow):
                         self.Object_Coordinates[filename][T_Stack][Z_Stack]=[]
                         self.Profile[filename][T_Stack][Z_Stack]=[]
                         self.MembraneSegments[filename][T_Stack][Z_Stack]=[]
+                        self.Cytoprof[filename][T_Stack][Z_Stack]=[]
                         if Result[0][0]["analysis"]["results_whole_cyto"]: 
-                            self.Cytoprof[filename][T_Stack][Z_Stack]=[]
                             self.Cyto_Image[filename][T_Stack][Z_Stack]=[]
                             self.Object_Parameters_cyto[filename][T_Stack][Z_Stack]=[]
                             self.Cyto_Intensities_per_object[filename][T_Stack][Z_Stack]=[]
@@ -5065,7 +5160,6 @@ class MainWindow(QtWidgets.QMainWindow):
                         
                         for objn in Resultstest[T_Stack][Z_Stack]["analysis"]["results_obj"]:
                             self.GPPhasor_polar_obj[filename][T_Stack][Z_Stack].append(Resultstest[T_Stack][Z_Stack]["analysis"]["results_obj"][objn]["basicmembrane"][3])
-                            
                             self.GPImage_per_object[filename][T_Stack][Z_Stack].append(Resultstest[T_Stack][Z_Stack]["analysis"]["results_obj"][objn]["basicmembrane"][2])
                             self.Object_Parameters[filename][T_Stack][Z_Stack].append(Resultstest[T_Stack][Z_Stack]["analysis"]["results_obj"][objn]["basicmembrane"][0]["Parameters"])
                             self.Object_Morphology[filename][T_Stack][Z_Stack].append(Resultstest[T_Stack][Z_Stack]["analysis"]["results_obj"][objn]["morphology"][2:])
@@ -5081,9 +5175,14 @@ class MainWindow(QtWidgets.QMainWindow):
                             else:
                                 self.Profile[filename][T_Stack][Z_Stack].append([])
                                 self.MembraneSegments[filename][T_Stack][Z_Stack].append([])
-                            if len(Resultstest[T_Stack][Z_Stack]["analysis"]["results_obj"][objn]["basiccyto"]) !=0:
+                            if len(Resultstest[T_Stack][Z_Stack]["analysis"]["results_obj"][objn]["objlinearization"]) !=0:
                                 self.Cytoprof[filename][T_Stack][Z_Stack].append([])
                                 self.Cytoprof[filename][T_Stack][Z_Stack][int(objn)-1].append(Resultstest[T_Stack][Z_Stack]["analysis"]["results_obj"][objn]["objlinearization"])
+                            else:
+                                self.Cytoprof[filename][T_Stack][Z_Stack].append([])
+                            
+                            if len(Resultstest[T_Stack][Z_Stack]["analysis"]["results_obj"][objn]["basiccyto"]) !=0:
+                                
                                 self.Cyto_Image[filename][T_Stack][Z_Stack].append(Resultstest[T_Stack][Z_Stack]["analysis"]["results_obj"][objn]["basiccyto"][2])
                                 self.Object_Parameters_cyto[filename][T_Stack][Z_Stack].append(Resultstest[T_Stack][Z_Stack]["analysis"]["results_obj"][objn]["basiccyto"][0]["Parameters"])
                                 self.Cyto_Intensities_per_object[filename][T_Stack][Z_Stack].append([])
@@ -5091,7 +5190,7 @@ class MainWindow(QtWidgets.QMainWindow):
                                 self.Cyto_Intensities_per_object[filename][T_Stack][Z_Stack][int(objn)-1].append(Resultstest[T_Stack][Z_Stack]["analysis"]["results_obj"][objn]["basiccyto"][0]["Norm. Intensity"])
                                 self.Cyto_GPPhasor_polar_obj[filename][T_Stack][Z_Stack].append(Resultstest[T_Stack][Z_Stack]["analysis"]["results_obj"][objn]["basicmembrane"][3])
                             elif Result[0][0]["analysis"]["results_whole_cyto"]:
-                                self.Cytoprof[filename][T_Stack][Z_Stack].append([])
+                                
                                 self.Cyto_Image[filename][T_Stack][Z_Stack].append([])
                                 self.Object_Parameters_cyto[filename][T_Stack][Z_Stack].append([])
                                 self.Cyto_Intensities_per_object[filename][T_Stack][Z_Stack].append([])
@@ -5126,10 +5225,10 @@ class MainWindow(QtWidgets.QMainWindow):
                 self.Channellamda[filename]=Lambdachannel
                 self.Profile[filename]=[]
                 self.MembraneSegments[filename]=[]
+                self.Cytoprof[filename]=[]
                 if Result["analysis"]["results_whole_cyto"]: 
                     self.Cyto_Intensities_per_object[filename]=[]
                     self.Cyto_GPPhasor_polar_obj[filename]=[]
-                    self.Cytoprof[filename]=[]
                     self.Cyto_Image[filename]=[]
                     self.Object_Parameters_cyto[filename]=[]
                 for objn in Resultstest["analysis"]["results_obj"]:
@@ -5149,9 +5248,13 @@ class MainWindow(QtWidgets.QMainWindow):
                     else:
                         self.Profile[filename].append([])
                         self.MembraneSegments[filename].append([])
-                    if len(Resultstest["analysis"]["results_obj"][objn]["basiccyto"]) !=0 :
+                    if len(Resultstest["analysis"]["results_obj"][objn]["objlinearization"]) !=0:
                         self.Cytoprof[filename].append([])
                         self.Cytoprof[filename][int(objn)-1].append(Resultstest["analysis"]["results_obj"][objn]["objlinearization"])
+                    else:
+                        self.Cytoprof[filename].append([])
+                    if len(Resultstest["analysis"]["results_obj"][objn]["basiccyto"]) !=0 :
+                        
                         self.Cyto_Image[filename].append(Resultstest["analysis"]["results_obj"][objn]["basiccyto"][2])
                         self.Object_Parameters_cyto[filename].append(Resultstest["analysis"]["results_obj"][objn]["basiccyto"][0]["Parameters"])
                         self.Cyto_Intensities_per_object[filename].append([])
@@ -5159,7 +5262,7 @@ class MainWindow(QtWidgets.QMainWindow):
                         self.Cyto_Intensities_per_object[filename][int(objn)-1].append(Resultstest["analysis"]["results_obj"][objn]["basiccyto"][0]["Norm. Intensity"])
                         self.Cyto_GPPhasor_polar_obj[filename].append(Resultstest["analysis"]["results_obj"][objn]["basicmembrane"][3])
                     elif Result["analysis"]["results_whole_cyto"]:
-                        self.Cytoprof[filename].append([])
+                        
                         self.Cyto_Intensities_per_object[filename].append([])
                         self.Cyto_GPPhasor_polar_obj[filename].append([])
 
@@ -5197,7 +5300,7 @@ if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)
     apply_dark_palette(app)
     window = MainWindow()
-    #pyi_splash.close()
+    # pyi_splash.close()
     app.processEvents() 
     window.showMaximized()
     sys.exit(app.exec_())

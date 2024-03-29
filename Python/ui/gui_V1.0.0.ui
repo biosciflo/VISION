@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1939</width>
-    <height>1054</height>
+    <width>1948</width>
+    <height>1084</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -56,6 +56,12 @@
          <layout class="QHBoxLayout" name="horizontalLayout">
           <item>
            <widget class="QPushButton" name="B_LoadFiles">
+            <property name="minimumSize">
+             <size>
+              <width>75</width>
+              <height>20</height>
+             </size>
+            </property>
             <property name="text">
              <string>Load Files</string>
             </property>
@@ -63,6 +69,12 @@
           </item>
           <item>
            <widget class="QPushButton" name="B_LoadFolder">
+            <property name="minimumSize">
+             <size>
+              <width>75</width>
+              <height>20</height>
+             </size>
+            </property>
             <property name="text">
              <string>Load Folder</string>
             </property>
@@ -73,9 +85,12 @@
             <property name="orientation">
              <enum>Qt::Horizontal</enum>
             </property>
+            <property name="sizeType">
+             <enum>QSizePolicy::Fixed</enum>
+            </property>
             <property name="sizeHint" stdset="0">
              <size>
-              <width>40</width>
+              <width>100</width>
               <height>20</height>
              </size>
             </property>
@@ -85,6 +100,12 @@
            <widget class="QPushButton" name="B_ClearSelection">
             <property name="enabled">
              <bool>false</bool>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>75</width>
+              <height>20</height>
+             </size>
             </property>
             <property name="toolTip">
              <string>Unselects all selections in table</string>
@@ -99,6 +120,12 @@
             <property name="enabled">
              <bool>false</bool>
             </property>
+            <property name="minimumSize">
+             <size>
+              <width>75</width>
+              <height>20</height>
+             </size>
+            </property>
             <property name="text">
              <string>Delete Entry</string>
             </property>
@@ -109,10 +136,32 @@
             <property name="enabled">
              <bool>false</bool>
             </property>
+            <property name="minimumSize">
+             <size>
+              <width>75</width>
+              <height>20</height>
+             </size>
+            </property>
             <property name="text">
              <string>Clear Table</string>
             </property>
            </widget>
+          </item>
+          <item>
+           <spacer name="horizontalSpacer_6">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeType">
+             <enum>QSizePolicy::Expanding</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
           </item>
          </layout>
         </item>
@@ -175,6 +224,12 @@
               <property name="enabled">
                <bool>false</bool>
               </property>
+              <property name="minimumSize">
+               <size>
+                <width>0</width>
+                <height>20</height>
+               </size>
+              </property>
               <property name="text">
                <string>Test Mask</string>
               </property>
@@ -185,8 +240,30 @@
               <property name="enabled">
                <bool>false</bool>
               </property>
+              <property name="minimumSize">
+               <size>
+                <width>0</width>
+                <height>20</height>
+               </size>
+              </property>
               <property name="text">
                <string>Run Analysis</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="pushButton_4">
+              <property name="enabled">
+               <bool>true</bool>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>100</width>
+                <height>100</height>
+               </size>
+              </property>
+              <property name="text">
+               <string>Stop Calculation</string>
               </property>
              </widget>
             </item>
@@ -194,6 +271,12 @@
              <widget class="QCheckBox" name="checkBox_2">
               <property name="enabled">
                <bool>false</bool>
+              </property>
+              <property name="minimumSize">
+               <size>
+                <width>0</width>
+                <height>20</height>
+               </size>
               </property>
               <property name="toolTip">
                <string extracomment="Choose between Whole Image analysis or Detected Object analysis"/>
@@ -210,6 +293,12 @@
              <widget class="QCheckBox" name="checkBox_7">
               <property name="enabled">
                <bool>false</bool>
+              </property>
+              <property name="minimumSize">
+               <size>
+                <width>0</width>
+                <height>20</height>
+               </size>
               </property>
               <property name="toolTip">
                <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Activatea Object linearization.  &amp;quot;Object Detection has to be activated&amp;quot;&lt;/p&gt;&lt;p&gt;(Can significantly slow down the calculation for images with high number of pixels and t-,z-, tz-Stack images)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
@@ -285,8 +374,14 @@
                 <x>17</x>
                 <y>10</y>
                 <width>201</width>
-                <height>17</height>
+                <height>20</height>
                </rect>
+              </property>
+              <property name="minimumSize">
+               <size>
+                <width>0</width>
+                <height>20</height>
+               </size>
               </property>
               <property name="toolTip">
                <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Aktivates Table and Settings in &amp;quot;Detailed Membrane Masking Options&amp;quot; &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
@@ -461,6 +556,12 @@
                  <property name="enabled">
                   <bool>false</bool>
                  </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>20</height>
+                  </size>
+                 </property>
                  <property name="toolTip">
                   <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Aktivate if, a specific channel should be used for Thresholding.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                  </property>
@@ -480,7 +581,7 @@
                  <property name="minimumSize">
                   <size>
                    <width>70</width>
-                   <height>0</height>
+                   <height>20</height>
                   </size>
                  </property>
                  <property name="toolTip">
@@ -490,6 +591,12 @@
                </item>
                <item row="1" column="0">
                 <widget class="QLabel" name="label_24">
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>20</height>
+                  </size>
+                 </property>
                  <property name="text">
                   <string>Thesholding Mode</string>
                  </property>
@@ -503,7 +610,7 @@
                  <property name="minimumSize">
                   <size>
                    <width>70</width>
-                   <height>0</height>
+                   <height>20</height>
                   </size>
                  </property>
                  <property name="toolTip">
@@ -523,6 +630,12 @@
                </item>
                <item row="2" column="0">
                 <widget class="QLabel" name="label_23">
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>20</height>
+                  </size>
+                 </property>
                  <property name="text">
                   <string>Manual Cutoff Level</string>
                  </property>
@@ -536,7 +649,7 @@
                  <property name="minimumSize">
                   <size>
                    <width>70</width>
-                   <height>0</height>
+                   <height>20</height>
                   </size>
                  </property>
                  <property name="toolTip">
@@ -555,6 +668,12 @@
                </item>
                <item row="3" column="0">
                 <widget class="QLabel" name="label_6">
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>20</height>
+                  </size>
+                 </property>
                  <property name="text">
                   <string>Signal to Noise Ratio</string>
                  </property>
@@ -574,7 +693,7 @@
                  <property name="minimumSize">
                   <size>
                    <width>70</width>
-                   <height>0</height>
+                   <height>20</height>
                   </size>
                  </property>
                  <property name="decimals">
@@ -596,6 +715,12 @@
                  <property name="enabled">
                   <bool>false</bool>
                  </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>20</height>
+                  </size>
+                 </property>
                  <property name="toolTip">
                   <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                  </property>
@@ -609,6 +734,12 @@
                </item>
                <item row="5" column="0">
                 <widget class="QLabel" name="label_27">
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>20</height>
+                  </size>
+                 </property>
                  <property name="text">
                   <string>Background Mean</string>
                  </property>
@@ -622,7 +753,7 @@
                  <property name="minimumSize">
                   <size>
                    <width>70</width>
-                   <height>0</height>
+                   <height>20</height>
                   </size>
                  </property>
                  <property name="decimals">
@@ -641,6 +772,12 @@
                </item>
                <item row="6" column="0">
                 <widget class="QLabel" name="label_22">
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>20</height>
+                  </size>
+                 </property>
                  <property name="text">
                   <string>Background StdDev.</string>
                  </property>
@@ -654,7 +791,7 @@
                  <property name="minimumSize">
                   <size>
                    <width>70</width>
-                   <height>0</height>
+                   <height>20</height>
                   </size>
                  </property>
                  <property name="decimals">
@@ -694,7 +831,7 @@
                  <property name="minimumSize">
                   <size>
                    <width>70</width>
-                   <height>0</height>
+                   <height>20</height>
                   </size>
                  </property>
                  <property name="value">
@@ -710,7 +847,7 @@
                  <property name="minimumSize">
                   <size>
                    <width>50</width>
-                   <height>0</height>
+                   <height>20</height>
                   </size>
                  </property>
                  <property name="toolTip">
@@ -729,6 +866,12 @@
                  <property name="enabled">
                   <bool>false</bool>
                  </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>20</height>
+                  </size>
+                 </property>
                  <property name="toolTip">
                   <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Activate compression of mask. Compression of the mask can help in profiling the membrane and cytosolic profiling.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                  </property>
@@ -742,7 +885,7 @@
                  <property name="minimumSize">
                   <size>
                    <width>50</width>
-                   <height>0</height>
+                   <height>20</height>
                   </size>
                  </property>
                  <property name="text">
@@ -758,7 +901,7 @@
                  <property name="minimumSize">
                   <size>
                    <width>70</width>
-                   <height>0</height>
+                   <height>20</height>
                   </size>
                  </property>
                  <property name="minimum">
@@ -773,6 +916,12 @@
                 <widget class="QCheckBox" name="checkBox_6">
                  <property name="enabled">
                   <bool>false</bool>
+                 </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>20</height>
+                  </size>
                  </property>
                  <property name="toolTip">
                   <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Activate Dilation of Mask. Dilation of the mask can help in profiling the membrane and cytosolic profiling.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
@@ -790,6 +939,12 @@
                  <property name="enabled">
                   <bool>false</bool>
                  </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>20</height>
+                  </size>
+                 </property>
                  <property name="toolTip">
                   <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Activatse removement of objects from mask. Renmoving objects from mask can help in profiling the membrane and cytosolic profiling.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                  </property>
@@ -802,6 +957,12 @@
                 <widget class="QCheckBox" name="checkBox_26">
                  <property name="enabled">
                   <bool>false</bool>
+                 </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>20</height>
+                  </size>
                  </property>
                  <property name="toolTip">
                   <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Activate Gaussian Filtering of Mask. Filtering of the mask can help in profiling the membrane and cytosolic profiling.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
@@ -822,14 +983,14 @@
                  <property name="minimumSize">
                   <size>
                    <width>70</width>
-                   <height>0</height>
+                   <height>20</height>
                   </size>
                  </property>
                  <property name="decimals">
                   <number>4</number>
                  </property>
                  <property name="maximum">
-                  <double>1.000000000000000</double>
+                  <double>999999.000000000000000</double>
                  </property>
                  <property name="singleStep">
                   <double>0.000500000000000</double>
@@ -847,7 +1008,7 @@
                  <property name="minimumSize">
                   <size>
                    <width>70</width>
-                   <height>0</height>
+                   <height>20</height>
                   </size>
                  </property>
                  <property name="toolTip">
@@ -878,7 +1039,7 @@
                  <property name="minimumSize">
                   <size>
                    <width>50</width>
-                   <height>0</height>
+                   <height>20</height>
                   </size>
                  </property>
                  <property name="toolTip">
@@ -897,6 +1058,12 @@
                  <property name="enabled">
                   <bool>false</bool>
                  </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>20</height>
+                  </size>
+                 </property>
                  <property name="toolTip">
                   <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Hole filling of the mask can help in profiling the membrane.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                  </property>
@@ -910,7 +1077,7 @@
                  <property name="minimumSize">
                   <size>
                    <width>50</width>
-                   <height>0</height>
+                   <height>20</height>
                   </size>
                  </property>
                  <property name="text">
@@ -926,10 +1093,13 @@
                  <property name="minimumSize">
                   <size>
                    <width>70</width>
-                   <height>0</height>
+                   <height>20</height>
                   </size>
                  </property>
                  <property name="minimum">
+                  <double>0.100000000000000</double>
+                 </property>
+                 <property name="value">
                   <double>1.000000000000000</double>
                  </property>
                 </widget>
@@ -952,6 +1122,12 @@
                 <width>501</width>
                 <height>211</height>
                </rect>
+              </property>
+              <property name="minimumSize">
+               <size>
+                <width>501</width>
+                <height>211</height>
+               </size>
               </property>
               <property name="frameShape">
                <enum>QFrame::StyledPanel</enum>
@@ -1050,6 +1226,12 @@
                 <height>20</height>
                </rect>
               </property>
+              <property name="minimumSize">
+               <size>
+                <width>0</width>
+                <height>20</height>
+               </size>
+              </property>
               <property name="text">
                <string>Z-Stack Pos</string>
               </property>
@@ -1066,6 +1248,12 @@
                 <height>20</height>
                </rect>
               </property>
+              <property name="minimumSize">
+               <size>
+                <width>0</width>
+                <height>20</height>
+               </size>
+              </property>
               <property name="toolTip">
                <string extracomment="Choose short wavelength for GP calulation">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Selection of Z-Slice&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
               </property>
@@ -1081,6 +1269,12 @@
                 <width>231</width>
                 <height>23</height>
                </rect>
+              </property>
+              <property name="minimumSize">
+               <size>
+                <width>0</width>
+                <height>20</height>
+               </size>
               </property>
               <property name="toolTip">
                <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Transferes Global Masking Settings to all Slices&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
@@ -1103,6 +1297,12 @@
               <height>22</height>
              </rect>
             </property>
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>20</height>
+             </size>
+            </property>
             <property name="toolTip">
              <string extracomment="Choose short wavelength for GP calulation">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Channel corresponding to D in the equation.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
             </property>
@@ -1113,8 +1313,14 @@
               <x>11</x>
               <y>5</y>
               <width>104</width>
-              <height>18</height>
+              <height>20</height>
              </rect>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>20</height>
+             </size>
             </property>
             <property name="text">
              <string>Channel Setting:</string>
@@ -1128,6 +1334,12 @@
               <width>104</width>
               <height>21</height>
              </rect>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>20</height>
+             </size>
             </property>
             <property name="font">
              <font>
@@ -1154,6 +1366,12 @@
               <height>22</height>
              </rect>
             </property>
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>20</height>
+             </size>
+            </property>
             <property name="text">
              <string>C</string>
             </property>
@@ -1169,6 +1387,12 @@
               <width>103</width>
               <height>22</height>
              </rect>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>20</height>
+             </size>
             </property>
             <property name="lineWidth">
              <number>1</number>
@@ -1192,6 +1416,12 @@
               <height>22</height>
              </rect>
             </property>
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>20</height>
+             </size>
+            </property>
             <property name="toolTip">
              <string extracomment="Choose short wavelength for GP calulation">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Channel corresponding to C in the equation.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
             </property>
@@ -1207,6 +1437,12 @@
               <width>104</width>
               <height>22</height>
              </rect>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>20</height>
+             </size>
             </property>
             <property name="toolTip">
              <string extracomment="Choose short wavelength for GP calulation">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Channel corresponding to A in the equation.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
@@ -1224,6 +1460,12 @@
               <height>22</height>
              </rect>
             </property>
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>20</height>
+             </size>
+            </property>
             <property name="toolTip">
              <string comment="Choose long wavelength for GP calulation" extracomment="Choose long wavelength for GP calulation">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Channel corresponding to B in the equation.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
             </property>
@@ -1236,6 +1478,12 @@
               <width>103</width>
               <height>21</height>
              </rect>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>20</height>
+             </size>
             </property>
             <property name="font">
              <font>
@@ -1265,6 +1513,12 @@
               <verstretch>0</verstretch>
              </sizepolicy>
             </property>
+            <property name="minimumSize">
+             <size>
+              <width>256</width>
+              <height>71</height>
+             </size>
+            </property>
             <property name="toolTip">
              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Enter analysis Equation here:&lt;/p&gt;&lt;p&gt;&lt;br/&gt;e.g. (A - B) / (A + B) for GP-Analysis (Default)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
             </property>
@@ -1289,6 +1543,12 @@
               <horstretch>0</horstretch>
               <verstretch>0</verstretch>
              </sizepolicy>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>20</height>
+             </size>
             </property>
             <property name="toolTip">
              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Activate Membrane Profiling. &amp;quot;Object Detection has to be activated&amp;quot;&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt; (Can significantly slow down the calculation for images with high number of pixels and t-,z-, tz-Stack images)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
@@ -1315,6 +1575,12 @@
               <verstretch>0</verstretch>
              </sizepolicy>
             </property>
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>20</height>
+             </size>
+            </property>
             <property name="toolTip">
              <string comment="Choose long wavelength for GP calulation" extracomment="Choose long wavelength for GP calulation">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Channel corresponding to B in the equation below.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
             </property>
@@ -1337,6 +1603,12 @@
               <verstretch>0</verstretch>
              </sizepolicy>
             </property>
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>20</height>
+             </size>
+            </property>
             <property name="toolTip">
              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Activates Additional Profiling Channel e.g. ProteinChannel. &amp;quot;Object Detection &amp;amp; Membrane Profiling has to be activated&amp;quot;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
             </property>
@@ -1352,6 +1624,12 @@
               <width>133</width>
               <height>22</height>
              </rect>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>20</height>
+             </size>
             </property>
             <property name="text">
              <string>Equation</string>
@@ -1402,8 +1680,14 @@
                 <x>17</x>
                 <y>10</y>
                 <width>191</width>
-                <height>17</height>
+                <height>20</height>
                </rect>
+              </property>
+              <property name="minimumSize">
+               <size>
+                <width>0</width>
+                <height>20</height>
+               </size>
               </property>
               <property name="toolTip">
                <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Aktivates Table and Settings in &amp;quot;Detailed Cytosol Masking Options&amp;quot; &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
@@ -1566,6 +1850,12 @@
                  <property name="enabled">
                   <bool>false</bool>
                  </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>20</height>
+                  </size>
+                 </property>
                  <property name="toolTip">
                   <string>Aktivate if, a specific channel should be used for Thresholding.</string>
                  </property>
@@ -1585,7 +1875,7 @@
                  <property name="minimumSize">
                   <size>
                    <width>70</width>
-                   <height>0</height>
+                   <height>20</height>
                   </size>
                  </property>
                  <property name="toolTip">
@@ -1595,6 +1885,12 @@
                </item>
                <item row="1" column="0">
                 <widget class="QLabel" name="label_35">
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>20</height>
+                  </size>
+                 </property>
                  <property name="text">
                   <string>Thesholding Mode</string>
                  </property>
@@ -1608,7 +1904,7 @@
                  <property name="minimumSize">
                   <size>
                    <width>70</width>
-                   <height>0</height>
+                   <height>20</height>
                   </size>
                  </property>
                  <property name="toolTip">
@@ -1628,6 +1924,12 @@
                </item>
                <item row="2" column="0">
                 <widget class="QLabel" name="label_36">
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>20</height>
+                  </size>
+                 </property>
                  <property name="text">
                   <string>Manual Cutoff Level</string>
                  </property>
@@ -1641,7 +1943,7 @@
                  <property name="minimumSize">
                   <size>
                    <width>70</width>
-                   <height>0</height>
+                   <height>20</height>
                   </size>
                  </property>
                  <property name="toolTip">
@@ -1660,6 +1962,12 @@
                </item>
                <item row="3" column="0">
                 <widget class="QLabel" name="label_34">
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>20</height>
+                  </size>
+                 </property>
                  <property name="text">
                   <string>Signal to Noise Ratio</string>
                  </property>
@@ -1673,7 +1981,7 @@
                  <property name="minimumSize">
                   <size>
                    <width>70</width>
-                   <height>0</height>
+                   <height>20</height>
                   </size>
                  </property>
                  <property name="decimals">
@@ -1695,6 +2003,12 @@
                  <property name="enabled">
                   <bool>false</bool>
                  </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>20</height>
+                  </size>
+                 </property>
                  <property name="toolTip">
                   <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                  </property>
@@ -1708,6 +2022,12 @@
                </item>
                <item row="5" column="0">
                 <widget class="QLabel" name="label_41">
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>20</height>
+                  </size>
+                 </property>
                  <property name="text">
                   <string>Background Mean.</string>
                  </property>
@@ -1721,7 +2041,7 @@
                  <property name="minimumSize">
                   <size>
                    <width>70</width>
-                   <height>0</height>
+                   <height>20</height>
                   </size>
                  </property>
                  <property name="decimals">
@@ -1740,6 +2060,12 @@
                </item>
                <item row="6" column="0">
                 <widget class="QLabel" name="label_33">
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>20</height>
+                  </size>
+                 </property>
                  <property name="text">
                   <string>Background StdDev.</string>
                  </property>
@@ -1753,7 +2079,7 @@
                  <property name="minimumSize">
                   <size>
                    <width>70</width>
-                   <height>0</height>
+                   <height>20</height>
                   </size>
                  </property>
                  <property name="decimals">
@@ -1790,6 +2116,12 @@
                  <property name="enabled">
                   <bool>false</bool>
                  </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>20</height>
+                  </size>
+                 </property>
                  <property name="toolTip">
                   <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Activate compression of mask.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                  </property>
@@ -1806,7 +2138,7 @@
                  <property name="minimumSize">
                   <size>
                    <width>70</width>
-                   <height>0</height>
+                   <height>20</height>
                   </size>
                  </property>
                  <property name="decimals">
@@ -1828,6 +2160,12 @@
                  <property name="enabled">
                   <bool>false</bool>
                  </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>20</height>
+                  </size>
+                 </property>
                  <property name="toolTip">
                   <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Activatse removement of objects from mask&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                  </property>
@@ -1844,7 +2182,7 @@
                  <property name="minimumSize">
                   <size>
                    <width>70</width>
-                   <height>0</height>
+                   <height>20</height>
                   </size>
                  </property>
                  <property name="minimum">
@@ -1859,6 +2197,12 @@
                 <widget class="QCheckBox" name="checkBox_35">
                  <property name="enabled">
                   <bool>false</bool>
+                 </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>20</height>
+                  </size>
                  </property>
                  <property name="toolTip">
                   <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Activate hole filling of mask&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
@@ -1876,7 +2220,7 @@
                  <property name="minimumSize">
                   <size>
                    <width>70</width>
-                   <height>0</height>
+                   <height>20</height>
                   </size>
                  </property>
                  <property name="value">
@@ -1889,6 +2233,12 @@
                  <property name="enabled">
                   <bool>false</bool>
                  </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>20</height>
+                  </size>
+                 </property>
                  <property name="toolTip">
                   <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Activate Gauss filtering of mask. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                  </property>
@@ -1900,31 +2250,12 @@
                  </property>
                 </widget>
                </item>
-               <item row="3" column="1">
-                <widget class="QSpinBox" name="spinBox_19">
-                 <property name="enabled">
-                  <bool>false</bool>
-                 </property>
-                 <property name="minimumSize">
-                  <size>
-                   <width>70</width>
-                   <height>0</height>
-                  </size>
-                 </property>
-                 <property name="minimum">
-                  <number>1</number>
-                 </property>
-                 <property name="value">
-                  <number>1</number>
-                 </property>
-                </widget>
-               </item>
                <item row="3" column="2">
                 <widget class="QLabel" name="label_38">
                  <property name="minimumSize">
                   <size>
                    <width>50</width>
-                   <height>0</height>
+                   <height>20</height>
                   </size>
                  </property>
                  <property name="text">
@@ -1936,6 +2267,12 @@
                 <widget class="QCheckBox" name="checkBox_37">
                  <property name="enabled">
                   <bool>false</bool>
+                 </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>20</height>
+                  </size>
                  </property>
                  <property name="toolTip">
                   <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Activate Dilation of Mask.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
@@ -1953,10 +2290,16 @@
                  <property name="enabled">
                   <bool>false</bool>
                  </property>
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
                  <property name="minimumSize">
                   <size>
                    <width>70</width>
-                   <height>0</height>
+                   <height>20</height>
                   </size>
                  </property>
                  <property name="toolTip">
@@ -1987,7 +2330,7 @@
                  <property name="minimumSize">
                   <size>
                    <width>50</width>
-                   <height>0</height>
+                   <height>20</height>
                   </size>
                  </property>
                  <property name="toolTip">
@@ -2006,7 +2349,7 @@
                  <property name="minimumSize">
                   <size>
                    <width>50</width>
-                   <height>0</height>
+                   <height>20</height>
                   </size>
                  </property>
                  <property name="text">
@@ -2022,7 +2365,7 @@
                  <property name="minimumSize">
                   <size>
                    <width>50</width>
-                   <height>0</height>
+                   <height>20</height>
                   </size>
                  </property>
                  <property name="toolTip">
@@ -2033,6 +2376,25 @@
                  </property>
                  <property name="value">
                   <number>3</number>
+                 </property>
+                </widget>
+               </item>
+               <item row="3" column="1">
+                <widget class="QDoubleSpinBox" name="doubleSpinBox_11">
+                 <property name="enabled">
+                  <bool>false</bool>
+                 </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>70</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                 <property name="minimum">
+                  <double>0.100000000000000</double>
+                 </property>
+                 <property name="value">
+                  <double>1.000000000000000</double>
                  </property>
                 </widget>
                </item>
@@ -2052,6 +2414,12 @@
                 <height>20</height>
                </rect>
               </property>
+              <property name="minimumSize">
+               <size>
+                <width>0</width>
+                <height>20</height>
+               </size>
+              </property>
               <property name="text">
                <string>Z-Stack Pos</string>
               </property>
@@ -2068,6 +2436,12 @@
                 <height>20</height>
                </rect>
               </property>
+              <property name="minimumSize">
+               <size>
+                <width>0</width>
+                <height>20</height>
+               </size>
+              </property>
               <property name="toolTip">
                <string extracomment="Choose short wavelength for GP calulation">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Selection of Z-Slice&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
               </property>
@@ -2083,6 +2457,12 @@
                 <width>211</width>
                 <height>23</height>
                </rect>
+              </property>
+              <property name="minimumSize">
+               <size>
+                <width>0</width>
+                <height>20</height>
+               </size>
               </property>
               <property name="toolTip">
                <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Transferes Global Masking Settings to all Slices&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
@@ -2102,6 +2482,12 @@
                 <width>501</width>
                 <height>211</height>
                </rect>
+              </property>
+              <property name="minimumSize">
+               <size>
+                <width>501</width>
+                <height>211</height>
+               </size>
               </property>
               <property name="frameShape">
                <enum>QFrame::StyledPanel</enum>
@@ -2208,6 +2594,12 @@
               <verstretch>0</verstretch>
              </sizepolicy>
             </property>
+            <property name="minimumSize">
+             <size>
+              <width>256</width>
+              <height>71</height>
+             </size>
+            </property>
             <property name="toolTip">
              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Enter analysis Equation here:&lt;/p&gt;&lt;p&gt;e.g. (A - B) / (A + B) for GP-Analysis (Default)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
             </property>
@@ -2232,6 +2624,12 @@
               <horstretch>0</horstretch>
               <verstretch>0</verstretch>
              </sizepolicy>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>20</height>
+             </size>
             </property>
             <property name="toolTip">
              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Activates cytosolic mesaurements.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
@@ -2262,6 +2660,12 @@
               <height>21</height>
              </rect>
             </property>
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>20</height>
+             </size>
+            </property>
             <property name="font">
              <font>
               <weight>50</weight>
@@ -2287,6 +2691,12 @@
               <height>22</height>
              </rect>
             </property>
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>20</height>
+             </size>
+            </property>
             <property name="toolTip">
              <string extracomment="Choose short wavelength for GP calulation">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Channel corresponding to A in the equation.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
             </property>
@@ -2299,6 +2709,12 @@
               <width>104</width>
               <height>22</height>
              </rect>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>20</height>
+             </size>
             </property>
             <property name="text">
              <string>C</string>
@@ -2315,6 +2731,12 @@
               <width>104</width>
               <height>21</height>
              </rect>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>20</height>
+             </size>
             </property>
             <property name="font">
              <font>
@@ -2344,6 +2766,12 @@
               <height>22</height>
              </rect>
             </property>
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>20</height>
+             </size>
+            </property>
             <property name="toolTip">
              <string extracomment="Choose short wavelength for GP calulation">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Channel corresponding to C in the equation.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
             </property>
@@ -2360,6 +2788,12 @@
               <height>22</height>
              </rect>
             </property>
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>20</height>
+             </size>
+            </property>
             <property name="toolTip">
              <string comment="Choose long wavelength for GP calulation" extracomment="Choose long wavelength for GP calulation">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Channel corresponding to B in the equation.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
             </property>
@@ -2372,6 +2806,12 @@
               <width>104</width>
               <height>22</height>
              </rect>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>20</height>
+             </size>
             </property>
             <property name="text">
              <string>Channel Setting:</string>
@@ -2389,6 +2829,12 @@
               <height>22</height>
              </rect>
             </property>
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>20</height>
+             </size>
+            </property>
             <property name="toolTip">
              <string extracomment="Choose short wavelength for GP calulation">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Channel corresponding to D in the equation.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
             </property>
@@ -2401,6 +2847,12 @@
               <width>103</width>
               <height>22</height>
              </rect>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>20</height>
+             </size>
             </property>
             <property name="lineWidth">
              <number>1</number>
@@ -2445,7 +2897,7 @@
                <property name="minimumSize">
                 <size>
                  <width>50</width>
-                 <height>0</height>
+                 <height>20</height>
                 </size>
                </property>
                <property name="toolTip">
@@ -2461,8 +2913,14 @@
              </item>
              <item row="5" column="0">
               <widget class="QLabel" name="label_11">
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>20</height>
+                </size>
+               </property>
                <property name="text">
-                <string>P-Value Threshold</string>
+                <string>β-Value Threshold</string>
                </property>
               </widget>
              </item>
@@ -2474,7 +2932,7 @@
                <property name="minimumSize">
                 <size>
                  <width>50</width>
-                 <height>0</height>
+                 <height>20</height>
                 </size>
                </property>
                <property name="toolTip">
@@ -2492,6 +2950,12 @@
               <widget class="QDoubleSpinBox" name="doubleSpinBox_3">
                <property name="enabled">
                 <bool>false</bool>
+               </property>
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>20</height>
+                </size>
                </property>
                <property name="decimals">
                 <number>2</number>
@@ -2512,6 +2976,12 @@
                <property name="enabled">
                 <bool>true</bool>
                </property>
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>20</height>
+                </size>
+               </property>
                <property name="toolTip">
                 <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Activates recentering of profiler tools.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                </property>
@@ -2524,6 +2994,12 @@
               <widget class="QCheckBox" name="checkBox_9">
                <property name="enabled">
                 <bool>true</bool>
+               </property>
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>20</height>
+                </size>
                </property>
                <property name="text">
                 <string>Auto Cut Off</string>
@@ -2545,7 +3021,7 @@
                <property name="minimumSize">
                 <size>
                  <width>50</width>
-                 <height>0</height>
+                 <height>20</height>
                 </size>
                </property>
                <property name="value">
@@ -2561,7 +3037,7 @@
                <property name="minimumSize">
                 <size>
                  <width>50</width>
-                 <height>0</height>
+                 <height>20</height>
                 </size>
                </property>
                <property name="toolTip">
@@ -2596,7 +3072,7 @@
              <rect>
               <x>10</x>
               <y>10</y>
-              <width>320</width>
+              <width>391</width>
               <height>60</height>
              </rect>
             </property>
@@ -2612,6 +3088,12 @@
             <layout class="QHBoxLayout" name="horizontalLayout_4">
              <item>
               <widget class="QLabel" name="label_15">
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>20</height>
+                </size>
+               </property>
                <property name="text">
                 <string>Skeleton Debranching</string>
                </property>
@@ -2635,6 +3117,18 @@
              </item>
              <item>
               <widget class="QLabel" name="label_25">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>20</height>
+                </size>
+               </property>
                <property name="text">
                 <string>tol0</string>
                </property>
@@ -2645,7 +3139,7 @@
                <property name="minimumSize">
                 <size>
                  <width>50</width>
-                 <height>0</height>
+                 <height>20</height>
                 </size>
                </property>
                <property name="toolTip">
@@ -2658,6 +3152,12 @@
              </item>
              <item>
               <widget class="QLabel" name="label_26">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
                <property name="text">
                 <string>tol1 </string>
                </property>
@@ -2668,7 +3168,7 @@
                <property name="minimumSize">
                 <size>
                  <width>50</width>
-                 <height>0</height>
+                 <height>20</height>
                 </size>
                </property>
                <property name="toolTip">
@@ -2695,6 +3195,12 @@
               <height>28</height>
              </rect>
             </property>
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>20</height>
+             </size>
+            </property>
             <property name="text">
              <string>Select Saving Path</string>
             </property>
@@ -2704,9 +3210,15 @@
              <rect>
               <x>10</x>
               <y>40</y>
-              <width>511</width>
+              <width>500</width>
               <height>31</height>
              </rect>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>500</width>
+              <height>31</height>
+             </size>
             </property>
             <property name="html">
              <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
@@ -2728,6 +3240,12 @@ p, li { white-space: pre-wrap; }
               <height>20</height>
              </rect>
             </property>
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>20</height>
+             </size>
+            </property>
             <property name="text">
              <string>Save Cropped Membrane</string>
             </property>
@@ -2743,6 +3261,12 @@ p, li { white-space: pre-wrap; }
               <width>171</width>
               <height>20</height>
              </rect>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>20</height>
+             </size>
             </property>
             <property name="text">
              <string>Save Cropped Cytosol</string>
@@ -2760,6 +3284,12 @@ p, li { white-space: pre-wrap; }
               <height>20</height>
              </rect>
             </property>
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>20</height>
+             </size>
+            </property>
             <property name="text">
              <string>Save Linearized Cytosol</string>
             </property>
@@ -2775,6 +3305,12 @@ p, li { white-space: pre-wrap; }
               <width>211</width>
               <height>20</height>
              </rect>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>20</height>
+             </size>
             </property>
             <property name="text">
              <string>Save Phasors</string>
@@ -2792,6 +3328,12 @@ p, li { white-space: pre-wrap; }
               <height>20</height>
              </rect>
             </property>
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>20</height>
+             </size>
+            </property>
             <property name="text">
              <string>Save Settings  in JSON </string>
             </property>
@@ -2808,6 +3350,12 @@ p, li { white-space: pre-wrap; }
               <height>20</height>
              </rect>
             </property>
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>20</height>
+             </size>
+            </property>
             <property name="text">
              <string>Save Results in JSON </string>
             </property>
@@ -2819,6 +3367,12 @@ p, li { white-space: pre-wrap; }
          <widget class="QProgressBar" name="progressBar_1">
           <property name="enabled">
            <bool>true</bool>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>522</width>
+            <height>21</height>
+           </size>
           </property>
           <property name="maximumSize">
            <size>
@@ -2848,6 +3402,12 @@ p, li { white-space: pre-wrap; }
         </item>
         <item>
          <widget class="QLabel" name="label_10">
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>20</height>
+           </size>
+          </property>
           <property name="font">
            <font>
             <pointsize>10</pointsize>
@@ -2881,10 +3441,13 @@ p, li { white-space: pre-wrap; }
           <property name="orientation">
            <enum>Qt::Vertical</enum>
           </property>
+          <property name="sizeType">
+           <enum>QSizePolicy::Fixed</enum>
+          </property>
           <property name="sizeHint" stdset="0">
            <size>
             <width>20</width>
-            <height>40</height>
+            <height>100</height>
            </size>
           </property>
          </spacer>
@@ -2946,7 +3509,7 @@ p, li { white-space: pre-wrap; }
              </rect>
             </property>
             <property name="currentIndex">
-             <number>0</number>
+             <number>1</number>
             </property>
             <widget class="QWidget" name="tab_18">
              <attribute name="title">
@@ -3004,8 +3567,14 @@ p, li { white-space: pre-wrap; }
               <x>695</x>
               <y>643</y>
               <width>47</width>
-              <height>13</height>
+              <height>20</height>
              </rect>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>20</height>
+             </size>
             </property>
             <property name="frameShape">
              <enum>QFrame::NoFrame</enum>
@@ -3054,6 +3623,12 @@ p, li { white-space: pre-wrap; }
               <height>23</height>
              </rect>
             </property>
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>20</height>
+             </size>
+            </property>
             <property name="text">
              <string>Probe Raw Image</string>
             </property>
@@ -3092,9 +3667,15 @@ p, li { white-space: pre-wrap; }
              <rect>
               <x>680</x>
               <y>710</y>
-              <width>191</width>
-              <height>122</height>
+              <width>181</width>
+              <height>131</height>
              </rect>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>181</width>
+              <height>131</height>
+             </size>
             </property>
             <property name="title">
              <string>Statistical Overview - Full Image</string>
@@ -3102,6 +3683,18 @@ p, li { white-space: pre-wrap; }
             <layout class="QFormLayout" name="formLayout_2">
              <item row="0" column="0">
               <widget class="QLabel" name="label_83">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>20</height>
+                </size>
+               </property>
                <property name="text">
                 <string>Mean</string>
                </property>
@@ -3109,13 +3702,25 @@ p, li { white-space: pre-wrap; }
              </item>
              <item row="0" column="1">
               <widget class="QLabel" name="label_84">
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>20</height>
+                </size>
+               </property>
                <property name="text">
-                <string>NAN</string>
+                <string>NaN</string>
                </property>
               </widget>
              </item>
              <item row="1" column="0">
               <widget class="QLabel" name="label_81">
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>20</height>
+                </size>
+               </property>
                <property name="text">
                 <string>Median</string>
                </property>
@@ -3123,13 +3728,25 @@ p, li { white-space: pre-wrap; }
              </item>
              <item row="1" column="1">
               <widget class="QLabel" name="label_86">
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>20</height>
+                </size>
+               </property>
                <property name="text">
-                <string>NAN</string>
+                <string>NaN</string>
                </property>
               </widget>
              </item>
              <item row="2" column="0">
               <widget class="QLabel" name="label_82">
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>20</height>
+                </size>
+               </property>
                <property name="text">
                 <string>Standard Deviation</string>
                </property>
@@ -3137,13 +3754,25 @@ p, li { white-space: pre-wrap; }
              </item>
              <item row="2" column="1">
               <widget class="QLabel" name="label_85">
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>20</height>
+                </size>
+               </property>
                <property name="text">
-                <string>NAN</string>
+                <string>NaN</string>
                </property>
               </widget>
              </item>
              <item row="3" column="0">
               <widget class="QLabel" name="label_80">
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>20</height>
+                </size>
+               </property>
                <property name="text">
                 <string>Min</string>
                </property>
@@ -3151,13 +3780,25 @@ p, li { white-space: pre-wrap; }
              </item>
              <item row="3" column="1">
               <widget class="QLabel" name="label_87">
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>20</height>
+                </size>
+               </property>
                <property name="text">
-                <string>NAN</string>
+                <string>NaN</string>
                </property>
               </widget>
              </item>
              <item row="4" column="0">
               <widget class="QLabel" name="label_89">
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>20</height>
+                </size>
+               </property>
                <property name="text">
                 <string>Max</string>
                </property>
@@ -3165,12 +3806,28 @@ p, li { white-space: pre-wrap; }
              </item>
              <item row="4" column="1">
               <widget class="QLabel" name="label_88">
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>20</height>
+                </size>
+               </property>
                <property name="text">
                 <string>NaN</string>
                </property>
               </widget>
              </item>
             </layout>
+           </widget>
+           <widget class="QWidget" name="widget" native="true">
+            <property name="geometry">
+             <rect>
+              <x>180</x>
+              <y>750</y>
+              <width>120</width>
+              <height>80</height>
+             </rect>
+            </property>
            </widget>
            <zorder>MplWidget</zorder>
            <zorder>tabWidget_8</zorder>
@@ -3180,6 +3837,7 @@ p, li { white-space: pre-wrap; }
            <zorder>pushButton_2</zorder>
            <zorder>horizontalScrollBar_4</zorder>
            <zorder>groupBox_20</zorder>
+           <zorder>widget</zorder>
           </widget>
           <widget class="QWidget" name="tab_4">
            <attribute name="title">
@@ -3248,7 +3906,7 @@ p, li { white-space: pre-wrap; }
              </rect>
             </property>
             <property name="currentIndex">
-             <number>1</number>
+             <number>0</number>
             </property>
             <widget class="QWidget" name="tab_22">
              <attribute name="title">
@@ -3328,9 +3986,15 @@ p, li { white-space: pre-wrap; }
                <rect>
                 <x>10</x>
                 <y>700</y>
-                <width>191</width>
+                <width>221</width>
                 <height>121</height>
                </rect>
+              </property>
+              <property name="minimumSize">
+               <size>
+                <width>0</width>
+                <height>121</height>
+               </size>
               </property>
               <property name="title">
                <string>Statistical Overview - Full Image</string>
@@ -3338,6 +4002,12 @@ p, li { white-space: pre-wrap; }
               <layout class="QFormLayout" name="formLayout_4">
                <item row="0" column="0">
                 <widget class="QLabel" name="label_51">
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>20</height>
+                  </size>
+                 </property>
                  <property name="text">
                   <string>Median:</string>
                  </property>
@@ -3345,13 +4015,25 @@ p, li { white-space: pre-wrap; }
                </item>
                <item row="0" column="1">
                 <widget class="QLabel" name="label_73">
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>20</height>
+                  </size>
+                 </property>
                  <property name="text">
-                  <string>NAN</string>
+                  <string>NaN</string>
                  </property>
                 </widget>
                </item>
                <item row="1" column="0">
                 <widget class="QLabel" name="label_44">
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>20</height>
+                  </size>
+                 </property>
                  <property name="text">
                   <string>Standard Deviaton:</string>
                  </property>
@@ -3359,13 +4041,25 @@ p, li { white-space: pre-wrap; }
                </item>
                <item row="1" column="1">
                 <widget class="QLabel" name="label_71">
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>20</height>
+                  </size>
+                 </property>
                  <property name="text">
-                  <string>NAN</string>
+                  <string>NaN</string>
                  </property>
                 </widget>
                </item>
                <item row="2" column="0">
                 <widget class="QLabel" name="label_45">
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>20</height>
+                  </size>
+                 </property>
                  <property name="text">
                   <string>Rejected Pixels %:</string>
                  </property>
@@ -3373,13 +4067,25 @@ p, li { white-space: pre-wrap; }
                </item>
                <item row="2" column="1">
                 <widget class="QLabel" name="label_76">
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>20</height>
+                  </size>
+                 </property>
                  <property name="text">
-                  <string>NAN</string>
+                  <string>NaN</string>
                  </property>
                 </widget>
                </item>
                <item row="3" column="0">
                 <widget class="QLabel" name="label_46">
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>20</height>
+                  </size>
+                 </property>
                  <property name="text">
                   <string>Mean Intensity of Thr Ch: </string>
                  </property>
@@ -3387,8 +4093,14 @@ p, li { white-space: pre-wrap; }
                </item>
                <item row="3" column="1">
                 <widget class="QLabel" name="label_69">
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>20</height>
+                  </size>
+                 </property>
                  <property name="text">
-                  <string>NAN</string>
+                  <string>NaN</string>
                  </property>
                 </widget>
                </item>
@@ -3558,6 +4270,12 @@ p, li { white-space: pre-wrap; }
               <height>311</height>
              </rect>
             </property>
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>311</height>
+             </size>
+            </property>
             <property name="cursor" stdset="0">
              <cursorShape>PointingHandCursor</cursorShape>
             </property>
@@ -3647,7 +4365,7 @@ p, li { white-space: pre-wrap; }
              </rect>
             </property>
             <property name="currentIndex">
-             <number>0</number>
+             <number>3</number>
             </property>
             <widget class="QWidget" name="tab_7">
              <attribute name="title">
@@ -3782,8 +4500,14 @@ p, li { white-space: pre-wrap; }
                 <x>351</x>
                 <y>21</y>
                 <width>47</width>
-                <height>13</height>
+                <height>20</height>
                </rect>
+              </property>
+              <property name="minimumSize">
+               <size>
+                <width>0</width>
+                <height>20</height>
+               </size>
               </property>
               <property name="text">
                <string>NaN</string>
@@ -3862,7 +4586,7 @@ p, li { white-space: pre-wrap; }
              </rect>
             </property>
             <property name="currentIndex">
-             <number>0</number>
+             <number>1</number>
             </property>
             <widget class="QWidget" name="tab_26">
              <attribute name="title">
@@ -3901,8 +4625,14 @@ p, li { white-space: pre-wrap; }
               <x>523</x>
               <y>357</y>
               <width>261</width>
-              <height>179</height>
+              <height>191</height>
              </rect>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>191</height>
+             </size>
             </property>
             <property name="title">
              <string>Statistical Overview - Object</string>
@@ -3910,8 +4640,14 @@ p, li { white-space: pre-wrap; }
             <layout class="QGridLayout" name="gridLayout_3">
              <item row="3" column="1">
               <widget class="QLabel" name="label_63">
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>20</height>
+                </size>
+               </property>
                <property name="text">
-                <string>NAN</string>
+                <string>NaN</string>
                </property>
                <property name="alignment">
                 <set>Qt::AlignCenter</set>
@@ -3920,6 +4656,12 @@ p, li { white-space: pre-wrap; }
              </item>
              <item row="2" column="0">
               <widget class="QLabel" name="label_54">
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>20</height>
+                </size>
+               </property>
                <property name="text">
                 <string>Standard Deviaton</string>
                </property>
@@ -3927,6 +4669,12 @@ p, li { white-space: pre-wrap; }
              </item>
              <item row="4" column="0">
               <widget class="QLabel" name="label_52">
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>20</height>
+                </size>
+               </property>
                <property name="text">
                 <string>Normalized Intensity ???</string>
                </property>
@@ -3934,6 +4682,12 @@ p, li { white-space: pre-wrap; }
              </item>
              <item row="5" column="0">
               <widget class="QLabel" name="label_57">
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>20</height>
+                </size>
+               </property>
                <property name="text">
                 <string>Eccentricity: </string>
                </property>
@@ -3941,8 +4695,14 @@ p, li { white-space: pre-wrap; }
              </item>
              <item row="2" column="1">
               <widget class="QLabel" name="label_62">
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>20</height>
+                </size>
+               </property>
                <property name="text">
-                <string>NAN</string>
+                <string>NaN</string>
                </property>
                <property name="alignment">
                 <set>Qt::AlignCenter</set>
@@ -3951,6 +4711,12 @@ p, li { white-space: pre-wrap; }
              </item>
              <item row="6" column="0">
               <widget class="QLabel" name="label_58">
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>20</height>
+                </size>
+               </property>
                <property name="text">
                 <string>Perimeter:</string>
                </property>
@@ -3958,6 +4724,12 @@ p, li { white-space: pre-wrap; }
              </item>
              <item row="7" column="0">
               <widget class="QLabel" name="label_59">
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>20</height>
+                </size>
+               </property>
                <property name="text">
                 <string>Area:</string>
                </property>
@@ -3965,8 +4737,14 @@ p, li { white-space: pre-wrap; }
              </item>
              <item row="1" column="1">
               <widget class="QLabel" name="label_60">
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>20</height>
+                </size>
+               </property>
                <property name="text">
-                <string>NAN</string>
+                <string>NaN</string>
                </property>
                <property name="alignment">
                 <set>Qt::AlignCenter</set>
@@ -3975,8 +4753,14 @@ p, li { white-space: pre-wrap; }
              </item>
              <item row="6" column="1">
               <widget class="QLabel" name="label_67">
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>20</height>
+                </size>
+               </property>
                <property name="text">
-                <string>NAN</string>
+                <string>NaN</string>
                </property>
                <property name="alignment">
                 <set>Qt::AlignCenter</set>
@@ -3985,8 +4769,14 @@ p, li { white-space: pre-wrap; }
              </item>
              <item row="4" column="1">
               <widget class="QLabel" name="label_64">
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>20</height>
+                </size>
+               </property>
                <property name="text">
-                <string>NAN</string>
+                <string>NaN</string>
                </property>
                <property name="alignment">
                 <set>Qt::AlignCenter</set>
@@ -3995,8 +4785,14 @@ p, li { white-space: pre-wrap; }
              </item>
              <item row="5" column="1">
               <widget class="QLabel" name="label_66">
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>20</height>
+                </size>
+               </property>
                <property name="text">
-                <string>NAN</string>
+                <string>NaN</string>
                </property>
                <property name="alignment">
                 <set>Qt::AlignCenter</set>
@@ -4005,8 +4801,14 @@ p, li { white-space: pre-wrap; }
              </item>
              <item row="7" column="1">
               <widget class="QLabel" name="label_90">
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>20</height>
+                </size>
+               </property>
                <property name="text">
-                <string>NAN</string>
+                <string>NaN</string>
                </property>
                <property name="alignment">
                 <set>Qt::AlignCenter</set>
@@ -4015,6 +4817,12 @@ p, li { white-space: pre-wrap; }
              </item>
              <item row="1" column="0">
               <widget class="QLabel" name="label_61">
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>20</height>
+                </size>
+               </property>
                <property name="text">
                 <string>Median</string>
                </property>
@@ -4022,6 +4830,12 @@ p, li { white-space: pre-wrap; }
              </item>
              <item row="3" column="0">
               <widget class="QLabel" name="label_55">
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>20</height>
+                </size>
+               </property>
                <property name="text">
                 <string>Rejected Pixels %</string>
                </property>
@@ -4029,8 +4843,14 @@ p, li { white-space: pre-wrap; }
              </item>
              <item row="3" column="2">
               <widget class="QLabel" name="label_138">
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>20</height>
+                </size>
+               </property>
                <property name="text">
-                <string>NAN</string>
+                <string>NaN</string>
                </property>
                <property name="alignment">
                 <set>Qt::AlignCenter</set>
@@ -4039,8 +4859,14 @@ p, li { white-space: pre-wrap; }
              </item>
              <item row="2" column="2">
               <widget class="QLabel" name="label_139">
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>20</height>
+                </size>
+               </property>
                <property name="text">
-                <string>NAN</string>
+                <string>NaN</string>
                </property>
                <property name="alignment">
                 <set>Qt::AlignCenter</set>
@@ -4049,8 +4875,14 @@ p, li { white-space: pre-wrap; }
              </item>
              <item row="4" column="2">
               <widget class="QLabel" name="label_137">
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>20</height>
+                </size>
+               </property>
                <property name="text">
-                <string>NAN</string>
+                <string>NaN</string>
                </property>
                <property name="alignment">
                 <set>Qt::AlignCenter</set>
@@ -4059,8 +4891,14 @@ p, li { white-space: pre-wrap; }
              </item>
              <item row="1" column="2">
               <widget class="QLabel" name="label_140">
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>20</height>
+                </size>
+               </property>
                <property name="text">
-                <string>NAN</string>
+                <string>NaN</string>
                </property>
                <property name="alignment">
                 <set>Qt::AlignCenter</set>
@@ -4069,6 +4907,12 @@ p, li { white-space: pre-wrap; }
              </item>
              <item row="0" column="1">
               <widget class="QLabel" name="label_65">
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>20</height>
+                </size>
+               </property>
                <property name="text">
                 <string>Membrane</string>
                </property>
@@ -4076,8 +4920,17 @@ p, li { white-space: pre-wrap; }
              </item>
              <item row="0" column="2">
               <widget class="QLabel" name="label_136">
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>20</height>
+                </size>
+               </property>
                <property name="text">
                 <string>Cytosol</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignCenter</set>
                </property>
               </widget>
              </item>
@@ -4109,6 +4962,19 @@ p, li { white-space: pre-wrap; }
        </layout>
       </item>
       <item>
+       <spacer name="horizontalSpacer_8">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item>
        <spacer name="horizontalSpacer">
         <property name="orientation">
          <enum>Qt::Horizontal</enum>
@@ -4122,6 +4988,19 @@ p, li { white-space: pre-wrap; }
        </spacer>
       </item>
      </layout>
+    </item>
+    <item>
+     <spacer name="horizontalSpacer_7">
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>40</width>
+        <height>20</height>
+       </size>
+      </property>
+     </spacer>
     </item>
    </layout>
   </widget>
