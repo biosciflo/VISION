@@ -1,6 +1,4 @@
 from Packages import np, skmM, skmF, ndi, slC, skM, imgIO, pd, os, sys, skcanny, tfl, plt, ndi, ssig
-import formula_main as Form
-
 
 def abovenoise(image, varidxs, S_N, stddev, bgmean, idx_col):
 
