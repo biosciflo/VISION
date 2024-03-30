@@ -251,18 +251,19 @@ Each panel has a Membrane and Cytosolic part and is split into Mask, Full Image,
 
 1. **Start VISON**
 2. **Load File(s) / Load Folder**
-3. **(Membrane Settings)** (Optional) Enter Equation for β-Value calculation.
-4. **(Membrane Settings)** Select Channels for each used variable in Equation.
-5. **(Membrane Settings)** (Optional) Enable and Choose Specific Thresholding Channel.
-6. **Test Mask** (if Mask is not optimal follow with Steps a-c, otherwise go to 7)
+3. **Inspect RawImage** Inspect all channels and dimensions of your RawImage by clicking onto the Filename in the image table.
+4. **(Membrane Settings)** (Optional) Enter Equation for β-Value calculation.
+5. **(Membrane Settings)** Select Channels for each used variable in Equation.
+6. **(Membrane Settings)** (Optional) Enable and Choose Specific Thresholding Channel.
+7. **Test Mask** (if Mask is not optimal follow with Steps a-c, otherwise go to 7)
    a. Move displayed Raw Image (Right Panel of Mask Results) to the channel of Choose Specific Thresholding Channel or used Channel of Equation with the lowest intensity. Click on “Probe Raw Image” and select a background area.
    b. Activate Background Compensation.
    c. Test Mask (if Mask is not optimal follow with Steps d-, otherwise go to 7)
    d. Enable options such as the Gauss Filter, Dilation, Compression, and Fill Holes, then fine-tune their respective parameters until the mask is satisfactory. Proceed to Step 7 upon completion.
-7. **Run Analysis – (Full Image)**
+8. **Run Analysis – (Full Image)**
    a. Check Full Image Results.
-8. **Activate Object Detection**
-9. **Run Analysis – (Full Image & Object Detection)**
+9. **Activate Object Detection**
+10. **Run Analysis – (Full Image & Object Detection)**
    a. If an error appears in the mini console, try to adapt the Masking options; it could be that the subroutines can't detect single objects.
    b. Check Full Image Results and Object-Related Results.
    
