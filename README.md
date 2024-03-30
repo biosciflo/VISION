@@ -22,7 +22,7 @@
   - [Load and Table Interaction Section](#load-and-table-interaction-section)
   - [Test, Run, and Analysis Settings](#test-run-and-analysis-settings)
   - [Specific Analysis Settings](#specific-analysis-settings)
-    - [Membrane Settings – P Value and Analysis](#membrane-settings--β-value-and-analysis)
+    - [Membrane Settings – β Value and Analysis](#membrane-settings--β-value-and-analysis)
     - [Membrane Settings – Global Membrane Masking Options](#membrane-settings--global-membrane-masking-options)
     - [Cytosol Settings](#cytosol-settings)
     - [Advanced Settings](#advanced-settings)
@@ -35,8 +35,6 @@
 - [Troubleshooting and Support](#troubleshooting-and-support)
   - [Reporting Bugs](#reporting-bugs)
 - [Appendix](#appendix)
-  - [Glossary](#glossary)
-- [Index](#index)
 - [License](#license)
 
 ## Introduction
@@ -105,15 +103,15 @@ macOS prevents certain applications from running due to security restrictions, p
 
 **Step 1: Grant Execution Permission**
 
-- **Command**: `chmod +x /path/to/yourApp`
+- **Command**: `chmod +x /path/to/yourAppFolder`
 - **Purpose**: Grants execute permission to your application, making it runnable on your system.
 - **Usage**: Replace `/path/to/yourApp` with the actual path to the application you wish to run.
 
 **Step 2: Remove Quarantine Attribute**
 
-- **Command**: `xattr -cr /path/to/yourApplication`
+- **Command**: `xattr -cr /path/to/yourApplicationFolder`
 - **Purpose**: Removes the quarantine attribute macOS applies to files downloaded from the internet, which causes the security block.
-- **Usage**: Replace `/path/to/yourApplication` with the path to the affected application or folder containing multiple blocked files.
+- **Usage**: Replace `/path/to/yourApplicationFolder` with the path to the affected application and folder (_internal) containing multiple blocked files.
 
 **Notes**
 
@@ -122,7 +120,7 @@ macOS prevents certain applications from running due to security restrictions, p
 - This guide is intended to help users quickly resolve issues with running applications that macOS has blocked due to its security settings.
 
 
-**Linux:**
+**Linux(Not supported yet):**
 - Open a terminal and change to the directory containing the extracted files.
 - Make the VISION binary executable with the command: `chmod +x VISION` (replace `VISION` with the actual name of the binary file).
 - Run the application by typing `./VISION` in the terminal.
@@ -198,7 +196,7 @@ The main window of VISION is designed with intuitiveness and efficiency in mind,
 
 ## Specific Analysis Settings
 
-### Membrane Settings – P Value and Analysis
+### Membrane Settings – β Value and Analysis
 
 - **Channel Settings**: Upon loading image files, fields A, B, C, & D automatically populate with existing channel information, such as '488' or numbers '1-9', derived directly from the original file's metadata. When loading spectral LSM or CZI files, the results in the comboboxes will include all available channel wavelengths.
 - **Membrane Profiler**: Enables/disables Membrane Profiler. 
@@ -269,14 +267,14 @@ Each panel has a Membrane and Cytosolic part and is split into Mask, Full Image,
    b. Check Full Image Results and Object-Related Results.
    
 **Note**: Once you have run the image, all Results are automatically Saved.
-## Youtube Tutorials:
+## Youtube Tutorials (cooming soon):
 - [TUTORIAL1](https://)
 - [TUTORIAL2](https://)
 - [TUTORIAL3](https://)
 
 # Advanced Features
 
-- **Custom Analyses**: Equations???? Different Equations?
+- **Custom Analyses**: (cooming soon)
 - **Patch Processing**: If multiple images are in the Image – List, either:
   - Select Multiple Images and press Run – Selected Images will be Processed.
   Or…
@@ -334,13 +332,7 @@ Your reports play a crucial role in improving the quality of the software, and w
 
 # Appendix
 
-- **Glossary**: Definitions of terms and concepts used within the guide and software.
 - **FAQs**: Answers to frequently asked questions about the software.
-
-# Index
-
-- **Keyword Index**: An index to help users quickly find information within the guide.
-
 
 ## License
 
