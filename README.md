@@ -103,15 +103,15 @@ macOS prevents certain applications from running due to security restrictions, p
 
 **Step 1: Grant Execution Permission**
 
-- **Command**: `chmod +x /path/to/yourAppFolder`
+- **Command**: `chmod +x /path/to/VISION(the folder)/VISION(theapp)`
 - **Purpose**: Grants execute permission to your application, making it runnable on your system.
-- **Usage**: Replace `/path/to/yourApp` with the actual path to the application you wish to run.
+- **Usage**: Replace `/path/to/VISION(the folder)/VISION(theapp)` with the actual path to the application you wish to run.
 
 **Step 2: Remove Quarantine Attribute**
 
-- **Command**: `xattr -cr /path/to/yourApplicationFolder`
+- **Command**: `xattr -cr /path/to/VISION(the folder)`
 - **Purpose**: Removes the quarantine attribute macOS applies to files downloaded from the internet, which causes the security block.
-- **Usage**: Replace `/path/to/yourApplicationFolder` with the path to the affected application and folder (_internal) containing multiple blocked files.
+- **Usage**: Replace `/path/to/VISION(the folder)` with the path to the affected application and folder (_internal) containing multiple blocked files.
 
 **Notes**
 
