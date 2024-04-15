@@ -1,7 +1,6 @@
 from Packages import np, skmM, skmF, ndi, slC, skM, imgIO, pd, os, sys, skcanny, tfl, plt, ndi, ssig
 
 
-
 def abovenoise(image, varidxs, S_N, stddev, bgmean, idx_col):
 
     if len(varidxs) == 1:
@@ -742,6 +741,8 @@ def indexing(skel):  # this is to order the coords progressively
 
 
 def indexing2(skel, truenodes):  # this is to order the coords progressively
+    truenodes = truenodes.astype(int)
+    skel[truenodes[:, 0], truenodes[:, 1]] = True
     returnskel = np.zeros_like(skel, dtype=bool)
     returnskel[skel] = True
     copyskel = np.zeros_like(skel, dtype=bool)
