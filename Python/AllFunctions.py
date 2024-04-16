@@ -1,8 +1,7 @@
-from Packages import np, skmM, skmF, ndi, slC, skM, imgIO, pd, os, sys, skcanny, tfl, plt, ndi, ssig
+from Packages import np, skmM, skmF, ndi, slC, skM, imgIO, pd, os, sys, skcanny, tfl, plt, ndi
 
 
 def abovenoise(image, varidxs, S_N, stddev, bgmean, idx_col):
-
     if len(varidxs) == 1:
         if bgmean == 'NaN':
             N_medianA = np.median(image[:, :, varidxs[0]])
@@ -259,7 +258,7 @@ def basicmeasure(img, reccoor, meta, varidxs, text, histpars):
         if i.isalpha():
             letters.append(i)
     letters.sort()
-    letters=list(set(letters))
+    letters = list(set(letters))
 
     if len(varidxs) == 1:
         varA = np.reshape(img[reccoor[:, 0], reccoor[:, 1], varidxs[0]], (-1, 1)).astype('int')
@@ -300,7 +299,8 @@ def basicmeasure(img, reccoor, meta, varidxs, text, histpars):
         GPstDev = np.round(np.std(GPs), 2)  # whole img GPs std. dev.
         histBin, GPhistNorm = normhist(histpars, GPs)  # histogram of GPs on whole img
         GPhistNorm = np.round(GPhistNorm, 3)
-        IntFrameNorm = np.round(np.sum(img[filtercoor[:, 0], filtercoor[:, 1], meta[3][0]]) / len(filtercoor))  # counts only pixels with
+        IntFrameNorm = np.round(
+            np.sum(img[filtercoor[:, 0], filtercoor[:, 1], meta[3][0]]) / len(filtercoor))  # counts only pixels with
         # GP ~NaN on either Ld or Lo channel (the dimmer) img
         # -----------------------------------------------------------------------------------------------------------
         imgGPs = np.full_like(img[:, :, meta[3][0]], np.nan, dtype=float)
@@ -312,7 +312,8 @@ def basicmeasure(img, reccoor, meta, varidxs, text, histpars):
 
         if len(varidxs) != 1:
             n = 1  # harmonic
-            COS = np.cos(2 * n * np.pi * ((meta[0] - meta[0][0]) / (np.max(meta[0]) - np.min(meta[0])))).reshape(-1, 1)  # FOR PHASOR PLOT
+            COS = np.cos(2 * n * np.pi * ((meta[0] - meta[0][0]) / (np.max(meta[0]) - np.min(meta[0])))).reshape(-1,
+                                                                                                                 1)  # FOR PHASOR PLOT
             SIN = np.sin(2 * n * np.pi * ((meta[0] - meta[0][0]) / (np.max(meta[0]) - np.min(meta[0])))).reshape(-1, 1)
             PhasorX = np.sum(img[filtercoor[:, 0], filtercoor[:, 1], :].T * COS, axis=0).reshape(1, -1) / \
                       np.sum(Int_array, axis=0).reshape(1, -1)
@@ -451,7 +452,9 @@ def tshape_corners(skel, newcoors):
             filtered_array_logic2 = filtered_array_logic2[np.newaxis, :, :]
             filtered_array_logic2 = np.concatenate((filtered_array_logic2, filtered_array_logic2), axis=0)
 
-            shrunk_filtered_array_check2 = filtered_array_check2[filtered_array_logic2].reshape(2, len(idx_points2_dist1), -1)
+            shrunk_filtered_array_check2 = filtered_array_check2[filtered_array_logic2].reshape(2,
+                                                                                                len(idx_points2_dist1),
+                                                                                                -1)
             cond_1 = shrunk_filtered_array_check2[0, :, 0] != shrunk_filtered_array_check2[0, :, 1]  # dims 1: (y, x)
             cond_2 = shrunk_filtered_array_check2[1, :, 0] != shrunk_filtered_array_check2[1, :, 1]
 
@@ -529,7 +532,6 @@ def tshape_corners(skel, newcoors):
         array_logic_4 = array_logic_4.astype(bool)
         array_sum_4 = np.sum(array_logic_4, axis=0)
 
-
         idx_points4 = np.where(array_sum_4 == 4)[0]
 
         if len(idx_points4) != 0:
@@ -603,8 +605,8 @@ def objmorphology(maskskel, coorcyto, pixelsize):
     floodmask = skmM.flood(maskskel, (centroid[0], centroid[1]), connectivity=1)
     InTEigs = skM.inertia_tensor_eigvals(floodmask)  # Eigenvalues of the Inertia T.
     ecc = np.round(np.sqrt(1 - InTEigs[1] / InTEigs[0]), 2)  # Calculated from the Eigenvalues of the Inertia T.
-    perim = np.around(skM.perimeter(floodmask) * pixelsize * 10**6, decimals=1)  # perimeter in um
-    area = np.around(np.sum(floodmask) * (pixelsize * 10**6) ** 2, decimals=1)  # area in um^2
+    perim = np.around(skM.perimeter(floodmask) * pixelsize * 10 ** 6, decimals=1)  # perimeter in um
+    area = np.around(np.sum(floodmask) * (pixelsize * 10 ** 6) ** 2, decimals=1)  # area in um^2
 
     return centroid, ecc, perim, area
 
@@ -636,7 +638,7 @@ def findnodes(skel, newcoors):
         sub_newcoors_3 = newcoors[:, idx_points3, np.newaxis]
 
         extended_subarray_check3 = np.concatenate([shrunk_subarray_check3, shrunk_subarray_check3[:, :, 0, np.newaxis]],
-                                              axis=2)
+                                                  axis=2)
         ext_subarray_check3diff = np.diff(extended_subarray_check3, axis=2)
 
         ext_subarray_check3diff_log = np.any(ext_subarray_check3diff == 0, axis=2)
@@ -669,11 +671,13 @@ def findnodes(skel, newcoors):
             idx_type5_3_8 = distance_5 == 3.8
 
             arraybool_dist_1_4 = np.round(array_distance_type5, decimals=1) == 1.4
-            arraybool_dist_1_4 = np.concatenate((arraybool_dist_1_4[np.newaxis, :, :], arraybool_dist_1_4[np.newaxis, :, :]), axis=0)
+            arraybool_dist_1_4 = np.concatenate(
+                (arraybool_dist_1_4[np.newaxis, :, :], arraybool_dist_1_4[np.newaxis, :, :]), axis=0)
             sub_shrunk_check3_type5_dist1_4 = sub_shrunk_check3_type5[arraybool_dist_1_4].reshape(2, -1, 2)
 
             ext_subarray_check3_type5_dist1_4 = np.concatenate([sub_shrunk_check3_type5_dist1_4,
-                                                                sub_shrunk_check3_type5_dist1_4[:, :, 0, np.newaxis]], axis=2)
+                                                                sub_shrunk_check3_type5_dist1_4[:, :, 0, np.newaxis]],
+                                                               axis=2)
 
             ext_check3_type5_dist1_4_diff = np.diff(ext_subarray_check3_type5_dist1_4, axis=2)
             ext_check3_type5_dist1_4_diff_log = np.any(ext_check3_type5_dist1_4_diff == 0, axis=2)
@@ -741,12 +745,21 @@ def indexing(skel):  # this is to order the coords progressively
 
 
 def indexing2(skel, truenodes):  # this is to order the coords progressively
+    squareBox = structure('square', (3, 3), hole=True)  # THIS IS TO ORDER THE COORD PROGRESSIVELY
     truenodes = truenodes.astype(int)
-    skel[truenodes[:, 0], truenodes[:, 1]] = True
+    checknodes = skel[truenodes[:, 0], truenodes[:, 1]]
+    falseidx = np.where(checknodes == False)[0]
+
+    if falseidx:
+        for i in falseidx:
+            checknextnode = truenodes[i, :] + squareBox
+            logicnext = skel[checknextnode[:, 0], checknextnode[:, 1]]
+            idxfirstnextnode = np.where(logicnext == True)[0][0]
+            truenodes[falseidx, :] = checknextnode[idxfirstnextnode, :]
+
     returnskel = np.zeros_like(skel, dtype=bool)
     returnskel[skel] = True
     copyskel = np.zeros_like(skel, dtype=bool)
-    squareBox = structure('square', (3, 3), hole=True)  # THIS IS TO ORDER THE COORD PROGRESSIVELY
     coor = np.transpose(np.nonzero(skel))
     copyskel = np.logical_or(copyskel, skel)
 
@@ -908,10 +921,14 @@ def croppingmorpho(imageR, Recmask_mem, Recmask_cyto, skelrecmask, coorlabels, t
     rawcroppedcyto = np.zeros((box.shape[0], box.shape[1], imageR.shape[2]))
     rawcroppedboth = np.zeros((box.shape[0], box.shape[1], imageR.shape[2]))
 
-    rawcroppedmask[newcoors_mask[:, 0], newcoors_mask[:, 1], :] = imageR[croppedmaskcoor[:, 0], croppedmaskcoor[:, 1], :]
-    rawcroppedcyto[newcoors_cyto[:, 0], newcoors_cyto[:, 1], :] = imageR[croppedcytocoor[:, 0], croppedcytocoor[:, 1], :]
-    rawcroppedboth[newcoors_mask[:, 0], newcoors_mask[:, 1], :] = imageR[croppedmaskcoor[:, 0], croppedmaskcoor[:, 1], :]
-    rawcroppedboth[newcoors_cyto[:, 0], newcoors_cyto[:, 1], :] = imageR[croppedcytocoor[:, 0], croppedcytocoor[:, 1], :]
+    rawcroppedmask[newcoors_mask[:, 0], newcoors_mask[:, 1], :] = imageR[croppedmaskcoor[:, 0], croppedmaskcoor[:, 1],
+                                                                  :]
+    rawcroppedcyto[newcoors_cyto[:, 0], newcoors_cyto[:, 1], :] = imageR[croppedcytocoor[:, 0], croppedcytocoor[:, 1],
+                                                                  :]
+    rawcroppedboth[newcoors_mask[:, 0], newcoors_mask[:, 1], :] = imageR[croppedmaskcoor[:, 0], croppedmaskcoor[:, 1],
+                                                                  :]
+    rawcroppedboth[newcoors_cyto[:, 0], newcoors_cyto[:, 1], :] = imageR[croppedcytocoor[:, 0], croppedcytocoor[:, 1],
+                                                                  :]
 
     return newcoors_skel, newcoors_mask, newcoors_cyto, newcoors_cytomasked, newcropped_skel, \
            rawcroppedmask, rawcroppedcyto, rawcroppedboth, centroid, ecc, perim, area, shiftcentroid, \
@@ -983,7 +1000,6 @@ def objprofiler(newcropped_skel, ordcoor, varidxs, pars, rawcroppedmask, autoff,
         array_logic = np.zeros_like(array_screen, dtype=bool)
         array_logic[0, array_idx, :] = newcropped_skel[array_screen[0, array_idx, :], array_screen[1, array_idx, :]]
         array_logic[1, array_idx, :] = newcropped_skel[array_screen[0, array_idx, :], array_screen[1, array_idx, :]]
-
         shrunk_array_screen = array_screen[array_logic].reshape(2, len(array_idx), -1)
         array_integration = lineprofile(shrunk_array_screen, coors, pars[1][0])
 
@@ -1003,8 +1019,9 @@ def objprofiler(newcropped_skel, ordcoor, varidxs, pars, rawcroppedmask, autoff,
                                                                       array_integration[1, array_idx, :], varidxs[0]] <
                                                        (2 ** pixeldepth - 1))
         logic_both_varA = np.logical_and(logic_abovenoise_varA, logic_notsat_varA)
-        array_int_varA = np.transpose(rawcroppedmask[array_integration[0, array_idx, :], array_integration[1, array_idx, :],
-                                                     varidxs[0]])
+        array_int_varA = np.transpose(
+            rawcroppedmask[array_integration[0, array_idx, :], array_integration[1, array_idx, :],
+                           varidxs[0]])
 
         logic_allVar = logic_both_varA
 
@@ -1020,8 +1037,9 @@ def objprofiler(newcropped_skel, ordcoor, varidxs, pars, rawcroppedmask, autoff,
                                                                       array_integration[1, array_idx, :], varidxs[0]] <
                                                        (2 ** pixeldepth - 1))
         logic_both_varA = np.logical_and(logic_abovenoise_varA, logic_notsat_varA)
-        array_int_varA = np.transpose(rawcroppedmask[array_integration[0, array_idx, :], array_integration[1, array_idx, :],
-                                                     varidxs[0]])
+        array_int_varA = np.transpose(
+            rawcroppedmask[array_integration[0, array_idx, :], array_integration[1, array_idx, :],
+                           varidxs[0]])
 
         logic_abovenoise_varB = np.zeros((array_integration.shape[2], array_integration.shape[1]), dtype=bool)
         logic_notsat_varB = np.zeros((array_integration.shape[2], array_integration.shape[1]), dtype=bool)
@@ -1032,8 +1050,9 @@ def objprofiler(newcropped_skel, ordcoor, varidxs, pars, rawcroppedmask, autoff,
                                                                       array_integration[1, array_idx, :], varidxs[1]] <
                                                        (2 ** pixeldepth - 1))
         logic_both_varB = np.logical_and(logic_abovenoise_varB, logic_notsat_varB)
-        array_int_varB = np.transpose(rawcroppedmask[array_integration[0, array_idx, :], array_integration[1, array_idx, :],
-                                                     varidxs[1]])
+        array_int_varB = np.transpose(
+            rawcroppedmask[array_integration[0, array_idx, :], array_integration[1, array_idx, :],
+                           varidxs[1]])
 
         logic_allVar = np.logical_and(logic_both_varA, logic_both_varB)
 
@@ -1050,8 +1069,9 @@ def objprofiler(newcropped_skel, ordcoor, varidxs, pars, rawcroppedmask, autoff,
                                                                       array_integration[1, array_idx, :], varidxs[0]] <
                                                        (2 ** pixeldepth - 1))
         logic_both_varA = np.logical_and(logic_abovenoise_varA, logic_notsat_varA)
-        array_int_varA = np.transpose(rawcroppedmask[array_integration[0, array_idx, :], array_integration[1, array_idx, :],
-                                                     varidxs[0]])
+        array_int_varA = np.transpose(
+            rawcroppedmask[array_integration[0, array_idx, :], array_integration[1, array_idx, :],
+                           varidxs[0]])
 
         logic_abovenoise_varB = np.zeros((array_integration.shape[2], array_integration.shape[1]), dtype=bool)
         logic_notsat_varB = np.zeros((array_integration.shape[2], array_integration.shape[1]), dtype=bool)
@@ -1062,8 +1082,9 @@ def objprofiler(newcropped_skel, ordcoor, varidxs, pars, rawcroppedmask, autoff,
                                                                       array_integration[1, array_idx, :], varidxs[1]] <
                                                        (2 ** pixeldepth - 1))
         logic_both_varB = np.logical_and(logic_abovenoise_varB, logic_notsat_varB)
-        array_int_varB = np.transpose(rawcroppedmask[array_integration[0, array_idx, :], array_integration[1, array_idx, :],
-                                                     varidxs[1]])
+        array_int_varB = np.transpose(
+            rawcroppedmask[array_integration[0, array_idx, :], array_integration[1, array_idx, :],
+                           varidxs[1]])
 
         logic_allVar = np.logical_and(logic_both_varA, logic_both_varB)
 
@@ -1374,7 +1395,6 @@ def measuremask(imageR, Reccoors, Reccoors_cyto, Meta, varidxs, varidxs_cyto, te
                 profiler,
                 Profpars, autoff, objlinear, radius, savelinearized, histpars_cyto, recenter, pixelsize, pixeldepth,
                 Thr_abovenoise, dim_line, colocalization, savephasors):
-
     results_whole = basicmeasure(imageR, Reccoors, Meta, varidxs, text, histpars)
 
     if colocalization != 'NaN':
@@ -1430,38 +1450,42 @@ def measuremask(imageR, Reccoors, Reccoors_cyto, Meta, varidxs, varidxs_cyto, te
                            np.asarray(np.moveaxis(rawcroppedcyto, -1, 0)))
 
             if profiler:  # THIS GENERATES THE ORDERED COORDINATES
-                try:
-                    if recenter:
-                        newcropped_skel, newcoors_skel = skel_recons(newcropped_skel, newcoors_skel, debranch=True, remove=True)
-                        newcropped_skel, newcoors_skel = recentering(newcropped_skel, newcoors_skel, shiftcentroid,
-                                                                     rawcroppedboth,
-                                                                     varidxs, dim_line, shape='octagon', dims=(7, 5))
+                # try:
+                if recenter:
+                    newcropped_skel, newcoors_skel = skel_recons(newcropped_skel, newcoors_skel, debranch=True,
+                                                                 remove=True)
+                    newcropped_skel, newcoors_skel = recentering(newcropped_skel, newcoors_skel, shiftcentroid,
+                                                                 rawcroppedboth,
+                                                                 varidxs, dim_line, shape='octagon', dims=(7, 5))
 
-                    nodes = findnodes(newcropped_skel, newcoors_skel)  # to find the nodes
+                nodes = findnodes(newcropped_skel, newcoors_skel)  # to find the nodes
 
-                    newcropped_skel, newcoors_skel = skel_recons(newcropped_skel, newcoors_skel, debranch=True, remove=True)
+                newcropped_skel, newcoors_skel = skel_recons(newcropped_skel, newcoors_skel, debranch=True, remove=True)
 
-                    if len(nodes) == 0:  # this deal with non cluster
-                        ordcoor, start, seg_lengths_pxl, newcropped_skel = indexing(newcropped_skel)
+                if len(nodes) == 0:  # this deal with non cluster
+                    ordcoor, start, seg_lengths_pxl, newcropped_skel = indexing(newcropped_skel)
 
-                    else:
-                        ordcoor, start, seg_lengths_pxl, newcropped_skel = indexing2(newcropped_skel, nodes)  # returns ordered coors with labels and seg
+                else:
+                    ordcoor, start, seg_lengths_pxl, newcropped_skel = indexing2(newcropped_skel,
+                                                                                 nodes)  # returns ordered coors with labels and seg
 
-                    seglabelled_mask = np.zeros_like(newcropped_skel, dtype=int)
-                    seglabelled_mask[ordcoor[:, 0], ordcoor[:, 1]] = ordcoor[:, 2]
+                seglabelled_mask = np.zeros_like(newcropped_skel, dtype=int)
+                seglabelled_mask[ordcoor[:, 0], ordcoor[:, 1]] = ordcoor[:, 2]
 
-                    INTs_GP, Pmedian_below, Pmedian_above, cutoff, percentage_up = objprofiler(newcropped_skel, ordcoor, varidxs,
-                                                                                Profpars,
-                                                                                rawcroppedmask, autoff,
-                                                                                pixeldepth, Thr_abovenoise,
-                                                                                cropped_Pcoded, idx_col)
+                INTs_GP, Pmedian_below, Pmedian_above, cutoff, percentage_up = objprofiler(newcropped_skel, ordcoor,
+                                                                                           varidxs,
+                                                                                           Profpars,
+                                                                                           rawcroppedmask, autoff,
+                                                                                           pixeldepth, Thr_abovenoise,
+                                                                                           cropped_Pcoded, idx_col)
 
-                    results_obj[i].update({'profile': [INTs_GP, Pmedian_below, Pmedian_above, cutoff, percentage_up, seg_lengths_pxl,
-                                                       seglabelled_mask]})
+                results_obj[i].update(
+                    {'profile': [INTs_GP, Pmedian_below, Pmedian_above, cutoff, percentage_up, seg_lengths_pxl,
+                                 seglabelled_mask]})
 
-                except:
-                    results_obj[i].update({'profile': []})
-                    print('Membrane not profiled')
+                # except:
+                #     results_obj[i].update({'profile': []})
+                #     print('Membrane not profiled')
 
             if objlinear:
                 try:
@@ -1483,7 +1507,8 @@ def measuremask(imageR, Reccoors, Reccoors_cyto, Meta, varidxs, varidxs_cyto, te
 
     results = {'results_whole': results_whole, 'results_whole_cyto': results_whole_cyto, 'results_obj': results_obj}
 
-    frames = allframes(results, ObjDetection, profile_cyto, profiler, varidxs, idx_col, savephasors)  # to generate data frame
+    frames = allframes(results, ObjDetection, profile_cyto, profiler, varidxs, idx_col,
+                       savephasors)  # to generate data frame
 
     return results, frames
 
@@ -1532,7 +1557,7 @@ def allframes(results, ObjDetection, profile_cyto, profiler, varidxs, idx_col, s
 
     if ObjDetection:
         df_headers = pd.DataFrame(['Eccentricity', 'Perimeter', 'Area', '% Pixel rejected', 'P_median', 'P_stddev',
-                      'Norm. Pixel Intensity'], columns=['Parameters'])
+                                   'Norm. Pixel Intensity'], columns=['Parameters'])
 
         list_df_morphology = []
         list_df_summary = []
@@ -1543,7 +1568,7 @@ def allframes(results, ObjDetection, profile_cyto, profiler, varidxs, idx_col, s
 
         df_head_par = pd.DataFrame(['Parameters'], columns=['Parameters'])
         df_wavelengths = pd.DataFrame(results['results_whole'][0]['Wavelengths (nm)'],
-                                        columns=['Parameters'])
+                                      columns=['Parameters'])
         df_bins = pd.DataFrame(results['results_whole'][0]['Bin'], columns=['Parameters'])
         df_hspace_onecell = pd.DataFrame([np.nan], columns=['Parameters'])
         df_header_emission = pd.DataFrame(['Wavelengths (nm)'], columns=['Parameters'])
@@ -1552,9 +1577,10 @@ def allframes(results, ObjDetection, profile_cyto, profiler, varidxs, idx_col, s
         if profile_cyto:
             df_head_par_cyto = pd.DataFrame(['Parameters cytosol'], columns=['Parameters'])
             df_headers_cyto = pd.DataFrame(['% Pixel rejected', 'P_median', 'P_stddev', 'Norm. Pixel Intensity'],
-                                          columns=['Parameters'])
+                                           columns=['Parameters'])
 
-            df_wavelengths_cyto = pd.DataFrame(results['results_whole_cyto'][0]['Wavelengths (nm)'], columns=['Parameters'])
+            df_wavelengths_cyto = pd.DataFrame(results['results_whole_cyto'][0]['Wavelengths (nm)'],
+                                               columns=['Parameters'])
 
             df_bins_cyto = pd.DataFrame(results['results_whole_cyto'][0]['Bin'], columns=['Parameters'])
 
@@ -1582,14 +1608,14 @@ def allframes(results, ObjDetection, profile_cyto, profiler, varidxs, idx_col, s
         for i in list(results['results_obj'].keys()):
 
             list_df_morphology.append(pd.DataFrame(
-                    [results['results_obj'][i]['morphology'][2], results['results_obj'][i]['morphology'][3],
-                     results['results_obj'][i]['morphology'][4]], columns=['Obj #{0}'.format(i)]))
+                [results['results_obj'][i]['morphology'][2], results['results_obj'][i]['morphology'][3],
+                 results['results_obj'][i]['morphology'][4]], columns=['Obj #{0}'.format(i)]))
 
             list_df_summary.append(pd.DataFrame([results['results_obj'][i]['basicmembrane'][0]['Parameters'][0],
-                                       results['results_obj'][i]['basicmembrane'][0]['Parameters'][1],
-                                       results['results_obj'][i]['basicmembrane'][0]['Parameters'][2],
-                                       results['results_obj'][i]['basicmembrane'][0]['Parameters'][3]],
-                                      columns=['Obj #{0}'.format(i)]))
+                                                 results['results_obj'][i]['basicmembrane'][0]['Parameters'][1],
+                                                 results['results_obj'][i]['basicmembrane'][0]['Parameters'][2],
+                                                 results['results_obj'][i]['basicmembrane'][0]['Parameters'][3]],
+                                                columns=['Obj #{0}'.format(i)]))
 
             list_df_emission.append(pd.DataFrame(results['results_obj'][i]['basicmembrane'][0]['Norm. Intensity'],
                                                  columns=['Obj #{0}'.format(i)]))
@@ -1603,17 +1629,19 @@ def allframes(results, ObjDetection, profile_cyto, profiler, varidxs, idx_col, s
 
             if profile_cyto:
                 if results['results_obj'][i]['basiccyto']:
-                    list_df_summary_cyto.append(pd.DataFrame([results['results_obj'][i]['basiccyto'][0]['Parameters'][0],
-                                                         results['results_obj'][i]['basiccyto'][0]['Parameters'][1],
-                                                         results['results_obj'][i]['basiccyto'][0]['Parameters'][2],
-                                                         results['results_obj'][i]['basiccyto'][0]['Parameters'][3]],
-                                                        columns=['Obj #{0}'.format(i)]))
+                    list_df_summary_cyto.append(
+                        pd.DataFrame([results['results_obj'][i]['basiccyto'][0]['Parameters'][0],
+                                      results['results_obj'][i]['basiccyto'][0]['Parameters'][1],
+                                      results['results_obj'][i]['basiccyto'][0]['Parameters'][2],
+                                      results['results_obj'][i]['basiccyto'][0]['Parameters'][3]],
+                                     columns=['Obj #{0}'.format(i)]))
 
-                    list_df_emission_cyto.append(pd.DataFrame(results['results_obj'][i]['basiccyto'][0]['Norm. Intensity'],
-                                                        columns=['Obj #{0}'.format(i)]))
+                    list_df_emission_cyto.append(
+                        pd.DataFrame(results['results_obj'][i]['basiccyto'][0]['Norm. Intensity'],
+                                     columns=['Obj #{0}'.format(i)]))
 
                     list_df_hist_cyto.append(pd.DataFrame(results['results_obj'][i]['basiccyto'][0]['Frequency (%)'],
-                                                     columns=['Obj #{0}'.format(i)]))
+                                                          columns=['Obj #{0}'.format(i)]))
 
                 else:
                     list_df_summary_cyto.append(pd.DataFrame(nan_summary_cyto, columns=['Obj #{0}'.format(i)]))
@@ -1644,10 +1672,10 @@ def allframes(results, ObjDetection, profile_cyto, profiler, varidxs, idx_col, s
                 pd_headers_profile = pd.DataFrame([list1], columns=col_names)
 
                 pd_sum_prof = pd.DataFrame([['Pmedian_below', 'Pmedian_above', 'cutoff', '%_above'],
-                                                         [results['results_obj'][i]['profile'][1],
-                                                          results['results_obj'][i]['profile'][2],
-                                                          results['results_obj'][i]['profile'][3],
-                                                          results['results_obj'][i]['profile'][4]]])
+                                            [results['results_obj'][i]['profile'][1],
+                                             results['results_obj'][i]['profile'][2],
+                                             results['results_obj'][i]['profile'][3],
+                                             results['results_obj'][i]['profile'][4]]])
 
                 pd_nan_sum = pd.DataFrame(list_nan_summary).T
                 combined_pds = pd.concat([pd_sum_prof, pd_nan_sum], axis=0, ignore_index=True).T
@@ -1656,7 +1684,8 @@ def allframes(results, ObjDetection, profile_cyto, profiler, varidxs, idx_col, s
 
                 df_traj_prof = pd.DataFrame(results['results_obj'][i]['profile'][0].tolist(), columns=col_names)
 
-                df_full_prof_obj = pd.concat([combined_pds_space, pd_headers_profile, df_traj_prof], axis=0, ignore_index=True)
+                df_full_prof_obj = pd.concat([combined_pds_space, pd_headers_profile, df_traj_prof], axis=0,
+                                             ignore_index=True)
 
                 list_df_prof_obj.append(df_full_prof_obj)
 
@@ -1671,7 +1700,7 @@ def allframes(results, ObjDetection, profile_cyto, profiler, varidxs, idx_col, s
         df_headers_objs = pd.concat(list_nobjs, axis=1)
 
         df_summary_data = pd.concat([df_headers_objs, df_morphology2, df_summary2, df_hspace_nobjs, df_headers_objs,
-                                   df_emission2, df_hspace_nobjs, df_headers_objs, df_hist2], ignore_index=True)
+                                     df_emission2, df_hspace_nobjs, df_headers_objs, df_hist2], ignore_index=True)
 
         df_summary_parameters = pd.concat([df_head_par, df_headers, df_hspace_onecell, df_header_emission,
                                            df_wavelengths, df_hspace_onecell, df_header_hist, df_bins], axis=0,
@@ -1684,13 +1713,15 @@ def allframes(results, ObjDetection, profile_cyto, profiler, varidxs, idx_col, s
             df_emission_cyto2 = pd.concat(list_df_emission_cyto, axis=1)
             df_hist_cyto2 = pd.concat(list_df_hist_cyto, axis=1)
 
-            df_summary_data = pd.concat([df_summary_data, df_hspace_nobjs, df_headers_objs, df_summary_cyto2, df_hspace_nobjs,
-                                         df_headers_objs, df_emission_cyto2, df_hspace_nobjs, df_headers_objs, df_hist_cyto2],
-                                        ignore_index=True)
+            df_summary_data = pd.concat(
+                [df_summary_data, df_hspace_nobjs, df_headers_objs, df_summary_cyto2, df_hspace_nobjs,
+                 df_headers_objs, df_emission_cyto2, df_hspace_nobjs, df_headers_objs, df_hist_cyto2],
+                ignore_index=True)
 
-            df_summary_parameters = pd.concat([df_summary_parameters, df_hspace_onecell, df_head_par_cyto, df_headers_cyto,
-                                               df_hspace_onecell, df_header_emission, df_wavelengths_cyto, df_hspace_onecell,
-                                               df_header_hist, df_bins_cyto], axis=0, ignore_index=True)
+            df_summary_parameters = pd.concat(
+                [df_summary_parameters, df_hspace_onecell, df_head_par_cyto, df_headers_cyto,
+                 df_hspace_onecell, df_header_emission, df_wavelengths_cyto, df_hspace_onecell,
+                 df_header_hist, df_bins_cyto], axis=0, ignore_index=True)
 
             df_summary = pd.concat([df_summary_parameters, df_summary_data], axis=1, ignore_index=True)
 
@@ -1717,13 +1748,15 @@ def allframes(results, ObjDetection, profile_cyto, profiler, varidxs, idx_col, s
         if profile_cyto:
             if profiler:
                 final_frame = pd.concat([frames_whole, df_space_whole_sum_objs, df_summary, df_space_sum_objs_prof,
-                                         df_all_profile2, df_space_objs_prof_seg, df_all_segments], axis=1, ignore_index=True)
+                                         df_all_profile2, df_space_objs_prof_seg, df_all_segments], axis=1,
+                                        ignore_index=True)
             else:
                 final_frame = pd.concat([frames_whole, df_space_whole_sum_objs, df_summary], axis=1, ignore_index=True)
         else:
             if profiler:
                 final_frame = pd.concat([frames_whole, df_space_whole_sum_objs, df_summary, df_space_sum_objs_prof,
-                                         df_all_profile2, df_space_objs_prof_seg, df_all_segments], axis=1, ignore_index=True)
+                                         df_all_profile2, df_space_objs_prof_seg, df_all_segments], axis=1,
+                                        ignore_index=True)
             else:
                 final_frame = pd.concat([frames_whole, df_space_whole_sum_objs, df_summary], axis=1, ignore_index=True)
 
