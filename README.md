@@ -88,7 +88,7 @@ VISION is designed to be easily accessible, offering both a standalone version f
 
 #### Standalone Version Installation
 **General Steps for All Platforms:**
-1. Download the ZIP file for your respective operating system (Windows, macOS, or Linux) from the VISION official website.
+1. Download the lates VISION Version for your respective operating system (Windows, macOS, or Linux) from the VISION official website (https://github.com/biosciflo/VISION/releases).
 2. Extract the ZIP file to your desired location. This will create a folder containing the VISION executable and all necessary dependencies.
 
 ##### **Windows:**
