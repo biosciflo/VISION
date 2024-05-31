@@ -1,5 +1,5 @@
 # User Guide for VISION
-**Version**: V1.0.0
+**Version**: V1.0.1
 
 ## Contents
 - [Introduction](#introduction)
