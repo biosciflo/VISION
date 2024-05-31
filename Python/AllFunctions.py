@@ -78,7 +78,7 @@ def abovenoise(image, varidxs, S_N, stddev, bgmean, idx_col):
         Thr_abovenoise = [Thr_A, Thr_B, Thr_C, Thr_D]
 
         mask = np.logical_and.reduce((mask_varA, mask_varB, mask_varC, mask_varD))
-    if ~np.isnan(idx_col[0]):
+    if idx_col:
         if bgmean == 'NaN':
             N_median_col = np.median(image[:, :, idx_col])
         else:
@@ -136,9 +136,66 @@ def spectrum(img, combinedmask):
     return IntSum
 
 
-def thresholding(img, sigma, varidsx, depth, combinedmask, idxThr, which, value=1, compression=False, k=0.1):
-    if sigma != 'NaN':
-        img = np.round(skmF.gaussian(img, sigma=sigma, preserve_range=True))
+def thresholding(img, filter_type, val, varidsx, depth, combinedmask, idxThr, which, value=1, compression=False, k=0.1):
+    if filter_type != 'No Filter':
+        img = img.astype(np.uint16)
+        rec_img = np.zeros_like(img, dtype=int)
+
+        if filter_type == 'Gaussian':
+            for a in range(0, img.shape[2]):
+                rec_img[:, :, a] = np.round(skmF.gaussian(img[:, :, a], sigma=val, preserve_range=True))
+
+        if filter_type == 'Mode':
+            box = skmM.disk(int(np.round(val, 0)))
+            for a in range(0, img.shape[2]):
+                rec_img[:, :, a] = np.round(skmF.rank.modal(img[:, :, a], footprint=box))
+
+        if filter_type == 'Mean':
+            box = skmM.disk(int(np.round(val, 0)))
+            for a in range(0, img.shape[2]):
+                rec_img[:, :, a] = np.round(skmF.rank.mean(img[:, :, a], footprint=box))
+
+        if filter_type == 'Geometric_mean':
+            box = skmM.disk(int(np.round(val, 0)))
+            for a in range(0, img.shape[2]):
+                rec_img[:, :, a] = np.round(skmF.rank.geometric_mean(img[:, :, a], footprint=box))
+
+        if filter_type == 'Median':
+            box = skmM.disk(int(np.round(val, 0)))
+            for a in range(0, img.shape[2]):
+                rec_img[:, :, a] = np.round(skmF.rank.median(img[:, :, a], footprint=box))
+
+        if filter_type == 'Majority':
+            box = skmM.disk(int(np.round(val, 0)))
+            for a in range(0, img.shape[2]):
+                rec_img[:, :, a] = np.round(skmF.rank.majority(img[:, :, a], footprint=box))
+
+        if filter_type == 'Minimum':
+            box = skmM.disk(int(np.round(val, 0)))
+            for a in range(0, img.shape[2]):
+                rec_img[:, :, a] = np.round(skmF.rank.minimum(img[:, :, a], footprint=box))
+
+        if filter_type == 'Maximum':
+            box = skmM.disk(int(np.round(val, 0)))
+            for a in range(0, img.shape[2]):
+                rec_img[:, :, a] = np.round(skmF.rank.maximum(img[:, :, a], footprint=box))
+
+        if filter_type == 'Sum':
+            box = skmM.disk(int(np.round(val, 0)))
+            for a in range(0, img.shape[2]):
+                rec_img[:, :, a] = np.round(skmF.rank.sum(img[:, :, a], footprint=box))
+
+        if filter_type == 'Gradient':
+            box = skmM.disk(int(np.round(val, 0)))
+            for a in range(0, img.shape[2]):
+                rec_img[:, :, a] = np.round(skmF.rank.gradient(img[:, :, a], footprint=box))
+
+        if filter_type == 'Entropy':
+            box = skmM.disk(int(np.round(val, 0)))
+            for a in range(0, img.shape[2]):
+                rec_img[:, :, a] = np.round(skmF.rank.entropy(img[:, :, a], footprint=box))
+
+        img = rec_img.astype(np.float64)
 
     if depth == 8:
         maxVal = 2 ** 8 - 1
@@ -175,9 +232,17 @@ def thresholding(img, sigma, varidsx, depth, combinedmask, idxThr, which, value=
                         np.sum(slice_C[combinedmask]) / np.sum(combinedmask),
                         np.sum(slice_D[combinedmask]) / np.sum(combinedmask)]
 
-    if idxThr != 'NaN':
-        slice_Thr = img[:, :, idxThr]
-        idx2 = idxThr
+    if idxThr:
+
+        if len(idxThr) == 1:
+            slice_Thr = img[:, :, idxThr[0]]
+            idx2 = idxThr
+
+        else:
+            sum_slides = img[:, :, idxThr]
+            slice_Thr = np.sum(sum_slides, axis=2)
+            idx2 = idxThr
+
     else:
         dim_idx = np.argmin(brightnesses)
         slice_Thr = img[:, :, varidsx[dim_idx]]
@@ -257,8 +322,8 @@ def basicmeasure(img, reccoor, meta, varidxs, text, histpars):
     for i in text:
         if i.isalpha():
             letters.append(i)
-    letters.sort()
     letters = list(set(letters))
+    letters.sort()
 
     if len(varidxs) == 1:
         varA = np.reshape(img[reccoor[:, 0], reccoor[:, 1], varidxs[0]], (-1, 1)).astype('int')
@@ -312,9 +377,20 @@ def basicmeasure(img, reccoor, meta, varidxs, text, histpars):
 
         if len(varidxs) != 1:
             n = 1  # harmonic
-            COS = np.cos(2 * n * np.pi * ((meta[0] - meta[0][0]) / (np.max(meta[0]) - np.min(meta[0])))).reshape(-1,
-                                                                                                                 1)  # FOR PHASOR PLOT
-            SIN = np.sin(2 * n * np.pi * ((meta[0] - meta[0][0]) / (np.max(meta[0]) - np.min(meta[0])))).reshape(-1, 1)
+            combined_string = ''.join(meta[0])
+
+            if any(char.isalpha() for char in combined_string):  # this is to create the lambda_points for the phasor
+                lambdas_phasor = np.arange(1, len(meta[0]) + 1, 1)
+            else:
+                lambdas_phasor = np.asarray([int(x) for x in meta[0]])
+
+            COS = np.cos(2 * n * np.pi * ((lambdas_phasor - lambdas_phasor[0]) / (np.max(lambdas_phasor) -
+                                                                                  np.min(lambdas_phasor)))).reshape(-1,
+                                                                                                                    1)
+            SIN = np.sin(2 * n * np.pi * ((lambdas_phasor - lambdas_phasor[0]) / (np.max(lambdas_phasor) -
+                                                                                  np.min(lambdas_phasor)))).reshape(-1,
+                                                                                                                    1)
+
             PhasorX = np.sum(img[filtercoor[:, 0], filtercoor[:, 1], :].T * COS, axis=0).reshape(1, -1) / \
                       np.sum(Int_array, axis=0).reshape(1, -1)
             PhasorY = np.sum(img[filtercoor[:, 0], filtercoor[:, 1], :].T * SIN, axis=0).reshape(1, -1) / \
@@ -329,7 +405,7 @@ def basicmeasure(img, reccoor, meta, varidxs, text, histpars):
             Rho, Phi = [], []
 
         dict_for_saving = {'Parameters': [Rejected, GPmedian, GPstDev, IntFrameNorm],
-                           'Wavelengths (nm)': meta[0].tolist(), 'Norm. Intensity': IntSumNorm[:, 0].tolist(),
+                           'Wavelengths (nm)': meta[0], 'Norm. Intensity': IntSumNorm[:, 0].tolist(),
                            'Bin': histBin.tolist(), 'Frequency (%)': GPhistNorm.tolist()}
 
         return [dict_for_saving, PhasorCor, imgGPs, [Rho, Phi]]
@@ -605,7 +681,7 @@ def objmorphology(maskskel, coorcyto, pixelsize):
     floodmask = skmM.flood(maskskel, (centroid[0], centroid[1]), connectivity=1)
     InTEigs = skM.inertia_tensor_eigvals(floodmask)  # Eigenvalues of the Inertia T.
     ecc = np.round(np.sqrt(1 - InTEigs[1] / InTEigs[0]), 2)  # Calculated from the Eigenvalues of the Inertia T.
-    perim = np.around(skM.perimeter(floodmask) * pixelsize * 10 ** 6, decimals=1)  # perimeter in um
+    perim = np.around(np.sum(maskskel) * pixelsize * 10 ** 6, decimals=1)
     area = np.around(np.sum(floodmask) * (pixelsize * 10 ** 6) ** 2, decimals=1)  # area in um^2
 
     return centroid, ecc, perim, area
@@ -936,16 +1012,17 @@ def croppingmorpho(imageR, Recmask_mem, Recmask_cyto, skelrecmask, coorlabels, t
 
 
 def findvaridx(Lambdachannel, varlist):
-    numeric_values = [x for x in varlist if isinstance(x, (int, float))]
+    string_values = [x for x in varlist if x != 'NaN']
 
-    if len(numeric_values) != 0:
+    if len(string_values) != 0:
         if len(Lambdachannel) == 1:
             varidxs = [0]
         else:
             varidxs = []
-            for i in numeric_values:
-                varidxs.append(np.where(Lambdachannel == i)[0][0])
 
+            for i in string_values:
+                if i in Lambdachannel:
+                    varidxs.append(Lambdachannel.index(i))
         return varidxs
 
     else:
@@ -988,7 +1065,7 @@ def lineprofile(shrunk_array, coors, num):
 
 
 def objprofiler(newcropped_skel, ordcoor, varidxs, pars, rawcroppedmask, autoff, pixeldepth, Thr_abovenoise,
-                cropped_Pcoded, idx_col):
+                cropped_Pcoded, idx_col, pixelsize):
     global array_int_varD, filtered_array_int_varD, filtered_array_int_varC, array_int_varC, logic_both_col
     coors = ordcoor[:, :2].T
 
@@ -1164,8 +1241,7 @@ def objprofiler(newcropped_skel, ordcoor, varidxs, pars, rawcroppedmask, autoff,
                                                                           varidxs[3]] >= Thr_abovenoise[3])
         logic_notsat_varD[:, array_idx] = np.transpose(rawcroppedmask[array_integration[0, array_idx, :],
                                                                       array_integration[1, array_idx, :], varidxs[
-                                                                          3]] <
-                                                       (2 ** pixeldepth - 1))
+                                                                          3]] < (2 ** pixeldepth - 1))
         logic_both_varD = np.logical_and(logic_abovenoise_varD, logic_notsat_varD)
 
         logic_allVar = np.logical_and(logic_allVar, logic_both_varD)
@@ -1175,21 +1251,21 @@ def objprofiler(newcropped_skel, ordcoor, varidxs, pars, rawcroppedmask, autoff,
                            varidxs[3]])
         filtered_array_int_varD = np.zeros_like(array_int_varD, dtype=int)
 
-    if ~np.isnan(idx_col[0]):
+    if idx_col:
         logic_abovenoise_col = np.zeros((array_integration.shape[2], array_integration.shape[1]), dtype=bool)
         logic_notsat_col = np.zeros((array_integration.shape[2], array_integration.shape[1]), dtype=bool)
         logic_abovenoise_col[:, array_idx] = np.transpose(rawcroppedmask[array_integration[0, array_idx, :],
                                                                          array_integration[1, array_idx, :],
-                                                                         idx_col] >= Thr_abovenoise[-1])
+                                                                         idx_col[0]] >= Thr_abovenoise[-1])
         logic_notsat_col[:, array_idx] = np.transpose(rawcroppedmask[array_integration[0, array_idx, :],
-                                                                     array_integration[1, array_idx, :], idx_col] <
+                                                                     array_integration[1, array_idx, :], idx_col[0]] <
                                                       (2 ** pixeldepth - 1))
 
         logic_both_col = np.logical_and(logic_abovenoise_col, logic_notsat_col)
 
         array_int_col = np.transpose(
             rawcroppedmask[array_integration[0, array_idx, :], array_integration[1, array_idx, :],
-                           idx_col])
+                           idx_col[0]])
 
         logic_allVar = np.logical_and(logic_allVar, logic_both_col)
 
@@ -1253,10 +1329,11 @@ def objprofiler(newcropped_skel, ordcoor, varidxs, pars, rawcroppedmask, autoff,
     profiled_Pvalue = np.round(np.nansum(filtered_array_Pvalue, axis=0) / np.sum(logic_allVar, axis=0), decimals=2)
     profiled_Pvalue = profiled_Pvalue[:, np.newaxis].astype(float)
 
-    Intensities_Pvalue = np.concatenate((array_idx[:, np.newaxis], Intensities, profiled_Pvalue), axis=1)
+    lateral_disp = np.around(array_idx[:, np.newaxis] * (pixelsize * 10 ** 6), decimals=3)  # displacment in um
+    Intensities_Pvalue = np.concatenate((lateral_disp, Intensities, profiled_Pvalue), axis=1)
     Int_Pvalue_labels = np.concatenate((Intensities_Pvalue, ordcoor[:, 2, np.newaxis]), axis=1)
 
-    if ~np.isnan(idx_col[0]):
+    if idx_col:
         filtered_array_int_col[logic_allVar] = array_int_col[logic_allVar]
         profiled_col = np.sum(filtered_array_int_col, axis=0) / np.sum(logic_allVar, axis=0)
         profiled_col = profiled_col[:, np.newaxis].astype(float)
@@ -1356,10 +1433,10 @@ def objlinearization(rawcroppedboth, newcropped_skel, newcoors_mask, newcoors_cy
 def makemask(imageR, Lambdachannel, varlist, MaskParams, colocalization):
     varidxs = findvaridx(Lambdachannel, varlist)
 
-    if colocalization != 'NaN':
-        idx_col = np.where(Lambdachannel == colocalization)[0]
+    if colocalization:
+        idx_col = [Lambdachannel.index(colocalization)]
     else:
-        idx_col = [np.nan]
+        idx_col = []
 
     notnoisemask, Thr_abovenoise = abovenoise(imageR, varidxs, MaskParams['S_N'], MaskParams['stddev'],
                                               MaskParams['bgmean'], idx_col)
@@ -1368,13 +1445,17 @@ def makemask(imageR, Lambdachannel, varlist, MaskParams, colocalization):
 
     IntSum = spectrum(imageR, combinedmask)
 
-    if MaskParams['lambdaThr'] != 'NaN' and len(Lambdachannel) != 1:
-        idxThr = np.where(Lambdachannel == MaskParams['lambdaThr'])[0][0]
-    else:
-        idxThr = 'NaN'
+    if MaskParams['lambdaThr'] and len(Lambdachannel) != 1:
+        idxThr = []
 
-    Threshold, maskThr, slice_Thr, idx2 = thresholding(imageR, MaskParams['GaussianS'], varidxs,
-                                                       MaskParams['PixelDepth'], combinedmask, idxThr,
+        for a in MaskParams['lambdaThr']:
+            idxThr.append(Lambdachannel.index(a))
+
+    else:
+        idxThr = []
+
+    Threshold, maskThr, slice_Thr, idx2 = thresholding(imageR, MaskParams['filter_type'], MaskParams['filter_val'],
+                                                       varidxs, MaskParams['PixelDepth'], combinedmask, idxThr,
                                                        MaskParams['Ttype'], value=MaskParams['ValManual'],
                                                        compression=MaskParams['compress'], k=MaskParams['Kvalue'])
 
@@ -1397,10 +1478,10 @@ def measuremask(imageR, Reccoors, Reccoors_cyto, Meta, varidxs, varidxs_cyto, te
                 Thr_abovenoise, dim_line, colocalization, savephasors):
     results_whole = basicmeasure(imageR, Reccoors, Meta, varidxs, text, histpars)
 
-    if colocalization != 'NaN':
-        idx_col = np.where(Lambdachannel == colocalization)[0]
+    if colocalization:
+        idx_col = [Lambdachannel.index(colocalization)]
     else:
-        idx_col = [np.nan]
+        idx_col = []
 
     if profile_cyto:
         results_whole_cyto = basicmeasure(imageR, Reccoors_cyto, Meta, varidxs_cyto, text_cyto, histpars_cyto)
@@ -1439,53 +1520,54 @@ def measuremask(imageR, Reccoors, Reccoors_cyto, Meta, varidxs, varidxs_cyto, te
                 directory_membrane = savepath + '/' + 'Cropped Membranes'
                 if not os.path.exists(directory_membrane):
                     os.makedirs(directory_membrane)
-                tfl.imsave(directory_membrane + '/' + 'Obj{0}.tiff'.format(i),
+                tfl.imwrite(directory_membrane + '/' + 'Obj{0}.tiff'.format(i),
                            np.asarray(np.moveaxis(rawcroppedmask, -1, 0)))
 
             if savecroppedcyto:
                 directory_cytosol = savepath + '/' + 'Cropped Cytosols'
                 if not os.path.exists(directory_cytosol):
                     os.makedirs(directory_cytosol)
-                tfl.imsave(directory_membrane + '/' + 'Obj{0}.tiff'.format(i),
+                tfl.imwrite(directory_cytosol + '/' + 'Obj{0}.tiff'.format(i),
                            np.asarray(np.moveaxis(rawcroppedcyto, -1, 0)))
 
             if profiler:  # THIS GENERATES THE ORDERED COORDINATES
-                # try:
-                if recenter:
-                    newcropped_skel, newcoors_skel = skel_recons(newcropped_skel, newcoors_skel, debranch=True,
-                                                                 remove=True)
-                    newcropped_skel, newcoors_skel = recentering(newcropped_skel, newcoors_skel, shiftcentroid,
-                                                                 rawcroppedboth,
-                                                                 varidxs, dim_line, shape='octagon', dims=(7, 5))
+                try:
+                    if recenter:
+                        newcropped_skel, newcoors_skel = skel_recons(newcropped_skel, newcoors_skel, debranch=True,
+                                                                     remove=True)
+                        newcropped_skel, newcoors_skel = recentering(newcropped_skel, newcoors_skel, shiftcentroid,
+                                                                     rawcroppedboth,
+                                                                     varidxs, dim_line, shape='octagon', dims=(7, 5))
 
-                nodes = findnodes(newcropped_skel, newcoors_skel)  # to find the nodes
+                    nodes = findnodes(newcropped_skel, newcoors_skel)  # to find the nodes
 
-                newcropped_skel, newcoors_skel = skel_recons(newcropped_skel, newcoors_skel, debranch=True, remove=True)
+                    newcropped_skel, newcoors_skel = skel_recons(newcropped_skel, newcoors_skel, debranch=True, remove=True)
 
-                if len(nodes) == 0:  # this deal with non cluster
-                    ordcoor, start, seg_lengths_pxl, newcropped_skel = indexing(newcropped_skel)
+                    if len(nodes) == 0:  # this deal with non cluster
+                        ordcoor, start, seg_lengths_pxl, newcropped_skel = indexing(newcropped_skel)
 
-                else:
-                    ordcoor, start, seg_lengths_pxl, newcropped_skel = indexing2(newcropped_skel,
-                                                                                 nodes)  # returns ordered coors with labels and seg
+                    else:
+                        ordcoor, start, seg_lengths_pxl, newcropped_skel = indexing2(newcropped_skel,
+                                                                                     nodes)  # returns ordered coors with labels and seg
 
-                seglabelled_mask = np.zeros_like(newcropped_skel, dtype=int)
-                seglabelled_mask[ordcoor[:, 0], ordcoor[:, 1]] = ordcoor[:, 2]
+                    seglabelled_mask = np.zeros_like(newcropped_skel, dtype=int)
+                    seglabelled_mask[ordcoor[:, 0], ordcoor[:, 1]] = ordcoor[:, 2]
 
-                INTs_GP, Pmedian_below, Pmedian_above, cutoff, percentage_up = objprofiler(newcropped_skel, ordcoor,
-                                                                                           varidxs,
-                                                                                           Profpars,
-                                                                                           rawcroppedmask, autoff,
-                                                                                           pixeldepth, Thr_abovenoise,
-                                                                                           cropped_Pcoded, idx_col)
+                    INTs_GP, Pmedian_below, Pmedian_above, cutoff, percentage_up = objprofiler(newcropped_skel, ordcoor,
+                                                                                               varidxs,
+                                                                                               Profpars,
+                                                                                               rawcroppedmask, autoff,
+                                                                                               pixeldepth, Thr_abovenoise,
+                                                                                               cropped_Pcoded, idx_col,
+                                                                                               pixelsize)
 
-                results_obj[i].update(
-                    {'profile': [INTs_GP, Pmedian_below, Pmedian_above, cutoff, percentage_up, seg_lengths_pxl,
-                                 seglabelled_mask]})
+                    results_obj[i].update(
+                        {'profile': [INTs_GP, Pmedian_below, Pmedian_above, cutoff, percentage_up, seg_lengths_pxl,
+                                     seglabelled_mask]})
 
-                # except:
-                #     results_obj[i].update({'profile': []})
-                #     print('Membrane not profiled')
+                except:
+                    results_obj[i].update({'profile': []})
+                    print('Membrane not profiled')
 
             if objlinear:
                 try:
@@ -1520,6 +1602,11 @@ def allframes(results, ObjDetection, profile_cyto, profiler, varidxs, idx_col, s
         df_headers_cyto, df_head_par_cyto, df_wavelengths_cyto, nan_to_append_sum, list_nan_summary, list_df_summary_prof, \
         list1, pd_nan_hspace, list_df_prof_obj, list_df_segments, list_headers_seg, df_space_sum_objs_prof, df_all_profile2, \
         df_space_objs_prof_seg, df_all_segments, nan_emiss, nan_hist, nan_summary_cyto
+
+    combined_string = ''.join(results['results_whole'][0]['Wavelengths (nm)'])
+    if not any(char.isalpha() for char in combined_string):  # this is to create the lambda_points for the phasor
+        results['results_whole'][0]['Wavelengths (nm)'] = [int(x) for x in
+                                                           results['results_whole'][0]['Wavelengths (nm)']]
 
     df_0 = pd.DataFrame(['% Rejected pixels', 'P_median', 'P_sd', 'Norm. Int.'])
     df_1 = pd.DataFrame([results['results_whole'][0]['Parameters'][0], results['results_whole'][0]['Parameters'][1],
@@ -1597,7 +1684,7 @@ def allframes(results, ObjDetection, profile_cyto, profiler, varidxs, idx_col, s
             list_df_prof_obj = []
             list_nan_summary = np.full((3, len(varidxs)), np.nan)
 
-            if ~np.isnan(idx_col[0]):
+            if idx_col:
                 pd_nan_hspace = pd.DataFrame([[np.nan] * (len(varidxs) + 4)])
             else:
                 pd_nan_hspace = pd.DataFrame([[np.nan] * (len(varidxs) + 3)])
@@ -1663,7 +1750,7 @@ def allframes(results, ObjDetection, profile_cyto, profiler, varidxs, idx_col, s
 
                 list2 = ['Obj #{0}'.format(i)] * (len(varidxs) + 3)
 
-                if ~np.isnan(idx_col[0]):
+                if idx_col:
                     list1.append('Coloc. channel')
                     list2.append('Obj #{0}'.format(i))
 
@@ -1787,23 +1874,27 @@ def allframes(results, ObjDetection, profile_cyto, profiler, varidxs, idx_col, s
 
 
 def exportframes(filename, savingpath, frames, dims):
-    excelname = savingpath + '/' + filename.split('.')[0] + '.xlsx'
+    excelname = savingpath + '/' + filename.split('.')[0]
     try:
         if sum(np.array(dims) > 1) == 2 or sum(np.array(dims) > 1) == 3:
-            frames.to_excel(excelname, sheet_name='Global', index=False, header=False, index_label=False)
+            frames.to_excel(excelname + '.xlsx', sheet_name='Global', index=False, header=False, index_label=False)
+            frames.to_csv(excelname, index=False, header=False, index_label=False)
 
         elif sum(np.array(dims) > 1) == 4:
-            with pd.ExcelWriter(excelname, engine='xlsxwriter') as writer:
+            with pd.ExcelWriter(excelname + '.xlsx', engine='xlsxwriter') as writer:
                 for z in frames.keys():
                     frames[z].to_excel(writer, sheet_name='slice_{0}'.format(z),
                                        index=False, header=False, index_label=False)
+                    frames[z].to_csv(excelname + '_slice_{0}'.format(z), index=False, header=False, index_label=False)
 
         elif sum(np.array(dims) > 1) == 5:
-            with pd.ExcelWriter(excelname, engine='xlsxwriter') as writer:
+            with pd.ExcelWriter(excelname + '.xlsx', engine='xlsxwriter') as writer:
                 for t in frames.keys():
                     for z in frames[t].keys():
                         frames[t][z].to_excel(writer, sheet_name='slice_t{0}_z{1}'.format(t, z),
                                               index=False, header=False, index_label=False)
+                        frames[t][z].to_csv(excelname + '_t{0}_z{1}'.format(t, z), index=False, header=False,
+                                      index_label=False)
     except:
         print('Nothing to save')
 
