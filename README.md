@@ -1,7 +1,7 @@
 # User Guide for VISION
 [biorxiv](https://www.biorxiv.org/content/10.1101/2024.03.29.587344v1)
 
-**Version**: V1.0.1
+**Version**: V1.0.2
 
 ## Contents
 - [Introduction](#introduction)
@@ -288,7 +288,6 @@ Each panel has a Membrane and Cytosolic part and is split into Mask, Full Image,
   - Important Note for Batch Processing:
 To apply specific masking options across multiple images in batch processing, it is essential to first initialize the detailed masking settings for each image file listed in the image table. This involves clicking on each file to activate the detailed options. Failing to perform this step may result in a key value error displayed in the mini console. We are aware of this issue and plan to streamline the process in future updates of VISION.
 
-
 # Using '*.ome.tiff' as imageformat:
 Currently image file types of '*.lsm' and '*.czi' can be openend but with '*.ome.tiff' (imagej/fiji) all images can be anlaysed with VISION. 
 - Other image types: If you have special image types such as .lif or .obf. Please get in touch with us. We will be happy to implement the image type if you can provide us with some test images. 
@@ -308,8 +307,204 @@ Currently image file types of '*.lsm' and '*.czi' can be openend but with '*.ome
 
 # Troubleshooting and Support
 
-- **Common Issues and Solutions**: As of now, no common issues have been identified. However, we acknowledge that problems we have not yet tested may arise. We appreciate your understanding and patience in these matters. We also encourage you to assist us by reporting any problems you encounter. Your feedback is invaluable in helping us continuously improve the software.
+## Common Issues and Solutions
+
+### 1. Software Installation Problems
+
+**Issue:**
+The VISION software does not install correctly.
+
+**Potential Causes:**
+- Incompatible operating system or hardware.
+- Missing dependencies.
+
+**Solutions:**
+- Ensure your system meets the minimum requirements listed in the installation guide.
+- Follow the installation steps carefully, and ensure all necessary dependencies are installed.
+- Refer to the installation section for detailed instructions.
+
+### 2. Software Crashes or Freezes
+
+**Issue:**
+The software crashes or becomes unresponsive during use.
+
+**Potential Causes:**
+- Insufficient system resources (RAM, CPU).
+- Bug in the software.
+
+**Solutions:**
+- Close other applications to free up system resources.
+- Ensure your system meets the recommended hardware specifications.
+- Check for software updates that may address stability issues.
+- Report the issue on our [ISSUES](https://github.com/biosciflo/VISION/issues)  with detailed information about your system and the problem. (How to report: [Reporting Bugs](#reporting-bugs))
+
+### 3. Error Messages
+
+**Issue:**
+You encounter error messages while using the software.
+
+**Potential Causes:**
+- Incorrect usage or unsupported operations.
+- Missing or corrupt files.
+
+**Solutions:**
+- Refer to the error message documentation in the manual or on our [GitHub issues page](#) to understand the cause and potential fixes.
+- Ensure all required files are present and correctly formatted.
+
+### 4. Unexpected Results
+
+**Issue:**
+The software produces unexpected or incorrect results.
+
+**Potential Causes:**
+- Incorrect input data or parameters.
+- Misconfigured settings.
+- Bug in the software.
+
+**Solutions:**
+- Verify that your input data meets the software's requirements.
+- Double-check all parameters and settings before running the software.
+- Refer to the user manual for guidance on proper usage and configuration.
+- Report the issue on our [ISSUES](https://github.com/biosciflo/VISION/issues) with detailed information about your system and the problem. (How to report: [Reporting Bugs](#reporting-bugs))
+
+# Getting Help
+
+If you encounter issues not covered in this guide, please refer to the following resources:
+
+- **User Manual:** Refer to the comprehensive user manual for detailed instructions and information.
+- **Support:** Contact us for support via the [ISSUES](https://github.com/biosciflo/VISION/issues) .
+
+We hope this troubleshooting guide helps you resolve any issues and enhances your experience with the VISION software.
+
 - **Software Updates**: We will release eventually, updates where we cover all the bugs which we and you encounter. New releases you will find here at the GitHub repository.
+
+## Error Messages, Causes, and Solutions
+
+1. **Error Message:** `Error: Invalid character '{invalid_char}' found in the text. ('E', 'I', 'N', 'O', 'Q', 'S' are reserved for mathematical operators). Please use A,B,C or D.`
+
+   - **Cause:** Invalid character found in the input string.
+   - **Solution:** Ensure that only characters A, B, C, and D are used in the input string.
+
+2. **Error Message:** `Invalid variable '{var}' found in the membrane equation. Only A, B, C, D are allowed.`
+
+   - **Cause:** An invalid variable is used in the membrane equation.
+   - **Solution:** Use only the variables A, B, C, and D in the equation.
+
+3. **Error Message:** `Error: {e}`
+
+   - **Cause:** General exception caught during sympify operation.
+   - **Solution:** Check the input equation for syntax errors and ensure it is a valid mathematical expression.
+
+4. **Error Message:** `Error: Invalid letter '{char}' found in the text.`
+
+   - **Cause:** Invalid uppercase letter found in the input string.
+   - **Solution:** Ensure only A, B, C, and D are used as uppercase letters.
+
+5. **Error Message:** `Error Membrane Settings: Letter(s) {', '.join(invalid_combos)} are in use in the Equation, but corresponding ComboBox value(s) are not selected. Please select a Channel for {', '.join(invalid_combos)}`
+
+   - **Cause:** ComboBox values for certain letters are not selected.
+   - **Solution:** Select the appropriate ComboBox values for the letters used in the equation.
+
+6. **Error Message:** `Error Membrane Settings: Letter(s) {', '.join(invalid_combos)} are not 'NaN' but corresponding letter(s) are used in the equation. Please select 'NaN' for {', '.join(invalid_combos)}`
+
+   - **Cause:** ComboBox values are not 'NaN' while the corresponding letters are used in the equation.
+   - **Solution:** Set the ComboBox values to 'NaN' for the letters used in the equation.
+
+7. **Error Message:** `Error: It was not possible to detect single objects. Please check your masking and thresholding settings.`
+
+   - **Cause:** DBSCAN found no samples or no objects to concatenate.
+   - **Solution:** Review and adjust the masking and thresholding settings.
+
+8. **Error Message:** `Error: An exception occurred in run: In Line {error_trace}: {e}`
+
+   - **Cause:** General exception occurred in the run method.
+   - **Solution:** Review the error trace for specific issues and debug accordingly.
+
+9. **Error Message:** `Invalid value. Expected 'NAN'.`
+
+   - **Cause:** Value conversion failed, and the value was not 'NAN'.
+   - **Solution:** Ensure the value is either valid or 'NAN' as expected.
+
+10. **Error Message:** `The value '{newValue}' is not valid for 'Thresholding Mode'. (Otsu or Manual)`
+
+    - **Cause:** Invalid value for Thresholding Mode.
+    - **Solution:** Use either 'Otsu' or 'Manual' for Thresholding Mode.
+
+11. **Error Message:** `The value '{newValue}' is not valid for 'Manual Cutoff Level'. (a int)`
+
+    - **Cause:** Non-integer value for Manual Cutoff Level.
+    - **Solution:** Enter an integer value for Manual Cutoff Level.
+
+12. **Error Message:** `The value '{newValue}' is not valid for 'Compression True/False'. (True or False)`
+
+    - **Cause:** Invalid value for Compression True/False.
+    - **Solution:** Use either 'True' or 'False' for Compression.
+
+13. **Error Message:** `The value '{newValue}' is not valid for 'Compression Value'. (a float)`
+
+    - **Cause:** Non-float value for Compression Value.
+    - **Solution:** Enter a float value for Compression Value.
+
+14. **Error Message:** `The value '{newValue}' is not valid for 'Remove Object'. (NaN or a int)`
+
+    - **Cause:** Value for Remove Object is neither 'NaN' nor an integer.
+    - **Solution:** Use either 'NaN' or an integer for Remove Object.
+
+15. **Error Message:** `The value '{newValue}' is not valid for 'Fill Holes'. (NaN or a float)`
+
+    - **Cause:** Value for Fill Holes is neither 'NaN' nor a float.
+    - **Solution:** Use either 'NaN' or a float for Fill Holes.
+
+16. **Error Message:** `The value '{newValue}' is not valid for 'Dilate True/False'. (True or False)`
+
+    - **Cause:** Invalid value for Dilate True/False.
+    - **Solution:** Use either 'True' or 'False' for Dilate.
+
+17. **Error Message:** `The value '{newValue}' is not valid for 'Dilation Shape'. (octagon, disk or square)`
+
+    - **Cause:** Invalid value for Dilation Shape.
+    - **Solution:** Use either 'octagon', 'disk', or 'square' for Dilation Shape.
+
+18. **Error Message:** `The value '{newValue}' is not valid for 'Dilation Shape Dimension 1'. (a int)`
+
+    - **Cause:** Non-integer value for Dilation Shape Dimension 1.
+    - **Solution:** Enter an integer value for Dilation Shape Dimension 1.
+
+19. **Error Message:** `The value '{newValue}' is not valid for 'Dilation Shape Dimension 2'. (a int)`
+
+    - **Cause:** Non-integer value for Dilation Shape Dimension 2.
+    - **Solution:** Enter an integer value for Dilation Shape Dimension 2.
+
+20. **Error Message:** `The value "{newValue}" is not valid for "Filter Type". ( pls choose one of these: "No Filter", "Gaussian", "Mode", "Median", "Mean", "Geometric_mean","Majority","Minimum","Maximum","Sum","Gradient","Entropy")`
+
+    - **Cause:** Invalid value for Filter Type.
+    - **Solution:** Choose one of the valid filter types listed.
+
+21. **Error Message:** `The value '{newValue}' is not valid for 'Filter Value'. (a float)`
+
+    - **Cause:** Non-float value for Filter Value.
+    - **Solution:** Enter a float value for Filter Value.
+
+22. **Error Message:** `The value '{newValue}' is not valid for 'Signal to Noise Ratio'. (a float)`
+
+    - **Cause:** Non-float value for Signal to Noise Ratio.
+    - **Solution:** Enter a float value for Signal to Noise Ratio.
+
+23. **Error Message:** `The value '{newValue}' is not valid for 'Background StdDev'. (a float)`
+
+    - **Cause:** Non-float value for Background StdDev.
+    - **Solution:** Enter a float value for Background StdDev.
+
+24. **Error Message:** `The value '{newValue}' is not valid for 'Background Mean'. (NaN or a float)`
+
+    - **Cause:** Value for Background Mean is neither 'NaN' nor a float.
+    - **Solution:** Use either 'NaN' or a float for Background Mean.
+
+25. **Error Message:** `The value '{value}' is not valid for 'Specific Channel Wavelength'. (NaN or a list of available channels e.g. [488,647])`
+
+    - **Cause:** Invalid value for Specific Channel Wavelength.
+    - **Solution:** Use either 'NaN' or a list of available channels (e.g., [488, 647]) for Specific Channel Wavelength.
+
 ## Reporting Bugs
 If you encounter any issues while using our software, we highly encourage you to report them so we can work on fixing them promptly. Here's how to report a bug on GitHub:
 
@@ -332,6 +527,10 @@ Fill Out the Issue Template: Provide a clear and concise title for your issue. F
 Monitor Your Issue: After submitting, keep an eye on your issue for any comments or questions from the development team. They may need more information or provide a workaround or solution.
 
 Your reports play a crucial role in improving the quality of the software, and we appreciate your contributions to making our project better for everyone.
+
+
+
+
 
 # Appendix
 
