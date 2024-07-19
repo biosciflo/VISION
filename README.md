@@ -36,7 +36,7 @@
 - [Using '*.ome.tiff' as image format](#using-ome-tiff-as-image-format)
 - [Troubleshooting and Support](#troubleshooting-and-support)
   - [Common Issues and Solutions](#Common-Issues-and-Solutions)
-  - [Error Messages, Causes, and Solutions](#Error-Messages,-Causes,-and-Solutions) 
+  - [Error Messages and Solutions](#Error-Messages-and-Solutions) 
   - [Reporting Bugs](#reporting-bugs)
 - [Getting Help](#Getting-Help) 
 - [Appendix](#appendix)
@@ -351,7 +351,7 @@ You encounter error messages while using the software.
 - Missing or corrupt files.
 
 **Solutions:**
-- Refer to the error message documentation in the manual or on our [GitHub issues page](#) to understand the cause and potential fixes.
+- Refer to the error message documentation in the manual or on our [Error Messages and Solutions](#Error-Messages-and-Solutions) to understand the cause and potential fixes.
 - Ensure all required files are present and correctly formatted.
 
 ### 4. Unexpected Results
@@ -370,7 +370,7 @@ The software produces unexpected or incorrect results.
 - Refer to the user manual for guidance on proper usage and configuration.
 - Report the issue on our [ISSUES](https://github.com/biosciflo/VISION/issues) with detailed information about your system and the problem. (How to report: [Reporting Bugs](#reporting-bugs))
 
-## Error Messages, Causes, and Solutions
+## Error Messages and Solutions
 
 1. **Error Message:** `Error: Invalid character '{invalid_char}' found in the text. ('E', 'I', 'N', 'O', 'Q', 'S' are reserved for mathematical operators). Please use A,B,C or D.`
 
