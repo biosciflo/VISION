@@ -35,6 +35,8 @@
 - [Advanced Features](#advanced-features)
 - [Using '*.ome.tiff' as image format](#using-ome-tiff-as-image-format)
 - [Troubleshooting and Support](#troubleshooting-and-support)
+  - [Common Issues and Solutions](#Common-Issues-and-Solutions)
+  - [Error Messages, Causes, and Solutions](#Error-Messages,-Causes,-and-Solutions) 
   - [Reporting Bugs](#reporting-bugs)
 - [Appendix](#appendix)
 - [License](#license)
