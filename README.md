@@ -38,6 +38,7 @@
   - [Common Issues and Solutions](#Common-Issues-and-Solutions)
   - [Error Messages, Causes, and Solutions](#Error-Messages,-Causes,-and-Solutions) 
   - [Reporting Bugs](#reporting-bugs)
+- [Getting Help](#Getting-Help) 
 - [Appendix](#appendix)
 - [License](#license)
 
@@ -369,17 +370,6 @@ The software produces unexpected or incorrect results.
 - Refer to the user manual for guidance on proper usage and configuration.
 - Report the issue on our [ISSUES](https://github.com/biosciflo/VISION/issues) with detailed information about your system and the problem. (How to report: [Reporting Bugs](#reporting-bugs))
 
-# Getting Help
-
-If you encounter issues not covered in this guide, please refer to the following resources:
-
-- **User Manual:** Refer to the comprehensive user manual for detailed instructions and information.
-- **Support:** Contact us for support via the [ISSUES](https://github.com/biosciflo/VISION/issues) .
-
-We hope this troubleshooting guide helps you resolve any issues and enhances your experience with the VISION software.
-
-- **Software Updates**: We will release eventually, updates where we cover all the bugs which we and you encounter. New releases you will find here at the GitHub repository.
-
 ## Error Messages, Causes, and Solutions
 
 1. **Error Message:** `Error: Invalid character '{invalid_char}' found in the text. ('E', 'I', 'N', 'O', 'Q', 'S' are reserved for mathematical operators). Please use A,B,C or D.`
@@ -530,9 +520,14 @@ Monitor Your Issue: After submitting, keep an eye on your issue for any comments
 
 Your reports play a crucial role in improving the quality of the software, and we appreciate your contributions to making our project better for everyone.
 
+# Getting Help
 
+If you encounter issues not covered in this guide, please refer to the following resources:
 
+- **User Manual:** Refer to the comprehensive user manual for detailed instructions and information.
+- **Support:** Contact us for support via the [ISSUES](https://github.com/biosciflo/VISION/issues) .
 
+We hope this troubleshooting guide helps you resolve any issues and enhances your experience with the VISION software.
 
 # Appendix
 
