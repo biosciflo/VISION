@@ -16,7 +16,7 @@
   - [Installation Instructions](#installation-instructions)
     - [Standalone Version Installation](#standalone-version-installation)
       - [Windows](#windows)
-      - [macOS](#macOS)
+      - [macOS](#macos)
     - [Python-Based Version Setup](#python-based-version-setup)
   - [First Launch](#first-launch)
 - [Navigating the Interface](#navigating-the-interface)
@@ -33,12 +33,13 @@
 - [Basic Project Walk Through](#basic-project-walk-through)
 - [Youtube Tutorials](#youtube-tutorials)
 - [Advanced Features](#advanced-features)
-- [Using '*.ome.tiff' as image format](#using-ome-tiff-as-image-format)
+- [Using '*.ome.tiff' as image format](#using-'*.ome.tiff'-as-image-format)
 - [Troubleshooting and Support](#troubleshooting-and-support)
-  - [Common Issues and Solutions](#Common-Issues-and-Solutions)
-  - [Error Messages and Solutions](#Error-Messages-and-Solutions) 
+  - [General Guidelines for Microscopy Image Quality](#general-guidelines-for-microscopy-image-quality)
+  - [Common Issues and Solutions](#common-issues-and-solutions)
+  - [Error Messages and Solutions](#error-messages-and-solutions) 
   - [Reporting Bugs](#reporting-bugs)
-- [Getting Help](#Getting-Help) 
+- [Getting Help](#getting-help) 
 - [Appendix](#appendix)
 - [License](#license)
 
@@ -273,7 +274,7 @@ Each panel has a Membrane and Cytosolic part and is split into Mask, Full Image,
    b. Check Full Image Results and Object-Related Results.
    
 **Note**: Once you have run the image, all Results are automatically Saved.
-## Youtube Tutorials (cooming soon):
+## Youtube Tutorials:
 - [TUTORIAL1](https://)
 - [TUTORIAL2](https://)
 - [TUTORIAL3](https://)
@@ -309,6 +310,36 @@ Currently image file types of '*.lsm' and '*.czi' can be openend but with '*.ome
 - **Glossary**: Definitions of terms and concepts used within the guide and software.
 
 # Troubleshooting and Support
+
+## General Guidelines for Microscopy Image Quality
+
+### Minimum Information Guidelines for Fluorescence Microscopy
+- **Metadata**: Ensure that all relevant metadata is recorded, including details about the imaging setup, sample preparation, and acquisition settings. This includes the type of microscope, objective lenses, exposure times, and light sources used.
+- **Calibration**: Maintain consistent calibration of imaging systems to ensure reproducibility. Include calibration scales or indicators in the images.
+- **Transparency**: Provide information on the software and settings used for image analysis to allow for reproducibility and transparency.
+
+### Signal-to-Noise Ratio (SNR) Optimization
+- **Photon Noise Management**: Maximize photon detection by optimizing exposure times and minimizing background noise through appropriate use of detector apertures and cooling techniques for CCD cameras.
+- **Dark and Read Noise**: Reduce thermal noise by cooling the camera sensor and minimize read noise by using high-performance cameras designed for low-light imaging.
+
+### Image Acquisition and Processing
+- **Sampling Rates**: Use appropriate sampling rates to ensure that the pixel size is suitable for the resolution of the microscope. The Nyquist criterion suggests that the pixel size should be at least half the size of the optical resolution limit.
+- **Contrast and Brightness**: Adjust contrast and brightness appropriately without over-processing the images. Maintain the original data integrity to allow for proper interpretation and analysis.
+- **Image Restoration**: Implement deconvolution and other image restoration techniques to improve image clarity while maintaining the original information content.
+
+### Quality Control and Troubleshooting
+- **Calibration**: Regularly check and maintain the calibration of the microscope and imaging system. Include a troubleshooting section in your manual to address common issues such as focus drift, alignment problems, and illumination inconsistencies.
+- **Artifact Recognition**: Provide example images and descriptions of common artifacts and how to avoid or correct them. This can help users recognize and troubleshoot problems in their own imaging setups.
+
+### Community Standards and Checklists
+- **Community Guidelines**: Follow established community guidelines, such as those from the QUAREP-LiMi initiative, which provides detailed checklists and protocols for quality assessment and reproducibility in light microscopy. These guidelines cover a wide range of aspects from data acquisition to image analysis and publication standards.
+- **Data Sharing**: Encourage users to share their data and analysis pipelines in public repositories to promote transparency and reproducibility in the scientific community.
+
+### Useful Resources
+- [EMBL Guidelines for Microscopy Images](https://www.embl.org/news/science/global-guidelines-to-improve-the-quality-of-microscopy-images-in-scientific-publications/)
+- [QUAREP-LiMi Guidelines](https://quarep.org/)
+- [Minimum Information Guidelines for Fluorescence Microscopy](https://arxiv.org/abs/2101.09153)
+
 
 ## Common Issues and Solutions
 
