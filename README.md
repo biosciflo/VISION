@@ -1,7 +1,6 @@
 # User Guide for VISION
 ## [Manuscript (biorxiv)](https://www.biorxiv.org/content/10.1101/2024.03.29.587344v1)
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/NmAVgJb-E-g?si=z5E4vFAmfQ1B9lJg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 **Version**: V1.0.2
 
@@ -277,9 +276,9 @@ Each panel has a Membrane and Cytosolic part and is split into Mask, Full Image,
    
 **Note**: Once you have run the image, all Results are automatically Saved.
 ## Youtube Tutorials:
-- [TUTORIAL1](https://)
-- [TUTORIAL2](https://)
-- [TUTORIAL3](https://)
+- [TUTORIAL1 - VISION BASIC TUTORIAL](https://)
+- [TUTORIAL2 - Image analysis via VISION](https://youtu.be/ZDZju8mgNiY?si=7WxcNF6_3l1iwFpn)
+- [TUTORIAL3 - Working with .ome.tif images in VISION](https://youtu.be/NmAVgJb-E-g?si=5x0bynHKfuwzkJ2S)
 
 # Advanced Features
 
