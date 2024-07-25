@@ -1,6 +1,8 @@
 # User Guide for VISION
 ## [Manuscript (biorxiv)](https://www.biorxiv.org/content/10.1101/2024.03.29.587344v1)
 
+<iframe width="560" height="315" src="https://www.youtube.com/embed/NmAVgJb-E-g?si=z5E4vFAmfQ1B9lJg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
 **Version**: V1.0.2
 
 ## Contents
