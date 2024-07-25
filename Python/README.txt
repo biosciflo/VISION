@@ -1,5 +1,8 @@
 # User Guide for VISION
-**Version**: V1.0.0
+## [Manuscript (biorxiv)](https://www.biorxiv.org/content/10.1101/2024.03.29.587344v1)
+
+
+**Version**: V1.0.2
 
 ## Contents
 - [Introduction](#introduction)
@@ -14,7 +17,7 @@
   - [Installation Instructions](#installation-instructions)
     - [Standalone Version Installation](#standalone-version-installation)
       - [Windows](#windows)
-      - [macOS](#macOS)
+      - [macOS](#macos)
     - [Python-Based Version Setup](#python-based-version-setup)
   - [First Launch](#first-launch)
 - [Navigating the Interface](#navigating-the-interface)
@@ -22,7 +25,7 @@
   - [Load and Table Interaction Section](#load-and-table-interaction-section)
   - [Test, Run, and Analysis Settings](#test-run-and-analysis-settings)
   - [Specific Analysis Settings](#specific-analysis-settings)
-    - [Membrane Settings – P Value and Analysis](#membrane-settings--p-value-and-analysis)
+    - [Membrane Settings – β Value and Analysis](#membrane-settings--β-value-and-analysis)
     - [Membrane Settings – Global Membrane Masking Options](#membrane-settings--global-membrane-masking-options)
     - [Cytosol Settings](#cytosol-settings)
     - [Advanced Settings](#advanced-settings)
@@ -31,11 +34,14 @@
 - [Basic Project Walk Through](#basic-project-walk-through)
 - [Youtube Tutorials](#youtube-tutorials)
 - [Advanced Features](#advanced-features)
-- [Using '*.ome.tiff' as image format](#using-ome-tiff-as-image-format)
+- [Using '*.ome.tiff' as image format](#using-'*.ome.tiff'-as-image-format)
 - [Troubleshooting and Support](#troubleshooting-and-support)
+  - [General Guidelines for Microscopy Image Quality](#general-guidelines-for-microscopy-image-quality)
+  - [Common Issues and Solutions](#common-issues-and-solutions)
+  - [Error Messages and Solutions](#error-messages-and-solutions) 
+  - [Reporting Bugs](#reporting-bugs)
+- [Getting Help](#getting-help) 
 - [Appendix](#appendix)
-  - [Glossary](#glossary)
-- [Index](#index)
 - [License](#license)
 
 ## Introduction
@@ -89,7 +95,7 @@ VISION is designed to be easily accessible, offering both a standalone version f
 
 #### Standalone Version Installation
 **General Steps for All Platforms:**
-1. Download the ZIP file for your respective operating system (Windows, macOS, or Linux) from the VISION official website.
+1. Download the lates VISION Version for your respective operating system (Windows, macOS, or Linux) from the VISION official website (https://github.com/biosciflo/VISION/releases).
 2. Extract the ZIP file to your desired location. This will create a folder containing the VISION executable and all necessary dependencies.
 
 ##### **Windows:**
@@ -104,15 +110,15 @@ macOS prevents certain applications from running due to security restrictions, p
 
 **Step 1: Grant Execution Permission**
 
-- **Command**: `chmod +x /path/to/yourApp`
+- **Command**: `chmod +x /path/to/VISION(the folder)/VISION(theapp)`
 - **Purpose**: Grants execute permission to your application, making it runnable on your system.
-- **Usage**: Replace `/path/to/yourApp` with the actual path to the application you wish to run.
+- **Usage**: Replace `/path/to/VISION(the folder)/VISION(theapp)` with the actual path to the application you wish to run.
 
 **Step 2: Remove Quarantine Attribute**
 
-- **Command**: `xattr -cr /path/to/yourApplication`
+- **Command**: `xattr -cr /path/to/VISION(the folder)`
 - **Purpose**: Removes the quarantine attribute macOS applies to files downloaded from the internet, which causes the security block.
-- **Usage**: Replace `/path/to/yourApplication` with the path to the affected application or folder containing multiple blocked files.
+- **Usage**: Replace `/path/to/VISION(the folder)` with the path to the affected application and folder (_internal) containing multiple blocked files.
 
 **Notes**
 
@@ -121,7 +127,7 @@ macOS prevents certain applications from running due to security restrictions, p
 - This guide is intended to help users quickly resolve issues with running applications that macOS has blocked due to its security settings.
 
 
-**Linux:**
+**Linux(Not supported yet):**
 - Open a terminal and change to the directory containing the extracted files.
 - Make the VISION binary executable with the command: `chmod +x VISION` (replace `VISION` with the actual name of the binary file).
 - Run the application by typing `./VISION` in the terminal.
@@ -197,12 +203,12 @@ The main window of VISION is designed with intuitiveness and efficiency in mind,
 
 ## Specific Analysis Settings
 
-### Membrane Settings – P Value and Analysis
+### Membrane Settings – β Value and Analysis
 
 - **Channel Settings**: Upon loading image files, fields A, B, C, & D automatically populate with existing channel information, such as '488' or numbers '1-9', derived directly from the original file's metadata. When loading spectral LSM or CZI files, the results in the comboboxes will include all available channel wavelengths.
 - **Membrane Profiler**: Enables/disables Membrane Profiler. 
 - **Colocalization**: Enables/disables an additional, independent colocalization channel. The population of the combobox below follows the same procedure as described in Channel Settings above.
-- **Equation**: The "Equation" text field leverages the channel settings A, B, C, and D to calculate the P-Value, for example, the GP-Value using the formula “(A-B)/(A+B)”. Please note, only the variables A, B, C, and D are permitted in this field.
+- **Equation**: The "Equation" text field leverages the channel settings A, B, C, and D to calculate the β-Value, for example, the GP-Value using the formula “(A-B)/(A+B)”. Please note, only the variables A, B, C, and D are permitted in this field.
 
 ### Membrane Settings – Global Membrane Masking Options
 
@@ -232,7 +238,7 @@ The main window of VISION is designed with intuitiveness and efficiency in mind,
 - **Membrane Profiling – dim_line**
 - **Membrane Profiling – Integrations Element**: Integration Element Shape
 - **Membrane Profiling – Integrations Element X/Y-Dimension**: Integration Element XY Dimension
-- **Membrane Profiling – P-Value Threshold Auto Cut off** 
+- **Membrane Profiling – β-Value Threshold Auto Cut off** 
 
 ### Data Saving
 
@@ -252,30 +258,31 @@ Each panel has a Membrane and Cytosolic part and is split into Mask, Full Image,
 
 1. **Start VISON**
 2. **Load File(s) / Load Folder**
-3. **(Membrane Settings)** (Optional) Enter Equation for P-Value calculation.
-4. **(Membrane Settings)** Select Channels for each used variable in Equation.
-5. **(Membrane Settings)** (Optional) Enable and Choose Specific Thresholding Channel.
-6. **Test Mask** (if Mask is not optimal follow with Steps a-c, otherwise go to 7)
+3. **Inspect RawImage** Inspect all channels and dimensions of your RawImage by clicking onto the Filename in the image table.
+4. **(Membrane Settings)** (Optional) Enter Equation for β-Value calculation.
+5. **(Membrane Settings)** Select Channels for each used variable in Equation.
+6. **(Membrane Settings)** (Optional) Enable and Choose Specific Thresholding Channel.
+7. **Test Mask** (if Mask is not optimal follow with Steps a-c, otherwise go to 7)
    a. Move displayed Raw Image (Right Panel of Mask Results) to the channel of Choose Specific Thresholding Channel or used Channel of Equation with the lowest intensity. Click on “Probe Raw Image” and select a background area.
    b. Activate Background Compensation.
    c. Test Mask (if Mask is not optimal follow with Steps d-, otherwise go to 7)
    d. Enable options such as the Gauss Filter, Dilation, Compression, and Fill Holes, then fine-tune their respective parameters until the mask is satisfactory. Proceed to Step 7 upon completion.
-7. **Run Analysis – (Full Image)**
+8. **Run Analysis – (Full Image)**
    a. Check Full Image Results.
-8. **Activate Object Detection**
-9. **Run Analysis – (Full Image & Object Detection)**
+9. **Activate Object Detection**
+10. **Run Analysis – (Full Image & Object Detection)**
    a. If an error appears in the mini console, try to adapt the Masking options; it could be that the subroutines can't detect single objects.
    b. Check Full Image Results and Object-Related Results.
    
 **Note**: Once you have run the image, all Results are automatically Saved.
 ## Youtube Tutorials:
-- [TUTORIAL1](https://)
-- [TUTORIAL2](https://)
-- [TUTORIAL3](https://)
+- [TUTORIAL1 - VISION BASIC TUTORIAL](https://)
+- [TUTORIAL2 - Image analysis via VISION](https://youtu.be/ZDZju8mgNiY?si=7WxcNF6_3l1iwFpn)
+- [TUTORIAL3 - Working with .ome.tif images in VISION](https://youtu.be/NmAVgJb-E-g?si=5x0bynHKfuwzkJ2S)
 
 # Advanced Features
 
-- **Custom Analyses**: Equations???? Different Equations?
+- **Custom Analyses**: (cooming soon)
 - **Patch Processing**: If multiple images are in the Image – List, either:
   - Select Multiple Images and press Run – Selected Images will be Processed.
   Or…
@@ -285,7 +292,6 @@ Each panel has a Membrane and Cytosolic part and is split into Mask, Full Image,
   - 3D Stacks: For spatial (z) slices within a 3D stack, use the dedicated combobox to select the specific time point (T Position) you wish to customize. This selection enables targeted modification of the masking options for individual z-layers.
   - Important Note for Batch Processing:
 To apply specific masking options across multiple images in batch processing, it is essential to first initialize the detailed masking settings for each image file listed in the image table. This involves clicking on each file to activate the detailed options. Failing to perform this step may result in a key value error displayed in the mini console. We are aware of this issue and plan to streamline the process in future updates of VISION.
-
 
 # Using '*.ome.tiff' as imageformat:
 Currently image file types of '*.lsm' and '*.czi' can be openend but with '*.ome.tiff' (imagej/fiji) all images can be anlaysed with VISION. 
@@ -306,19 +312,243 @@ Currently image file types of '*.lsm' and '*.czi' can be openend but with '*.ome
 
 # Troubleshooting and Support
 
-- **Common Issues and Solutions**: As of now, no common issues have been identified. However, we acknowledge that problems we have not yet tested may arise. We appreciate your understanding and patience in these matters. We also encourage you to assist us by reporting any problems you encounter. Your feedback is invaluable in helping us continuously improve the software.
-- **Software Updates**: We will release eventually, updates where we cover all the bugs which we and you encounter. New releases you will find here at the GitHub repository.
-- **Getting Help**: At the GitHub repository.
+## General Guidelines for Microscopy Image Quality
+
+### Minimum Information Guidelines for Fluorescence Microscopy
+- **Metadata**: Ensure that all relevant metadata is recorded, including details about the imaging setup, sample preparation, and acquisition settings. This includes the type of microscope, objective lenses, exposure times, and light sources used.
+- **Calibration**: Maintain consistent calibration of imaging systems to ensure reproducibility. Include calibration scales or indicators in the images.
+- **Transparency**: Provide information on the software and settings used for image analysis to allow for reproducibility and transparency.
+
+### Signal-to-Noise Ratio (SNR) Optimization
+- **Photon Noise Management**: Maximize photon detection by optimizing exposure times and minimizing background noise through appropriate use of detector apertures and cooling techniques for CCD cameras.
+- **Dark and Read Noise**: Reduce thermal noise by cooling the camera sensor and minimize read noise by using high-performance cameras designed for low-light imaging.
+
+### Image Acquisition and Processing
+- **Sampling Rates**: Use appropriate sampling rates to ensure that the pixel size is suitable for the resolution of the microscope. The Nyquist criterion suggests that the pixel size should be at least half the size of the optical resolution limit.
+- **Contrast and Brightness**: Adjust contrast and brightness appropriately without over-processing the images. Maintain the original data integrity to allow for proper interpretation and analysis.
+- **Image Restoration**: Implement deconvolution and other image restoration techniques to improve image clarity while maintaining the original information content.
+
+### Quality Control and Troubleshooting
+- **Calibration**: Regularly check and maintain the calibration of the microscope and imaging system. Include a troubleshooting section in your manual to address common issues such as focus drift, alignment problems, and illumination inconsistencies.
+- **Artifact Recognition**: Provide example images and descriptions of common artifacts and how to avoid or correct them. This can help users recognize and troubleshoot problems in their own imaging setups.
+
+### Community Standards and Checklists
+- **Community Guidelines**: Follow established community guidelines, such as those from the QUAREP-LiMi initiative, which provides detailed checklists and protocols for quality assessment and reproducibility in light microscopy. These guidelines cover a wide range of aspects from data acquisition to image analysis and publication standards.
+- **Data Sharing**: Encourage users to share their data and analysis pipelines in public repositories to promote transparency and reproducibility in the scientific community.
+
+### Useful Resources
+- [EMBL Guidelines for Microscopy Images](https://www.embl.org/news/science/global-guidelines-to-improve-the-quality-of-microscopy-images-in-scientific-publications/)
+- [QUAREP-LiMi Guidelines](https://quarep.org/)
+- [Minimum Information Guidelines for Fluorescence Microscopy](https://arxiv.org/abs/2101.09153)
+
+
+## Common Issues and Solutions
+
+### 1. Software Installation Problems
+
+**Issue:**
+The VISION software does not install correctly.
+
+**Potential Causes:**
+- Incompatible operating system or hardware.
+- Missing dependencies.
+
+**Solutions:**
+- Ensure your system meets the minimum requirements listed in the installation guide.
+- Follow the installation steps carefully, and ensure all necessary dependencies are installed.
+- Refer to the installation section for detailed instructions.
+
+### 2. Software Crashes or Freezes
+
+**Issue:**
+The software crashes or becomes unresponsive during use.
+
+**Potential Causes:**
+- Insufficient system resources (RAM, CPU).
+- Bug in the software.
+
+**Solutions:**
+- Close other applications to free up system resources.
+- Ensure your system meets the recommended hardware specifications.
+- Check for software updates that may address stability issues.
+- Report the issue on our [ISSUES](https://github.com/biosciflo/VISION/issues)  with detailed information about your system and the problem. (How to report: [Reporting Bugs](#reporting-bugs))
+
+### 3. Error Messages
+
+**Issue:**
+You encounter error messages while using the software.
+
+**Potential Causes:**
+- Incorrect usage or unsupported operations.
+- Missing or corrupt files.
+
+**Solutions:**
+- Refer to the error message documentation in the manual or on our [Error Messages and Solutions](#Error-Messages-and-Solutions) to understand the cause and potential fixes.
+- Ensure all required files are present and correctly formatted.
+
+### 4. Unexpected Results
+
+**Issue:**
+The software produces unexpected or incorrect results.
+
+**Potential Causes:**
+- Incorrect input data or parameters.
+- Misconfigured settings.
+- Bug in the software.
+
+**Solutions:**
+- Verify that your input data meets the software's requirements.
+- Double-check all parameters and settings before running the software.
+- Refer to the user manual for guidance on proper usage and configuration.
+- Report the issue on our [ISSUES](https://github.com/biosciflo/VISION/issues) with detailed information about your system and the problem. (How to report: [Reporting Bugs](#reporting-bugs))
+
+## Error Messages and Solutions
+
+1. **Error Message:** `Error: Invalid character '{char}' found in the text. ('E', 'I', 'N', 'O', 'Q', 'S' are reserved for mathematical operators). Please use A,B,C or D.`
+
+   - **Cause:** Invalid character found in the input string.
+   - **Solution:** Ensure that only characters A, B, C, and D are used in the input string.
+
+2. **Error Message:** `Error: Invalid letter '{char}' found in the text.`
+
+   - **Cause:** Invalid uppercase letter found in the input string.
+   - **Solution:** Ensure only A, B, C, and D are used as uppercase letters.
+
+3. **Error Message:** `Error Membrane Settings: Letter(s) {chars} are in use in the Equation, but corresponding ComboBox value(s) are not selected. Please select a Channel for {chars}`
+
+   - **Cause:** ComboBox values for certain letters (A,B,C,D) are not selected.
+   - **Solution:** Select the appropriate ComboBox (A,B,C,D) values for the letters used in the equation.
+
+4. **Error Message:** `Error Membrane Settings: Letter(s) {chars} are not 'NaN' but corresponding letter(s) are not used in the equation. Please select 'NaN' for {chars}`
+
+   - **Cause:** ComboBox (A,B,C,D) values are not 'NaN' while the corresponding letters are not used in the equation.
+   - **Solution:** Set the ComboBox (A,B,C,D) values to 'NaN' for the letters not used in the equation.
+
+5. **Error Message:** `Error: It was not possible to detect single objects. Please check your masking and thresholding settings.`
+
+   - **Cause:** Function DBSCAN found no samples or no objects to concatenate.
+   - **Solution:** Review and adjust the masking and thresholding settings.
+
+
+6. **Error Message:** `Invalid value. Expected 'NAN'.`
+
+   - **Cause:** Value conversion failed, and the value was not 'NAN'.
+   - **Solution:** Ensure the value is either valid or 'NAN' as expected.
+
+7. **Error Message:** `The value '{newValue}' is not valid for 'Thresholding Mode'. (Otsu or Manual)`
+
+    - **Cause:** Invalid value for Thresholding Mode.
+    - **Solution:** Use either 'Otsu' or 'Manual' for Thresholding Mode.
+
+8. **Error Message:** `The value '{newValue}' is not valid for 'Manual Cutoff Level'. (a int)`
+
+    - **Cause:** Non-integer value for Manual Cutoff Level.
+    - **Solution:** Enter an integer value for Manual Cutoff Level.
+
+9. **Error Message:** `The value '{newValue}' is not valid for 'Compression True/False'. (True or False)`
+
+    - **Cause:** Invalid value for Compression True/False.
+    - **Solution:** Use either 'True' or 'False' for Compression.
+
+10. **Error Message:** `The value '{newValue}' is not valid for 'Compression Value'. (a float)`
+
+    - **Cause:** Non-float value for Compression Value.
+    - **Solution:** Enter a float value for Compression Value.
+
+11. **Error Message:** `The value '{newValue}' is not valid for 'Remove Object'. (NaN or a int)`
+
+    - **Cause:** Value for Remove Object is neither 'NaN' nor an integer.
+    - **Solution:** Use either 'NaN' or an integer for Remove Object.
+
+12. **Error Message:** `The value '{newValue}' is not valid for 'Fill Holes'. (NaN or a float)`
+
+    - **Cause:** Value for Fill Holes is neither 'NaN' nor a float.
+    - **Solution:** Use either 'NaN' or a float for Fill Holes.
+
+13. **Error Message:** `The value '{newValue}' is not valid for 'Dilate True/False'. (True or False)`
+
+    - **Cause:** Invalid value for Dilate True/False.
+    - **Solution:** Use either 'True' or 'False' for Dilate.
+
+14. **Error Message:** `The value '{newValue}' is not valid for 'Dilation Shape'. (octagon, disk or square)`
+
+    - **Cause:** Invalid value for Dilation Shape.
+    - **Solution:** Use either 'octagon', 'disk', or 'square' for Dilation Shape.
+
+15. **Error Message:** `The value '{newValue}' is not valid for 'Dilation Shape Dimension 1'. (a int)`
+
+    - **Cause:** Non-integer value for Dilation Shape Dimension 1.
+    - **Solution:** Enter an integer value for Dilation Shape Dimension 1.
+
+16. **Error Message:** `The value '{newValue}' is not valid for 'Dilation Shape Dimension 2'. (a int)`
+
+    - **Cause:** Non-integer value for Dilation Shape Dimension 2.
+    - **Solution:** Enter an integer value for Dilation Shape Dimension 2.
+
+17. **Error Message:** `The value "{newValue}" is not valid for "Filter Type". ( pls choose one of these: "No Filter", "Gaussian", "Mode", "Median", "Mean", "Geometric_mean","Majority","Minimum","Maximum","Sum","Gradient","Entropy")`
+
+    - **Cause:** Invalid value for Filter Type.
+    - **Solution:** Choose one of the valid filter types listed.
+
+18. **Error Message:** `The value '{newValue}' is not valid for 'Filter Value'. (a float)`
+
+    - **Cause:** Non-float value for Filter Value.
+    - **Solution:** Enter a float value for Filter Value.
+
+19. **Error Message:** `The value '{newValue}' is not valid for 'Signal to Noise Ratio'. (a float)`
+
+    - **Cause:** Non-float value for Signal to Noise Ratio.
+    - **Solution:** Enter a float value for Signal to Noise Ratio.
+
+20. **Error Message:** `The value '{newValue}' is not valid for 'Background StdDev'. (a float)`
+
+    - **Cause:** Non-float value for Background StdDev.
+    - **Solution:** Enter a float value for Background StdDev.
+
+21. **Error Message:** `The value '{newValue}' is not valid for 'Background Mean'. (NaN or a float)`
+
+    - **Cause:** Value for Background Mean is neither 'NaN' nor a float.
+    - **Solution:** Use either 'NaN' or a float for Background Mean.
+
+22. **Error Message:** `The value '{value}' is not valid for 'Specific Channel Wavelength'. (NaN or a list of available channels e.g. [488,647])`
+
+    - **Cause:** Invalid value for Specific Channel Wavelength.
+    - **Solution:** Use either 'NaN' or a list of available channels (e.g., [488, 647]) for Specific Channel Wavelength.
+
+## Reporting Bugs
+If you encounter any issues while using our software, we highly encourage you to report them on our [ISSUES](https://github.com/biosciflo/VISION/issues) page so we can work on fixing them promptly. Here's how to report a bug on GitHub:
+
+**Visit the GitHub Repository:** Navigate to our software's GitHub repository. If you're not already signed in, GitHub will prompt you to log in or create a new account.
+
+**Check Existing Issues:** Before submitting a new bug report, please take a moment to check if the issue has already been reported. You can use the repository's search tool to find issues by keywords. If you find an existing issue that matches yours, you can add any new information you have to that issue rather than creating a new one.
+
+**Create a New Issue:** If your issue is new, click the 'Issues' tab in the repository, and then click the 'New issue' button. If the repository uses issue templates, select the one that matches your situation or choose 'Open a blank issue' if none of the templates fit.
+
+**Fill Out the Issue Template:** Provide a clear and concise title for your issue. Fill in the template with as much detail as possible. Be sure to include de following parts:
+
+- A brief description of the issue.
+- Steps to reproduce the issue.
+- Expected behavior and what actually happens.
+- Any relevant error messages or screenshots. For that please add the "global_error_log.txt" and/or "error_log.txt". They are in the folder were your executable file is located. 
+- Your operating system and version, as well as the software version you're using.
+- Any files that you used. 
+- Submit the Issue: Once you've filled out the template, submit your issue by clicking the 'Submit new issue' button.
+
+**Monitor Your Issue:** After submitting, keep an eye on your issue for any comments or questions from the development team. They may need more information or provide a workaround or solution.
+
+Your reports play a crucial role in improving the quality of the software, and we appreciate your contributions to making our project better for everyone.
+
+# Getting Help
+
+If you encounter issues not covered in this guide, please refer to the following resources:
+
+- **Support:** Contact us for support via the [ISSUES](https://github.com/biosciflo/VISION/issues) .
+
+We hope this troubleshooting guide helps you resolve any issues and enhances your experience with the VISION software.
 
 # Appendix
 
-- **Glossary**: Definitions of terms and concepts used within the guide and software.
 - **FAQs**: Answers to frequently asked questions about the software.
-
-# Index
-
-- **Keyword Index**: An index to help users quickly find information within the guide.
-
 
 ## License
 
@@ -998,3 +1228,4 @@ the library.  If this is what you want to do, use the GNU Lesser General
 Public License instead of this License.  But first, please read
 <https://www.gnu.org/licenses/why-not-lgpl.html>.
 ```
+

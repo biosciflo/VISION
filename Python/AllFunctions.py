@@ -1437,9 +1437,10 @@ def makemask(imageR, Lambdachannel, varlist, MaskParams, colocalization):
         idx_col = [Lambdachannel.index(colocalization)]
     else:
         idx_col = []
-
+    
     notnoisemask, Thr_abovenoise = abovenoise(imageR, varidxs, MaskParams['S_N'], MaskParams['stddev'],
                                               MaskParams['bgmean'], idx_col)
+    
 
     combinedmask, satperc = nosaturated(imageR, notnoisemask, varidxs, MaskParams['PixelDepth'])  # > S/N + no sat
 
@@ -1878,14 +1879,14 @@ def exportframes(filename, savingpath, frames, dims):
     try:
         if sum(np.array(dims) > 1) == 2 or sum(np.array(dims) > 1) == 3:
             frames.to_excel(excelname + '.xlsx', sheet_name='Global', index=False, header=False, index_label=False)
-            frames.to_csv(excelname, index=False, header=False, index_label=False)
+            frames.to_csv(excelname + '.csv', index=False, header=False, index_label=False)
 
         elif sum(np.array(dims) > 1) == 4:
             with pd.ExcelWriter(excelname + '.xlsx', engine='xlsxwriter') as writer:
                 for z in frames.keys():
                     frames[z].to_excel(writer, sheet_name='slice_{0}'.format(z),
                                        index=False, header=False, index_label=False)
-                    frames[z].to_csv(excelname + '_slice_{0}'.format(z), index=False, header=False, index_label=False)
+                    frames[z].to_csv(excelname + '_slice_{0}'.format(z) + '.csv' , index=False, header=False, index_label=False)
 
         elif sum(np.array(dims) > 1) == 5:
             with pd.ExcelWriter(excelname + '.xlsx', engine='xlsxwriter') as writer:
@@ -1893,7 +1894,7 @@ def exportframes(filename, savingpath, frames, dims):
                     for z in frames[t].keys():
                         frames[t][z].to_excel(writer, sheet_name='slice_t{0}_z{1}'.format(t, z),
                                               index=False, header=False, index_label=False)
-                        frames[t][z].to_csv(excelname + '_t{0}_z{1}'.format(t, z), index=False, header=False,
+                        frames[t][z].to_csv(excelname + '_t{0}_z{1}'.format(t, z) + '.csv', index=False, header=False,
                                       index_label=False)
     except:
         print('Nothing to save')
