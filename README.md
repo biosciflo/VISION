@@ -276,7 +276,7 @@ Each panel has a Membrane and Cytosolic part and is split into Mask, Full Image,
    
 **Note**: Once you have run the image, all Results are automatically Saved.
 ## Youtube Tutorials:
-- [TUTORIAL1 - VISION BASIC TUTORIAL](https://)
+- [TUTORIAL1 - VISION BASIC TUTORIAL](https://youtu.be/z-sK1EvmCSo)
 - [TUTORIAL2 - Image analysis via VISION](https://youtu.be/ZDZju8mgNiY?si=7WxcNF6_3l1iwFpn)
 - [TUTORIAL3 - Working with .ome.tif images in VISION](https://youtu.be/NmAVgJb-E-g?si=5x0bynHKfuwzkJ2S)
 
